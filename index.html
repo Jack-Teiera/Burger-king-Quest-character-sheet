@@ -448,6 +448,8 @@
     margin-bottom: 10px;
   }
   .hp-controls { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
+  .rest-stack { display: flex; flex-direction: column; gap: 4px; }
+  .rest-stack .hp-btn { padding: 4px 8px; font-size: 11px; white-space: nowrap; }
   .hp-btn {
     padding: 5px 9px;
     border-radius: 6px;
@@ -1003,6 +1005,69 @@ const INGREDIENTS_LIST = [
   "Scaglie di Peperoncino", "Essenza di Battlecattle", "Spezie Naniche", "Polvere di Brace"
 ];
 
+const INGREDIENT_CATEGORIES = [
+  {
+    id: "Pane",
+    icon: "🍞",
+    label: "Pane",
+    items: [
+      { name: "Pane al Sesamo", sym: "🍔", code: "[PAN]" }
+    ]
+  },
+  {
+    id: "Proteina",
+    icon: "🥩",
+    label: "Proteina",
+    items: [
+      { name: "Carne alla Griglia", sym: "🥩", code: "[PRO]" },
+      { name: "Bacon Croccante", sym: "🥓", code: "[PRO]" },
+      { name: "Filetto Croccante", sym: "🍗", code: "[PRO]" },
+      { name: "Formaggio Fuso", sym: "🧀", code: "[PRO]" }
+    ]
+  },
+  {
+    id: "Fresco",
+    icon: "🥬",
+    label: "Fresco",
+    items: [
+      { name: "Lattuga Iceberg", sym: "🥬", code: "[FRE]" },
+      { name: "Pomodoro", sym: "🍅", code: "[FRE]" },
+      { name: "Cipolla Fresca", sym: "🧅", code: "[FRE]" },
+      { name: "Cetrioli Sottaceto", sym: "🥒", code: "[FRE]" },
+      { name: "Patate Mandragola", sym: "🥔", code: "[FRE]" }
+    ]
+  },
+  {
+    id: "Salsa",
+    icon: "🧴",
+    label: "Salsa",
+    items: [
+      { name: "Salsa King / Maionese", sym: "🥚", code: "[SAL]" },
+      { name: "Salsa BBQ", sym: "🔥", code: "[SAL]" }
+    ]
+  },
+  {
+    id: "Speciale",
+    icon: "🌶️",
+    label: "Speciale",
+    items: [
+      { name: "Scaglie di Peperoncino", sym: "🌶️", code: "[SPE]" },
+      { name: "Essenza di Battlecattle", sym: "🧪", code: "[SPE]" },
+      { name: "Spezie Naniche", sym: "✨", code: "[SPE]" },
+      { name: "Polvere di Brace", sym: "🌋", code: "[SPE]" }
+    ]
+  }
+];
+
+function getIngredientMeta(ingName) {
+  for (const cat of INGREDIENT_CATEGORIES) {
+    const found = cat.items.find(it => it.name === ingName);
+    if (found) return { ...found, catId: cat.id, catIcon: cat.icon };
+  }
+  return { name: ingName, sym: "🧂", code: "[SPE]", catId: "Speciale", catIcon: "🌶️" };
+}
+
+
 const TOOLS_LIST = [
   "Strumenti da Cuoco", "Kit da Erborista", "Strumenti da Alchimista", "Strumenti da Fabbro",
   "Arnesi da Scasso", "Trucchi per Camuffamento", "Strumenti da Cartografo", "Strumenti da Inventore",
@@ -1285,6 +1350,15 @@ function getActiveBurgerObj() {
 
 function getActiveFriesObj() {
   return FRIES_DATA.find(f => f.id === state.activeFries) || null;
+}
+
+
+function hasShieldInInventory() {
+  if (state.hasShield) return true;
+  const invText = String(state.inventory || "").toLowerCase();
+  const notesText = String(state.notes || "").toLowerCase();
+  const otherText = String(state.otherProfs || "").toLowerCase();
+  return /scudo/i.test(invText) || /scudo/i.test(notesText) || /scudo/i.test(otherText);
 }
 
 function getCalculatedAC() {
@@ -1641,17 +1715,19 @@ function renderHomeTab() {
           <span style="font-size:24px;font-weight:900;color:var(--bk-red);">${state.hpCurrent} <span style="font-size:15px;color:#6e5041;">/ ${state.hpMax}</span></span>
           ${state.hpTemp > 0 ? `<span style="background:#0d6efd;color:#fff;font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px;">+${state.hpTemp} Temp</span>` : ""}
         </div>
-        <div class="hp-controls">
+        <div class="hp-controls" style="align-items:center;">
           <button class="hp-btn hp-dmg" onclick="adjustHP(-1)">-1</button>
           <button class="hp-btn hp-dmg" onclick="adjustHP(-5)">-5</button>
           <button class="hp-btn hp-heal" onclick="adjustHP(1)">+1</button>
           <button class="hp-btn hp-heal" onclick="adjustHP(5)">+5</button>
-          <button class="hp-btn" style="background:#7A3B26;color:#fff;" onclick="shortRest()">☕ Riposo Breve</button>
-          <button class="hp-btn hp-rest" onclick="longRest()">🏕️ Riposo Lungo</button>
+          <div class="rest-stack">
+            <button class="hp-btn" style="background:#7A3B26;color:#fff;" onclick="shortRest()">☕ Riposo Breve</button>
+            <button class="hp-btn hp-rest" onclick="longRest()">🏕️ Riposo Lungo</button>
+          </div>
         </div>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px;padding-top:6px;border-top:1px dashed #E8B4A6;">
-          <label style="font-size:11px;font-weight:800;color:var(--bk-brown);">Attuali: <input type="number" min="0" style="width:56px;display:inline-block;padding:3px 5px;" value="${state.hpCurrent}" onchange="state.hpCurrent=Math.max(0,Math.min(state.hpMax,Number(this.value)));scheduleSave();renderApp();"></label>
-          <label style="font-size:11px;font-weight:800;color:var(--bk-brown);">PF Max: <input type="number" min="1" style="width:58px;display:inline-block;padding:3px 5px;" value="${state.hpMax}" onchange="const v=Math.max(1,Number(this.value));state.hpMax=v;if(state.hpCurrent>v)state.hpCurrent=v;scheduleSave();renderApp();"></label>
+          <label style="font-size:11px;font-weight:800;color:var(--bk-brown);">Attuali: <input type="number" min="0" style="width:58px;display:inline-block;padding:3px 5px;" value="${state.hpCurrent}" onchange="state.hpCurrent=Math.max(0,Math.min(state.hpMax,Number(this.value)));scheduleSave();renderApp();"></label>
+          <label style="font-size:11px;font-weight:800;color:var(--bk-brown);">PF Max: <input type="number" min="1" style="width:58px;display:inline-block;padding:3px 5px;" ${editMode ? "" : "disabled"} value="${state.hpMax}" onchange="const v=Math.max(1,Number(this.value));state.hpMax=v;if(state.hpCurrent>v)state.hpCurrent=v;scheduleSave();renderApp();"></label>
           <label style="font-size:11px;font-weight:800;color:#0d6efd;">PF Temp: <input type="number" min="0" style="width:54px;display:inline-block;padding:3px 5px;" value="${state.hpTemp}" onchange="updateField('hpTemp', Math.max(0, Number(this.value)));renderApp();"></label>
         </div>
         <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:7px;padding-top:6px;border-top:1px dashed #E8B4A6;">
@@ -1673,10 +1749,10 @@ function renderHomeTab() {
 
     <div class="card">
       <div class="vitals-grid">
-        <div class="vital-box">
+        <div class="vital-box ${hasShieldInInventory() ? "clickable" : ""}" ${hasShieldInInventory() ? `onclick="state.hasShield=!state.hasShield;scheduleSave();renderApp();showDiceToast('Scudo', state.hasShield ? 'Scudo equipaggiato (+2 CA)' : 'Scudo riposto', state.hasShield ? '+2 CA' : '0 CA');"` : ""}>
           <div class="vital-lbl">🛡️ CA</div>
           <div class="vital-val">${ac}</div>
-          <div class="vital-sub">${state.hasShield ? "+Scudo" : "Base"}</div>
+          <div class="vital-sub">${state.hasShield ? "+Scudo (Tocca)" : (hasShieldInInventory() ? "Equipaggia Scudo" : "Base")}</div>
         </div>
         <div class="vital-box clickable" onclick="rollD20('Iniziativa', ${init})">
           <div class="vital-lbl">⚡ Iniziativa</div>
@@ -1781,23 +1857,7 @@ function renderStatsTab() {
     </div>
 
     <div class="card">
-      <div class="card-title"><span>🎯 Abilità (18)</span><span style="font-size:11px;">${editMode ? "Seleziona livello di competenza su ogni abilità" : "Attiva 🔓 Modifica per cambiare competenze"}</span></div>
-      ${editMode ? `
-        <div style="background:var(--bk-cream);border:1px solid var(--bk-border);border-radius:8px;padding:8px;margin-bottom:8px;font-size:12px;">
-          <strong>Scegli rapidamente una competenza abilità:</strong>
-          <div style="display:flex;gap:6px;margin-top:5px;flex-wrap:wrap;">
-            <select id="quick-skill-sel" style="flex:1;min-width:160px;">
-              ${SKILLS_LIST.map(s => `<option value="${s.id}">${s.name} (${s.stat})</option>`).join("")}
-            </select>
-            <select id="quick-skill-lvl" style="width:145px;">
-              <option value="1">Competente (+PB)</option>
-              <option value="2">Perizia (2×PB)</option>
-              <option value="0">Nessuna</option>
-            </select>
-            <button class="btn btn-print" onclick="const sid=document.getElementById('quick-skill-sel').value;const slvl=Number(document.getElementById('quick-skill-lvl').value);state.skillProfs[sid]=slvl;scheduleSave();renderApp();">Applica</button>
-          </div>
-        </div>
-      ` : ""}
+      <div class="card-title"><span>🎯 Abilità (18)</span><span style="font-size:11px;">${editMode ? "Tocca il cerchio: Vuoto → Comp. → Perizia (2×)" : "Attiva 🔓 Modifica per cambiare competenze"}</span></div>
       ${skillsHtml}
     </div>
 
@@ -2108,16 +2168,32 @@ function renderFoodTab() {
     `;
   }).join("");
 
-  const ingHtml = INGREDIENTS_LIST.map(ing => {
-    const q = Number(state.ingredients[ing] || 0);
-    return `
-      <div class="chk-item" style="justify-content:space-between;">
-        <span style="font-weight:${q > 0 ? "800" : "400"};">${ing}</span>
-        <div style="display:flex;align-items:center;gap:4px;">
-          <button class="roll-pill" style="padding:1px 6px;" onclick="state.ingredients['${ing}']=Math.max(0,(state.ingredients['${ing}']||0)-1);scheduleSave();renderApp();">-</button>
-          <strong style="min-width:16px;text-align:center;">${q}</strong>
-          <button class="roll-pill" style="padding:1px 6px;" onclick="state.ingredients['${ing}']=(state.ingredients['${ing}']||0)+1;scheduleSave();renderApp();">+</button>
+  const ingHtml = INGREDIENT_CATEGORIES.map(cat => {
+    const catItemsHtml = cat.items.map(it => {
+      const ing = it.name;
+      const q = Number(state.ingredients[ing] || 0);
+      return `
+        <div class="chk-item" style="justify-content:space-between;${q > 0 ? "background:#FFF8E1;border:1px solid #F5A623;" : ""}">
+          <span style="display:flex;align-items:center;gap:5px;font-weight:${q > 0 ? "800" : "500"};">
+            <span style="font-size:15px;line-height:1;" title="${esc(cat.label)}">${it.sym}</span>
+            <span>${esc(ing)}</span>
+          </span>
+          <div style="display:flex;align-items:center;gap:4px;">
+            <button class="roll-pill" style="padding:1px 6px;" onclick="state.ingredients['${ing}']=Math.max(0,(state.ingredients['${ing}']||0)-1);scheduleSave();renderApp();">-</button>
+            <strong style="min-width:16px;text-align:center;">${q}</strong>
+            <button class="roll-pill" style="padding:1px 6px;" onclick="state.ingredients['${ing}']=(state.ingredients['${ing}']||0)+1;scheduleSave();renderApp();">+</button>
+          </div>
         </div>
+      `;
+    }).join("");
+    const catTotal = cat.items.reduce((acc, it) => acc + Number(state.ingredients[it.name] || 0), 0);
+    return `
+      <div class="ing-cat-group" style="margin-bottom:10px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;background:var(--bk-brown);color:#fff;padding:5px 9px;border-radius:7px;margin-bottom:5px;font-size:11.5px;font-weight:800;letter-spacing:0.4px;text-transform:uppercase;">
+          <span>${cat.icon} ${esc(cat.label)}</span>
+          <span style="background:rgba(255,255,255,0.18);padding:1px 7px;border-radius:999px;font-size:10.5px;">Tot: ${catTotal}</span>
+        </div>
+        <div class="chk-grid">${catItemsHtml}</div>
       </div>
     `;
   }).join("");
@@ -2177,8 +2253,8 @@ function renderFoodTab() {
     </div>
 
     <div class="card">
-      <div class="card-title"><span>🥬 Dispensa Ingredienti BK</span></div>
-      <div class="chk-grid">${ingHtml}</div>
+      <div class="card-title"><span>📖 Dispensa Ingredienti BK (per Macrocategoria & Simbolo)</span></div>
+      ${ingHtml}
     </div>
   `;
 }
@@ -2437,12 +2513,13 @@ function renderPrintSheet() {
     </tr>
   `).join("");
 
-  const ingPrint = INGREDIENTS_LIST.map(ing => `
+  const ingPrint = INGREDIENT_CATEGORIES.flatMap(cat => cat.items.map(it => `
     <div class="ing-cell">
-      <div>${esc(ing)}</div>
-      <strong>N° ${Number(state.ingredients[ing] || 0)}</strong>
+      <div style="font-size:11px;">${it.sym}</div>
+      <div>${esc(it.name)}</div>
+      <strong>N° ${Number(state.ingredients[it.name] || 0)}</strong>
     </div>
-  `).join("");
+  `)).join("");
 
   const burgersOwned = BURGERS_DATA.filter(b => (state.burgerPantry[b.id] || 0) > 0).map(b => `${b.name} (×${state.burgerPantry[b.id]})`).join(", ");
   const friesOwned = FRIES_DATA.filter(f => (state.friesPantry[f.id] || 0) > 0).map(f => `${f.name} (×${state.friesPantry[f.id]})`).join(", ");
@@ -2669,6 +2746,85 @@ function importJSON(e) {
 
 
 let wizStep = 1;
+
+const SPECIES_SKILL_RULES = {
+  "Umano": { count: 1, label: "Abile (Umano): scegli 1 abilità qualsiasi", pool: SKILLS_LIST.map(s => s.id) },
+  "Elfo": { count: 1, label: "Sensi Acuti (Elfo): scegli 1 tra Intuizione, Percezione o Sopravvivenza", pool: ["intuizione", "percezione", "sopravvivenza"] }
+};
+
+const CLASS_SKILL_RULES = {
+  "Guerriero": { count: 2, label: "Guerriero: scegli 2 abilità tra quelle di classe", pool: ["acrobazia", "addestrare", "atletica", "intimidire", "intuizione", "percezione", "sopravvivenza", "storia"] },
+  "Ladro": { count: 4, label: "Ladro: scegli 4 abilità tra quelle di classe", pool: ["acrobazia", "atletica", "furtivita", "indagare", "inganno", "intimidire", "intrattenere", "intuizione", "percezione", "persuasione", "rapidita"] },
+  "Paladino": { count: 2, label: "Paladino: scegli 2 abilità tra quelle di classe", pool: ["atletica", "intimidire", "intuizione", "medicina", "persuasione", "religione"] },
+  "Bardo": { count: 3, label: "Bardo: scegli 3 abilità qualsiasi", pool: SKILLS_LIST.map(s => s.id) },
+  "Mago": { count: 2, label: "Mago: scegli 2 abilità tra quelle di classe", pool: ["arcano", "indagare", "intuizione", "medicina", "natura", "religione", "storia"] },
+  "Druido": { count: 2, label: "Druido: scegli 2 abilità tra quelle di classe", pool: ["addestrare", "arcano", "intuizione", "medicina", "natura", "percezione", "religione", "sopravvivenza"] },
+  "Chierico": { count: 2, label: "Chierico: scegli 2 abilità tra quelle di classe", pool: ["intuizione", "medicina", "persuasione", "religione", "storia"] },
+  "Warlock": { count: 2, label: "Warlock: scegli 2 abilità tra quelle di classe", pool: ["arcano", "inganno", "intimidire", "indagare", "natura", "religione", "storia"] }
+};
+
+let wizSpeciesSkills = [];
+let wizClassSkills = [];
+
+function syncWizardSkillProfs() {
+  const spRule = SPECIES_SKILL_RULES[state.species];
+  const clsRule = CLASS_SKILL_RULES[state.className];
+  if (spRule) {
+    wizSpeciesSkills = wizSpeciesSkills.filter(id => spRule.pool.includes(id)).slice(0, spRule.count);
+  } else {
+    wizSpeciesSkills = [];
+  }
+  if (clsRule) {
+    wizClassSkills = wizClassSkills.filter(id => clsRule.pool.includes(id) && !wizSpeciesSkills.includes(id)).slice(0, clsRule.count);
+  } else {
+    wizClassSkills = [];
+  }
+  state.skillProfs = {};
+  [...wizSpeciesSkills, ...wizClassSkills].forEach(id => { state.skillProfs[id] = 1; });
+}
+
+function toggleWizSpeciesSkill(skillId) {
+  const rule = SPECIES_SKILL_RULES[state.species];
+  if (!rule) return;
+  const idx = wizSpeciesSkills.indexOf(skillId);
+  if (idx >= 0) {
+    wizSpeciesSkills.splice(idx, 1);
+  } else {
+    if (wizSpeciesSkills.length >= rule.count) {
+      if (rule.count === 1) wizSpeciesSkills = [skillId];
+      else {
+        showDiceToast("Limite Raggiunto", `Puoi selezionare al massimo ${rule.count} abilità per la specie ${state.species}.`, "!");
+        return;
+      }
+    } else {
+      wizSpeciesSkills.push(skillId);
+    }
+  }
+  syncWizardSkillProfs();
+  renderWizard();
+}
+
+function toggleWizClassSkill(skillId) {
+  const rule = CLASS_SKILL_RULES[state.className];
+  if (!rule) return;
+  if (wizSpeciesSkills.includes(skillId)) {
+    showDiceToast("Già Selezionata", "Questa abilità è già stata scelta come competenza di specie.", "✓");
+    return;
+  }
+  const idx = wizClassSkills.indexOf(skillId);
+  if (idx >= 0) {
+    wizClassSkills.splice(idx, 1);
+  } else {
+    if (wizClassSkills.length >= rule.count) {
+      showDiceToast("Limite Raggiunto", `Puoi selezionare al massimo ${rule.count} abilità per la classe ${state.className}.`, "!");
+      return;
+    }
+    wizClassSkills.push(skillId);
+  }
+  syncWizardSkillProfs();
+  renderWizard();
+}
+
 const CLASS_STARTER_PACKS = {
   "Guerriero": {
     summary: "Opzioni iniziali Guerriero: pacchetto armi + armatura + scudo + zaino oppure oro iniziale.",
@@ -2761,12 +2917,18 @@ function filterFoodList(q) {
   document.querySelectorAll("#app-content .chk-item").forEach(el => {
     el.style.display = !term || el.textContent.toLowerCase().includes(term) ? "" : "none";
   });
+  document.querySelectorAll("#app-content .ing-cat-group").forEach(grp => {
+    const visibleItems = Array.from(grp.querySelectorAll(".chk-item")).some(it => it.style.display !== "none");
+    grp.style.display = !term || visibleItems ? "" : "none";
+  });
 }
 
 function openWizard() {
   if (!confirm("Vuoi avviare la procedura guidata per creare un nuovo personaggio da manuale? I dati attuali non esportati verranno azzerati.")) return;
   state = defaultState();
   wizStep = 1;
+  wizSpeciesSkills = [];
+  wizClassSkills = [];
   document.getElementById("wizard-modal").classList.add("open");
   renderWizard();
 }
@@ -2842,15 +3004,36 @@ function renderWizard() {
     `;
   } else if (wizStep === 2) {
     const sp = SPECIES_DATA[state.species];
+    const spSkillRule = SPECIES_SKILL_RULES[state.species];
     bodyHtml = `
       <div style="margin-bottom:8px;"><label class="lbl">Scegli la Specie</label>
-        <select onchange="state.species=this.value;recalcMaxHP();renderWizard();">
+        <select onchange="state.species=this.value;syncWizardSkillProfs();recalcMaxHP();renderWizard();">
           ${Object.keys(SPECIES_DATA).map(s => `<option value="${s}" ${state.species === s ? "selected" : ""}>${s} (Velocità ${SPECIES_DATA[s].speed} m, Taglia ${SPECIES_DATA[s].size})</option>`).join("")}
         </select>
       </div>
       <div style="background:var(--bk-cream);padding:8px;border-radius:8px;border:1px solid var(--bk-border);margin-bottom:8px;">
         ${sp.traits.map(t => `<div style="margin-bottom:4px;font-size:12px;"><strong>• ${esc(t.name)}:</strong> ${esc(t.desc)}</div>`).join("")}
       </div>
+      ${spSkillRule ? `
+        <div style="background:#FFFDF5;padding:8px;border-radius:8px;border:1.5px solid var(--bk-gold);margin-bottom:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <label class="lbl" style="margin:0;">🎯 ${esc(spSkillRule.label)}</label>
+            <span class="acc-tag">${wizSpeciesSkills.length}/${spSkillRule.count}</span>
+          </div>
+          <div class="chk-grid">
+            ${spSkillRule.pool.map(sid => {
+              const skObj = SKILLS_LIST.find(x => x.id === sid);
+              const checked = wizSpeciesSkills.includes(sid);
+              return `
+                <label class="chk-item" style="cursor:pointer;${checked ? "background:#e8f5e9;border:1px solid #2e7d32;font-weight:800;" : ""}">
+                  <input type="checkbox" ${checked ? "checked" : ""} onchange="toggleWizSpeciesSkill('${sid}')">
+                  <span>${esc(skObj ? skObj.name : sid)} (${skObj ? skObj.stat : ""})</span>
+                </label>
+              `;
+            }).join("")}
+          </div>
+        </div>
+      ` : ""}
       ${state.species === "Umano" ? `
         <div><label class="lbl">Talento d'Origine (Umano Versatile)</label>
           <select onchange="state.originFeat=this.value;recalcMaxHP();renderWizard();">
@@ -2861,9 +3044,10 @@ function renderWizard() {
     `;
   } else if (wizStep === 3) {
     const cls = CLASSES_DATA[state.className];
+    const clsSkillRule = CLASS_SKILL_RULES[state.className];
     bodyHtml = `
       <div style="margin-bottom:8px;"><label class="lbl">Scegli la Classe e Sottoclasse Burger King-Dom</label>
-        <select onchange="state.className=this.value;state.saveProfs={};cls.saves.forEach(sv=>state.saveProfs[sv]=true);recalcMaxHP();renderWizard();">
+        <select onchange="state.className=this.value;const nc=CLASSES_DATA[this.value];state.saveProfs={};nc.saves.forEach(sv=>state.saveProfs[sv]=true);syncWizardSkillProfs();recalcMaxHP();renderWizard();">
           ${Object.keys(CLASSES_DATA).map(c => `<option value="${c}" ${state.className === c ? "selected" : ""}>${c} — ${CLASSES_DATA[c].subName} (DV d${CLASSES_DATA[c].hd})</option>`).join("")}
         </select>
       </div>
@@ -2873,6 +3057,30 @@ function renderWizard() {
             <option value="Shake-a-Lot" ${state.paladinSchool === "Shake-a-Lot" ? "selected" : ""}>Shake-a-Lot (Gelo & Difesa)</option>
             <option value="King's Blade" ${state.paladinSchool === "King's Blade" ? "selected" : ""}>King's Blade (Fiamme & Assalto)</option>
           </select>
+        </div>
+      ` : ""}
+      ${clsSkillRule ? `
+        <div style="background:#FFFDF5;padding:8px;border-radius:8px;border:1.5px solid var(--bk-gold);margin-bottom:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <label class="lbl" style="margin:0;">🎯 ${esc(clsSkillRule.label)}</label>
+            <span class="acc-tag">${wizClassSkills.length}/${clsSkillRule.count}</span>
+          </div>
+          <div class="chk-grid">
+            ${clsSkillRule.pool.map(sid => {
+              const skObj = SKILLS_LIST.find(x => x.id === sid);
+              const fromSpecies = wizSpeciesSkills.includes(sid);
+              const isSelected = wizClassSkills.includes(sid);
+              const checked = fromSpecies || isSelected;
+              const limitReached = !checked && wizClassSkills.length >= clsSkillRule.count;
+              const isDisabled = fromSpecies || limitReached;
+              return `
+                <label class="chk-item" style="cursor:${isDisabled ? "not-allowed" : "pointer"};opacity:${limitReached ? "0.55" : "1"};${checked ? "background:#e8f5e9;border:1px solid #2e7d32;font-weight:800;" : ""}">
+                  <input type="checkbox" ${checked ? "checked" : ""} ${isDisabled ? "disabled" : ""} onchange="toggleWizClassSkill('${sid}')">
+                  <span>${esc(skObj ? skObj.name : sid)} ${fromSpecies ? "(Specie)" : "(" + (skObj ? skObj.stat : "") + ")"}</span>
+                </label>
+              `;
+            }).join("")}
+          </div>
         </div>
       ` : ""}
       <div style="background:var(--bk-cream);padding:8px;border-radius:8px;border:1px solid var(--bk-border);">

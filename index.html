@@ -820,38 +820,38 @@ let saveTimer = null;
 
 const SPECIES_DATA = {
   "Umano": { speed: 9, size: "Media", traits: [
-    { name: "Intraprendente", short: "Ispirazione Eroica dopo Riposo Lungo", desc: "Ottieni Ispirazione Eroica ogni volta che termini un Riposo Lungo." },
-    { name: "Abile", short: "+1 Competenza in un'abilità", desc: "Ottieni competenza in una abilità aggiuntiva a tua scelta." },
-    { name: "Versatile (Talento d'Origine)", short: "1 Talento d'Origine extra", desc: "Ottieni un Talento d'Origine extra a tua scelta (es. Abile, Allerta, Fortunato, Robusto, Iniziato alla Magia)." }
+    { name: "Intraprendente", short: "Ispirazione Eroica a fine Riposo Lungo", desc: "Ottieni Ispirazione Eroica a fine riposo lungo (Manuale BK, Razze e Bonus)." },
+    { name: "Abile", short: "Una competenza in abilità a scelta", desc: "Ottieni una competenza in abilità a scelta (Manuale BK, Razze e Bonus)." },
+    { name: "Versatile", short: "Un Talento d'Origine (consigliato Skilled)", desc: "Ottieni un Talento d'Origine (consigliato Skilled) (Manuale BK, Razze e Bonus)." }
   ]},
   "Elfo": { speed: 9, size: "Media", traits: [
-    { name: "Retaggio Elfico", short: "Lignaggio Drow/Alto/Silvano", desc: "Scegli lignaggio: Drow (Luci Danzanti, Luminescenza, Oscurità), Alto (Prestidigitazione, Individuazione del Magico, Passo Velato) o Silvano (Druidismo, Passo Veloce, Passare Senza Tracce e Velocità 10,5 m)." },
-    { name: "Ascendenza Fatata & Trance", short: "Vantaggio vs Ammaliato; Riposo 4h", desc: "Hai Vantaggio ai TS per evitare o terminare la condizione Ammaliato. Completi un Riposo Lungo in 4 ore." },
-    { name: "Sensi Acuti", short: "Competenza Intuizione/Percezione/Sopravvivenza", desc: "Ottieni competenza in una tra Intuizione, Percezione o Sopravvivenza." }
+    { name: "Retaggio Elfico", short: "Drow / Alto / Silvano; Wood Elf +1,5 m vel.", desc: "Scegli Lignaggio: Drow/Alto/Silvano; incantesimi a livelli 1/3/5; Wood Elf +1,5 m velocità (Manuale BK, Razze e Bonus)." },
+    { name: "Ascendenza Fatata & Trance", short: "Vantaggio vs Ammaliato; Riposo Lungo in 4h", desc: "Ascendenza Fatata (vantaggio vs Ammaliato); Trance (riposo lungo in 4 ore) (Manuale BK, Razze e Bonus)." },
+    { name: "Sensi Acuti", short: "Competenza: Intuizione/Percezione/Sopravvivenza", desc: "Sensi Acuti (competenza: Intuizione/Percezione/Sopravvivenza) (Manuale BK, Razze e Bonus)." }
   ]},
   "Nano": { speed: 9, size: "Media", traits: [
-    { name: "Resilienza & Robustezza Nanica", short: "Res. Veleno, +1 PF/livello", desc: "Resistenza ai danni da veleno e Vantaggio ai TS contro Avvelenato. I tuoi PF massimi aumentano di +1 per ogni livello." },
-    { name: "Conoscenza della Pietra", short: "Percezione Tellurica 18m (10 min)", desc: "Come Azione Bonus ottieni Percezione Tellurica 18 m su pietra per 10 minuti (usi = Bonus di Competenza per Riposo Lungo)." }
+    { name: "Resilienza & Robustezza Nanica", short: "Res. Veleno, Vant. Avvelenato, +1 PF/liv.", desc: "Resilienza Nanica (res. Veleno e vantaggio ai TS contro Avvelenato); Robustezza Nanica (+1 PF per livello) (Manuale BK, Razze e Bonus)." },
+    { name: "Conoscenza della Pietra", short: "Tremorsense 18 m per 10 min (PB/riposo lungo)", desc: "Conoscenza della Pietra (Tremorsense 18 m per 10 min, PB/riposo lungo) (Manuale BK, Razze e Bonus)." }
   ]},
   "Halfling": { speed: 9, size: "Piccola", traits: [
-    { name: "Fortuna & Coraggioso", short: "Ritira gli 1 sul d20; Vant. vs Spaventato", desc: "Quando ottieni 1 sul d20 di un test, tiro per colpire o TS, puoi ritirare il dado. Hai Vantaggio ai TS contro Spaventato." },
-    { name: "Agilità & Furtività Halfling", short: "Attraversi creature più grandi", desc: "Puoi muoverti attraverso lo spazio di creature di taglia superiore e nasconderti dietro creature di almeno una taglia più grande." }
+    { name: "Fortuna & Coraggioso", short: "Ritira gli 1 ai d20; Vantaggio vs Spaventato", desc: "Coraggioso (vantaggio vs Spaventato); Fortuna (ritira i 1 ai d20) (Manuale BK, Razze e Bonus)." },
+    { name: "Agilità & Naturalmente Furtivo", short: "Agilità Halfling; Nascondersi dietro più grandi", desc: "Agilità Halfling; Naturalmente Furtivo (puoi Nasconderti se oscurato da una creatura più grande) (Manuale BK, Razze e Bonus)." }
   ]},
   "Tiefling": { speed: 9, size: "Media", traits: [
-    { name: "Retaggio Diabolico", short: "Abissale/Ctonio/Infernale", desc: "Ottieni resistenza elementale (Veleno/Necrotico/Fuoco) e magie innati al 1°, 3° e 5° livello in base al lignaggio scelto." },
-    { name: "Presenza Ultramondana", short: "Trucchetto Taumaturgia", desc: "Conosci il trucchetto Taumaturgia." }
+    { name: "Retaggio Diabolico", short: "Abyssal / Chthonic / Infernal", desc: "Retaggio Diabolico (scegli Abyssal/Chthonic/Infernal: resistenza + trucchetti; incantesimi ai livelli 3 e 5) (Manuale BK, Razze e Bonus)." },
+    { name: "Presenza Ultramondana", short: "Trucchetto Thaumaturgy", desc: "Presenza Ultramondana (Thaumaturgy) (Manuale BK, Razze e Bonus)." }
   ]},
   "Gnomo": { speed: 9, size: "Piccola", traits: [
-    { name: "Astuzia Gnoma", short: "Vantaggio TS Int, Sag, Car", desc: "Hai Vantaggio ai Tiri Salvezza su Intelligenza, Saggezza e Carisma." },
-    { name: "Lignaggio Gnomesco", short: "Foresta o Roccia", desc: "Foresta: Illusione Minore e Parlare con gli Animali (PB volte/giorno). Roccia: Riparare, Prestidigitazione e piccoli congegni." }
+    { name: "Astuzia Gnoma", short: "Vantaggio ai TS Int/Sag/Car", desc: "Astuzia Gnoma (vantaggio ai TS Int/Sag/Car) (Manuale BK, Razze e Bonus)." },
+    { name: "Lignaggio Gnomesco", short: "Di Foresta o di Roccia", desc: "Lignaggio: di Foresta (Minor Illusion; Speak with Animals PB/giorno) oppure di Roccia (Mending, Prestidigitazione; piccoli congegni) (Manuale BK, Razze e Bonus)." }
   ]},
   "Mezzorco": { speed: 9, size: "Media", traits: [
-    { name: "Slancio d'Adrenalina", short: "Scatto Az. Bonus + PF Temp = PB", desc: "Puoi usare Scatto come Azione Bonus ottenendo PF Temporanei pari al PB (usi = PB per Riposo Breve o Lungo)." },
-    { name: "Vigore Inarrestabile", short: "Resti a 1 PF (1/Riposo Lungo)", desc: "Quando scendi a 0 PF senza morire sul colpo, scendi invece a 1 PF (1 volta per Riposo Lungo)." }
+    { name: "Slancio d'Adrenalina", short: "Dash come Az. Bonus + PF temp = PB", desc: "Slancio d'Adrenalina (Dash come Az. Bonus + PF temp. = PB, usi = PB/riposo breve o lungo) (Manuale BK, Razze e Bonus)." },
+    { name: "Vigore Inarrestabile", short: "Resti a 1 PF (1/riposo lungo)", desc: "Vigore Inarrestabile (resti a 1 PF 1/riposo lungo) (Manuale BK, Razze e Bonus)." }
   ]},
   "Dragonide": { speed: 9, size: "Media", traits: [
-    { name: "Discendenza & Arma a Soffio", short: "Cono 4,5m o Linea 9m (1d10→4d10)", desc: "Resistenza al tipo di danno draconico. Soffio (TS Des, 1d10 al 1°, 2d10 al 5°, 3d10 all'11°, usi = PB per Riposo Lungo)." },
-    { name: "Volo Draconico (5° liv.)", short: "Volo 10 min (1/Riposo Lungo)", desc: "Dal 5° livello puoi manifestare ali spettrali per 10 minuti (Velocità di volo pari alla tua Velocità)." }
+    { name: "Discendenza & Arma a Soffio", short: "Cono 4,5m o Linea 9×1,5m (1d10→4d10)", desc: "Discendenza draconica; Arma a Soffio (cono 4,5 m o linea 9×1,5 m; TS Des; 1d10→4d10; usi = PB/riposo lungo); Resistenza al tipo di danno (Manuale BK, Razze e Bonus)." },
+    { name: "Volo Draconico (5° liv.)", short: "10 min, 1/riposo lungo al 5° livello", desc: "Volo draconico al 5° livello (10 min, 1/riposo lungo) (Manuale BK, Razze e Bonus)." }
   ]}
 };
 
@@ -873,46 +873,56 @@ const ORIGIN_FEATS = [
 
 const CLASSES_DATA = {
   "Guerriero": { hd: 10, saves: ["FOR", "COS"], caster: null, subName: "Fame di Battaglia", features: [
-    { lvl: 3, name: "Menù Potenziato", short: "Stile metabolico (1 min) mangiando cibo", desc: "Quando consumi cibo ottieni per 1 minuto: Vigore (+2 danni con armi), Salute (+1 CA e PF temp = PB) oppure Energia (+3 m velocità e Vantaggio TS Des)." },
-    { lvl: 3, name: "Fame di Battaglia", short: "Digiuno furioso: +1d10+Cos danni, Res. fisica", desc: "Azione Bonus (se non hai Menù attivo, usi = PB/Riposo Lungo): raddoppi mod/bonus sui TS, resistenza a contundente/perforante/tagliente, puoi tirare con Svantaggio per aggiungere +1d10+Cos ai danni. Termina se mangi/bevi." },
-    { lvl: 7, name: "Metabolismo d'Acciaio", short: "Mangiata come Az. Bonus, condividi buff", desc: "Consumi cibo come Azione Bonus; resisti a veleno/esaurimento; condividi PF temp = Cos o +1,5 m velocità con PB alleati entro 3 m." },
-    { lvl: 10, name: "Doppio Ciclo", short: "Switch gratuito tra Menù e Fame", desc: "1/Riposo Breve o Lungo passi gratuitamente da Menù Potenziato a Fame di Battaglia e viceversa." }
+    { lvl: 3, name: "Menù Potenziato (3°)", short: "Stile metabolico (1 min) consumando cibo", desc: "Quando consumi cibo (razione, panini BK, ecc.), puoi attivare come parte della stessa azione uno stile metabolico per 1 minuto: Vigore (+2 danni con armi), Salute (+1 CA e PF temp = PB una volta all'attivazione) o Energia (+3 m velocità e vantaggio TS Des contro effetti che vedi). Non più di un Menù attivo alla volta." },
+    { lvl: 3, name: "Fame di Battaglia (3°)", short: "Azione Bonus: raddoppia mod/bonus TS, Res. fisica", desc: "Come Azione Bonus, se non hai un Menù attivo, entri in Fame di Battaglia per 1 minuto: raddoppi i modificatori e i bonus sui Tiri Salvezza; puoi effettuare tiri per colpire con svantaggio e, se colpisci, aggiungere 1d10 + mod. Cos al danno; resistenza a danni contundenti, perforanti e taglienti. Termina se non attacchi/subisci danni in un turno o se mangi/bevi volontariamente. Usi = PB per riposo lungo." },
+    { lvl: 7, name: "Metabolismo d'Acciaio (7°)", short: "Res. veleno, Mangiata Rapida Az. Bonus, condividi buff", desc: "Resistenza al veleno e vantaggio ai TS contro avvelenamento ed esaurimento da fame/marce forzate. Consumi cibo come Azione Bonus; condividi versione ridotta con PB alleati entro 3 m per 1 min (PF temp = mod. Cos min 1 oppure +1,5 m velocità)." },
+    { lvl: 10, name: "Doppio Ciclo (10°)", short: "Switch Metabolico 1/riposo breve o lungo", desc: "Una volta per riposo breve o lungo, quando Menù Potenziato termina puoi entrare subito in Fame di Battaglia senza spendere un uso; quando Fame di Battaglia termina puoi attivare Menù Potenziato senza azioni o cibo." },
+    { lvl: 15, name: "Disciplina Implacabile (15°)", short: "Fame Lucida e Dieta Ferrea", desc: "Fame Lucida: durante Fame di Battaglia vantaggio ai TS Sag, immunità a spaventato e ritiri un 1 sui dadi danno arma. Dieta Ferrea: con Menù Potenziato attivo vantaggio ai TS Cos per Concentrazione e riduci di 2 ogni danno non magico subito." },
+    { lvl: 18, name: "Apice Metabolico (18°)", short: "1/riposo lungo: Menù + Fame attivi insieme", desc: "Una volta per riposo lungo, come Azione per 1 minuto attivi contemporaneamente Menù Potenziato e Fame di Battaglia (effetti sommati; bonus ai danni della Fame diventa +3)." }
   ]},
   "Ladro": { hd: 8, saves: ["DES", "INT"], caster: null, subName: "Furfante Goloso", features: [
-    { lvl: 3, name: "Foraggiatore Arcano", short: "Comp. Cuoco/Erborista + 1 abilità/perizia", desc: "Competenza in Strumenti da Cuoco e Kit da Erborista, più competenza (o Perizia) in Sopravvivenza, Indagare o Natura. Vantaggio a cercare ingredienti." },
-    { lvl: 3, name: "Furto Nutritivo", short: "Estrai Vigore, Rapidità o Durezza con Furtivo", desc: "Usi = PB/Riposo Lungo quando applichi Attacco Furtivo: Estrazione di Vigore (PF temp = PB+Des), Rapidità (rubi 3m velocità, no AdO) o Durezza (+2 CA a te, -2 CA al bersaglio)." },
-    { lvl: 9, name: "Gioco di Prestigio", short: "Immagazzina Estratti su critico/kill; Passi Silenti", desc: "Quando porti a 0 PF o fai critico immagazzini un Estratto fino al Riposo Lungo. Vantaggio a Furtività nella natura." }
+    { lvl: 3, name: "Sharing is Caring — Foraggiatore Arcano (3°)", short: "Comp. Cuoco/Erborista + 1 abilità/Perizia", desc: "Competenza in Strumenti da Cuoco e Kit da Erborista. Scegli una tra Sopravvivenza, Indagare o Natura: ottieni Competenza (o Perizia se già competente). Vantaggio per identificare componenti su creature/piante e individuare scorte commestibili." },
+    { lvl: 3, name: "Sharing is Caring — Furto Nutritivo (3°)", short: "PB/riposo lungo su Attacco Furtivo", desc: "Un numero di volte pari al PB per riposo lungo, quando colpisci con Attacco Furtivo distilli essenze vitali: Estrazione di Vigore (PF temp = PB + mod. Des min 1), Estrazione di Rapidità (rubi 3 m velocità e no AdO dal bersaglio, che è rallentato di 3 m) o Estrazione di Durezza (+2 CA a te, -2 CA al bersaglio)." },
+    { lvl: 9, name: "Gioco di Prestigio (9°)", short: "Raccolto Rapido e Passi Silenti", desc: "Quando porti a 0 PF una creatura o ottieni un critico con arma a finezza o leggera, immagazzini un Estratto fino al riposo lungo. Passi Silenti: terreno naturale leggero non dà penalità a Furtività e hai vantaggio se parzialmente celato in ambiente naturale." },
+    { lvl: 13, name: "Vitaminario da Campo (13°)", short: "Fino a 3 Estratti Vitaminici al riposo (1h)", desc: "Durante un riposo breve o lungo prepari fino a 3 Estratti Vitaminici Potenziati (consumabili come Azione Bonus, durata 1 ora, 1 attivo alla volta): Vitamina A (+2 Percezione/Indagare, Scurovisione +6m o 18m), Vitamina B (+3m velocità, vantaggio Acrobazia e Rapidità di Mano) o Vitamina C (resistenza veleno e vantaggio TS Cos contro malattie)." },
+    { lvl: 17, name: "Predazione Magistrale (17°)", short: "Doppio Bottino e Depredare", desc: "Doppio Bottino: 1/turno con Attacco Furtivo attivi Furto Nutritivo senza consumare usi e un alleato entro 9 m ottiene +3m velocità, +1 CA o PF temp = PB. Depredare: 1/riposo lungo su Attacco Furtivo il bersaglio fa TS Sag (CD 8+PB+Des) o perde una resistenza per 1 minuto (o fino a fine prossimo turno se riesce)." }
   ]},
   "Paladino": { hd: 10, saves: ["SAG", "CAR"], caster: "CAR", halfCaster: true, subName: "Giuramento del Burger Knight", features: [
-    { lvl: 3, name: "Scuola del Giuramento", short: "Shake-a-Lot (Gelo/Difesa) o King's Blade (Fuoco/Assalto)", desc: "Scegli scuola: Shake-a-Lot (Punizioni di freddo, Scudo del Gelo: +1 CA e res. freddo entro 9 m) oppure King's Blade (Punizioni di fuoco, Giudizio della Griglia: +Car danni fuoco entro 9 m)." },
-    { lvl: 7, name: "Aura della Corona (3m)", short: "Aura difensiva (Gelo) o offensiva (Braci)", desc: "Shake-a-Lot: tu e alleati nell'aura avete +2 CA e res. freddo (-3 m velocità ai nemici). King's Blade: res. fuoco e +Car danni fuoco 1/turno." }
+    { lvl: 3, name: "Marchio della Corona (3°)", short: "Scuola Shake-a-Lot o King's Blade", desc: "Al 3° livello scegli una scuola: Shake-a-Lot (Gelo & Difesa; Scudo del Gelo: +1 CA e resistenza freddo entro 9 m, -3m velocità nemici entro 3 m) o King's Blade (Fiamme & Assalto; Giudizio della Griglia: +Car min +1 danni fuoco entro 9 m). Punizioni Divine possono infliggere fuoco o freddo a seconda della scuola." },
+    { lvl: 7, name: "Aura della Corona (7°)", short: "Aura 3 m (9 m al 18° liv.)", desc: "Shake-a-Lot (Aura del Gelo Vigile): tu e alleati nell'aura avete resistenza freddo e +2 CA; nemici nell'aura -3m velocità. King's Blade (Aura delle Braci): resistenza fuoco e 1/turno +mod. Car danni fuoco con arma nell'aura." },
+    { lvl: 15, name: "Maestria del Maestro (15°)", short: "Punizione Congelante o Punizione Ardente", desc: "Shake-a-Lot: Punizione Divina aggiunge +1d8 freddo e -3m velocità (se velocità era 0, TS Cos o stordito); Imposizione delle Mani può dare resistenza fisica non magica. King's Blade: Punizione Divina può fare fuoco (+1d8, ignora resistenza fuoco) e TS Cos o il bersaglio brucia." },
+    { lvl: 20, name: "Campione della Corona (20°)", short: "1/riposo lungo per 1 min: Avatar dei Picchi o Campione della Forgia", desc: "Shake-a-Lot: immunità freddo, cammini su ghiaccio/pareti, +1d8 freddo e TS For o intrappolato, alleati nell'aura ottengono PF temp = Car/turno. King's Blade: immunità fuoco, resistenza freddo, +2d8 fuoco e teletrasporto 3m." }
   ]},
   "Bardo": { hd: 8, saves: ["DES", "CAR"], caster: "CAR", subName: "Collegio del Bardbecue", features: [
-    { lvl: 3, name: "Fiamme Addomesticate", short: "Controllare Fiamme, Produrre Fiamma, Sfera Infuocata", desc: "Impari Controllare Fiamme e Produrre Fiamma. 1/Riposo Lungo plasmi una Sfera Infuocata entro 18 m che non danneggia gli alleati. Comp./Perizia Strumenti da Cuoco." },
-    { lvl: 3, name: "Ispirazione Fiammeggiante & Cucina", short: "On Fire (+danni fuoco/PF temp) e razioni al riposo", desc: "Chi usa Ispirazione Bardica può aggiungere il dado come danni da fuoco (On Fire) o ottenere PF temp. A fine riposo prepari razioni per PB creature (PF temp = Car + Dado Ispirazione)." },
-    { lvl: 6, name: "Danza delle Braci", short: "Reazione accecante +Car ai danni da fuoco", desc: "Reazione (1 Ispirazione): aggiungi dado fuoco all'attacco di un alleato e accechi il bersaglio. Aggiungi +Car ai danni da fuoco e ignori resistenza al fuoco." }
+    { lvl: 3, name: "Bonus di Competenza & Fiamme Addomesticate (3°)", short: "Cuoco + Intimidire/Persuasione; Controllare/Produrre Fiamma", desc: "Ottieni competenza in Strumenti da Cuoco e Intimidire o Persuasione (o Perizia Cuoco se già competente). Impari Controllare Fiamme e Produrre Fiamma (non contano nel limite) e 1/riposo lungo plasmi una Sfera Infuocata entro 18 m senza danneggiare gli alleati scelti." },
+    { lvl: 3, name: "Ispirazione Fiammeggiante & Cucina di Campo (3°)", short: "On Fire e razioni a fine riposo", desc: "Con Ispirazione Fiammeggiante ('On Fire') chi usa Ispirazione Bardica aggiunge il dado come danni da fuoco su colpo andato a segno o PF temp su prova/TS. Con Cucina di Campo, a fine riposo breve/lungo prepari razioni per PB creature (PF temp = Car + Dado Ispirazione, min 1)." },
+    { lvl: 6, name: "Danza delle Braci (6°)", short: "Scintilla Tattica e Fuoco Maestoso", desc: "Scintilla Tattica (Reazione, 1 Ispirazione): quando un alleato entro 18 m infligge danni, aggiungi dado fuoco e acceca il bersaglio (TS Cos o no reazioni). Fuoco Maestoso: 1/turno aggiungi +Car ai danni da fuoco e ignori la resistenza al fuoco." },
+    { lvl: 14, name: "Capotavola della Corona (14°)", short: "Convito Rinvigorente (1/riposo lungo)", desc: "Con performance di 10 min durante un riposo imbandisci un Convito per te e fino a 6 creature entro 9 m (fino al prossimo riposo lungo): PF temp = 2×Dado Ispirazione, primo TS fallito +Dado Ispirazione (1/creatura) e vantaggio Strumenti da Cuoco e Intrattenere." }
   ]},
   "Mago": { hd: 6, saves: ["INT", "SAG"], caster: "INT", subName: "Mago Molecolare", features: [
-    { lvl: 2, name: "Magia Molecolare & Manipolazione", short: "2 trucchetti elementali extra + Savant", desc: "Copiare magie elementali costa metà oro/tempo. Impari 2 trucchetti tra Controllare Acqua/Fiamme, Modellare Terra, Folata di Vento." },
-    { lvl: 2, name: "Sequenza Elementale", short: "Marchia 'Temperata' con Fuoco, poi combo elementale", desc: "Danneggiando con Fuoco marchi 'Temperata'. Colpendo poi con altro elemento (usi = PB/Riposo Lungo) attivi: Acido (-2 CA), Freddo (-3m vel.), Fuoco (+1d6), Fulmine (no reazioni) o Tuono (spinta 3m + prono)." },
-    { lvl: 6, name: "Chimica del Sapore", short: "Converti/dividi elementi e ignora resistenze", desc: "Puoi convertire o dividere i dadi di danno tra i 5 elementi e ignorare le resistenze dei bersagli Temperati." },
-    { lvl: 10, name: "Punto di Fumo", short: "Ritira fino a Int dadi danno; +1d8 Risonanze", desc: "1/turno ritiri fino a mod. Int dadi di danno elementale; le risonanze infliggono +1d8 danni extra." }
+    { lvl: 2, name: "Magia Molecolare (2°)", short: "Savant Molecolare, Manipolazione di Stato, Sequenza Elementale", desc: "Savant Molecolare: copiare magie di acido/freddo/fuoco/fulmine/tuono costa metà oro e tempo; competenza Alchimista o Cuoco. Manipolazione di Stato: 2 trucchetti tra Controllare Acqua/Fiamme, Modellare Terra, Folata di Vento. Sequenza Elementale (usi = PB/riposo lungo): il fuoco marchia 'Temperata'; un diverso elemento attiva risonanza senza azione (Acido -2 CA, Freddo -3m vel., Fuoco +1d6/turno, Fulmine no reazioni, Tuono spinta 3m + TS For o prono)." },
+    { lvl: 6, name: "Chimica del Sapore (6°)", short: "Emulsione Elementale e Variazione di Consistenza", desc: "Emulsione Elementale: suddividi i dadi tra due tipi elementali o converti tutti i danni in uno dei 5 tipi. Variazione di consistenza: su bersaglio Temperato con Sequenza Elementale ignori le sue resistenze per il prossimo attacco." },
+    { lvl: 10, name: "Punto di Fumo (10°)", short: "Reroll termico e Sequenza Migliorata", desc: "Reroll termico: 1/turno ritiri fino a mod. Int (min 1) dadi di danno elementale. Sequenza Migliorata: le risonanze infliggono +1d8 danni extra e puoi attivarle su 2 creature Temperate nello stesso turno con 1 uso." },
+    { lvl: 14, name: "Sintesi Totale (14°)", short: "Reazione a catena (1/riposo lungo)", desc: "Una volta per riposo lungo, con una magia elementale di 1°+ liv. applichi Sinterizzazione (creature entro 3 m Temperate) e come Azione Bonus lanci una magia di 1°-3° liv. di altro elemento scatenando Sequenza Elementale entro 3 m." }
   ]},
   "Druido": { hd: 8, saves: ["INT", "SAG"], caster: "SAG", subName: "Circolo del Raccolto Rabbioso", features: [
-    { lvl: 2, name: "Semi da Battaglia", short: "Spendi Forma Selvatica per evocare piante tattiche", desc: "Azione (1 Forma Selvatica): evochi un Seme (CA 15, PF 5×livello) tra Maistragliatrice (cono 1d8 perf.), Jalapugno (mischia 1d8+Sag + spinta), Tirasole (linea 1d8 rad.), Cetriolio (trattiene + olio scivoloso). Comandi con Azione Bonus." },
-    { lvl: 6, name: "Scorza Dura & Potenza Vegetale", short: "Res. Veleno + Sag ai danni di semi/magie", desc: "Resistenza al veleno e +Sag ai danni inflitti da un tuo seme o incantesimo (1/turno)." },
-    { lvl: 10, name: "Muro di Lattuga & Sovrano del Campo", short: "Reazione +5 CA; fino a 3 semi attivi", desc: "Reazione (usi = PB/Riposo Lungo): +5 CA a te o un alleato entro 9 m. Puoi mantenere fino a 3 semi attivi contemporaneamente." }
+    { lvl: 2, name: "Semi da Battaglia (2°)", short: "Azione (1 Forma Selvatica): Maistragliatrice, Jalapugno, Tirasole, Cetriolio", desc: "Come Azione spendi 1 Forma Selvatica per far sbocciare un seme entro 9 m (CA 15, PF 5×livello druido, 1 ora); comandi con Azione Bonus. Semi del 2° liv.: Maistragliatrice (cono 4,5m, TS Des 1d8 perf.), Jalapugno (attacco incantesimo 1d8+Sag contundente + spinta 1,5m), Tirasole (linea 9×1,5m, TS Cos 1d8 radianti + rivela invisibili), Cetriolio (TS For o trattenuto + terreno scivoloso 3m). Crescita Rigogliosa aumenta i dadi ai liv. 6°, 10°, 14°." },
+    { lvl: 6, name: "Scorza Dura & Potenza Vegetale (6°)", short: "Res. Veleno, Vant. Avvelenato, +Sag ai danni", desc: "Resistenza al veleno e vantaggio ai TS contro avvelenamento. Potenza Vegetale: 1/turno quando un tuo seme o incantesimo infligge danni, aggiungi +Sag." },
+    { lvl: 10, name: "Muro di Lattuga & Sovrano del Campo (10°)", short: "Reazione +5 CA (PB/riposo lungo); fino a 3 semi attivi", desc: "Muro di Lattuga: Reazione (usi = PB/riposo lungo) su te o alleato entro 9 m colpito: +5 CA fino al prossimo turno e protezione da dardi incantati. Sovrano del Campo: ignori terreno difficile vegetale e puoi avere fino a 3 semi attivi (crei 2 semi dello stesso tipo con 1 uso di Forma Selvatica)." },
+    { lvl: 14, name: "Marea Verde (14°)", short: "Fioritura Rabbiosa e Ciclo della Vita", desc: "Fioritura Rabbiosa: quando fai germogliare un seme, tutti i semi attivi compiono subito un'azione aggiuntiva. Ciclo della Vita: quando una creatura muore entro 6 m recuperi 1 uso di Forma Selvatica." }
   ]},
   "Chierico": { hd: 8, saves: ["SAG", "CAR"], caster: "SAG", subName: "Dominio del Digiuno", features: [
-    { lvl: 1, name: "Rito del Digiuno", short: "Az. Bonus: Vantaggio Percezione/Intuizione/Indagare", desc: "Azione Bonus (usi = PB/Riposo Lungo): per 1 minuto hai Vantaggio a Percezione, Intuizione e Indagare e smascheri illusioni minori. Termina se mangi o bevi." },
-    { lvl: 2, name: "Canalizzare: Smascherare l'Inganno", short: "Aura 9m rivela invisibili e illusioni", desc: "Azione: per 1 minuto entro 9 m creatura invisibili/camuffate sono contornate di luce e gli alleati sommano +Sag ai TS contro illusioni/ammaliamenti." },
-    { lvl: 6, name: "Terzo Occhio Divino", short: "Scurovisione magica; Vista Pura 3m a digiuno", desc: "Vedi nell'oscurità magica; durante Rito del Digiuno o sotto metà PF ottieni Vista Pura 3 m e resistenza ai danni psichici." },
-    { lvl: 8, name: "Colpo dell'Asceta", short: "+1d8 danni psichici 1/turno con armi", desc: "Una volta per turno quando colpisci con un'arma infliggi +1d8 danni psichici." }
+    { lvl: 1, name: "Proficienze Bonus & Rito del Digiuno (1°)", short: "Armature pesanti + Intuizione/Percezione; Chiarezza del Digiuno", desc: "Competenza in armature pesanti e Intuizione o Percezione. Rito del Digiuno: Azione Bonus (usi = PB/riposo lungo) per 1 min: vantaggio a Percezione, Intuizione e Indagare, riconosci illusioni semplici e resisti il doppio del tempo senza cibo." },
+    { lvl: 2, name: "Canalizzare Divinità: Smascherare l'Inganno (2°)", short: "Azione, raggio 9 m per 1 minuto", desc: "Per 1 min in raggio 9 m le illusioni mostrano un alone lattiginoso, alleati hanno vantaggio Int contro illusioni, creature invisibili/camuffate sono contornate di luce e chi supera TS contro illusioni/ammaliamenti aggiunge +Sag (1/creatura)." },
+    { lvl: 6, name: "Terzo Occhio Divino (6°)", short: "Scurovisione magica; Vista Pura 3m a digiuno o ≤ metà PF", desc: "Scurovisione magica che ignora l'oscurità magica; durante Rito del Digiuno o con PF ≤ metà del massimo ottieni Vista Pura 3 m e resistenza ai danni psichici finché attivo." },
+    { lvl: 8, name: "Colpo dell'Asceta (8°)", short: "+1d8 danni psichici 1/turno con armi (+2d8 al 14°)", desc: "Una volta per turno quando colpisci con un attacco con arma infliggi +1d8 danni psichici (+2d8 al 14° livello)." },
+    { lvl: 17, name: "Ascesi del Vuoto (17°)", short: "Vista Pura 9 m, immunità Affascinato/Addormentato/Accecato", desc: "Ottieni Vista Pura 9 m, immunità ad affascinato, addormentato e accecato, e 1/riposo lungo lanci Visione del Vero senza slot né componenti." }
   ]},
   "Warlock": { hd: 8, saves: ["SAG", "CAR"], caster: "CAR", pactMagic: true, subName: "Patrono del Fuoco Primordiale", features: [
-    { lvl: 1, name: "Scintilla Originaria", short: "Res. Fuoco; Eldritch Blast di Fuoco +Car", desc: "Resistenza ai danni da fuoco. Impari Creare Falò e Controllare Fiamme. I tuoi raggi di Deflagrazione Occulta infliggono danni da fuoco; sommi +Car a un tiro di danno da fuoco con slot." },
-    { lvl: 6, name: "Conduttore Bianco", short: "Ignora res. fuoco; Reazione Svantaggio nemico", desc: "I tuoi incantesimi ignorano resistenza al fuoco (e infliggono metà danno agli immuni PB volte/Riposo Lungo). Reazione quando colpito: svantaggio al prossimo attacco contro di te." },
-    { lvl: 10, name: "Anima Ignifuga", short: "Vedi nel fumo 18m; rivela CA/resistenze", desc: "Vedi attraverso fumo/vapore entro 18 m; 1/turno conosci CA e resistenze fuoco/freddo di chi subisce tuoi danni da fuoco." }
+    { lvl: 1, name: "Scintilla Originaria (1°)", short: "Res. Fuoco; Creare Falò/Controllare Fiamme; Eldritch Blast di Fuoco", desc: "Impari Creare Falò e Controllare Fiamme (non contano nel limite). Ottieni resistenza ai danni da fuoco; con slot aggiungi +Car a un tiro di danno da fuoco (1/turno); i raggi di Eldritch Blast infliggono danni di fuoco." },
+    { lvl: 6, name: "Conduttore Bianco (6°)", short: "Ignora res. fuoco; Reazione Ribollire l'Aria", desc: "Le magie di fuoco ignorano la resistenza al fuoco (e possono fare metà danno agli immuni PB volte/riposo lungo). Ribollire l'aria (Reazione quando colpito): le creature ostili hanno svantaggio al prossimo tiro per colpire contro di te." },
+    { lvl: 10, name: "Anima Ignifuga (10°)", short: "Vedi nel fumo 18m; immunità fuoco/calore non magico; Rivelazione Termica", desc: "Occhi di Brace: vedi attraverso fumo/vapore entro 18 m. Naturalmente Abbrustolito: immune a calore/fuoco non magico, resistenza fuoco magico. Rivelazione termica: 1/turno quando un nemico entro 9 m subisce danni da fuoco conosci CA e resistenze/immunità a fuoco/freddo." },
+    { lvl: 14, name: "Avatar della Prima Fiamma (14°)", short: "Azione, 1/riposo lungo per 1 minuto", desc: "Per 1 minuto ottieni volo 9 m, immunità al fuoco, resistenza al freddo, nemici che finiscono entro 3 m subiscono +Car danni da fuoco e dopo una magia di fuoco ti teletrasporti di 6 m vicino a una fiamma (1/turno)." }
   ]}
 };
 
@@ -1139,12 +1149,78 @@ function defaultState() {
 
 let state = loadState();
 
+
+const SCHEMA_VERSION = 4;
+
+function migrateState(rawObj) {
+  const base = defaultState();
+  if (!rawObj || typeof rawObj !== "object") return base;
+
+  const src = (rawObj.data && typeof rawObj.data === "object")
+    ? rawObj.data
+    : ((rawObj.character && typeof rawObj.character === "object") ? rawObj.character : rawObj);
+
+  const merged = Object.assign({}, base, src);
+
+  merged.stats = Object.assign({}, base.stats, (src.stats && typeof src.stats === "object") ? src.stats : {});
+  merged.saveProfs = Object.assign({}, base.saveProfs, (src.saveProfs && typeof src.saveProfs === "object") ? src.saveProfs : {});
+  merged.skillProfs = Object.assign({}, base.skillProfs, (src.skillProfs && typeof src.skillProfs === "object") ? src.skillProfs : {});
+  merged.burgerPantry = Object.assign({}, base.burgerPantry, (src.burgerPantry && typeof src.burgerPantry === "object") ? src.burgerPantry : {});
+  merged.friesPantry = Object.assign({}, base.friesPantry, (src.friesPantry && typeof src.friesPantry === "object") ? src.friesPantry : {});
+  merged.ingredients = Object.assign({}, base.ingredients, (src.ingredients && typeof src.ingredients === "object") ? src.ingredients : {});
+  merged.tools = Object.assign({}, base.tools, (src.tools && typeof src.tools === "object") ? src.tools : {});
+
+  const dsSrc = (src.deathSaves && typeof src.deathSaves === "object") ? src.deathSaves : {};
+  merged.deathSaves = {
+    succ: [0, 1, 2].map(i => Boolean(Array.isArray(dsSrc.succ) ? dsSrc.succ[i] : false)),
+    fail: [0, 1, 2].map(i => Boolean(Array.isArray(dsSrc.fail) ? dsSrc.fail[i] : false))
+  };
+
+  const slotsSrc = (src.spellSlots && typeof src.spellSlots === "object") ? src.spellSlots : {};
+  merged.spellSlots = {};
+  [1, 2, 3, 4, 5].forEach(lvl => {
+    const s = slotsSrc[lvl] || slotsSrc[String(lvl)] || {};
+    const maxVal = Math.max(0, Number(s.max || 0));
+    const usedVal = Math.max(0, Math.min(maxVal || 99, Number(s.used || 0)));
+    merged.spellSlots[lvl] = { max: maxVal, used: usedVal };
+  });
+
+  merged.weapons = Array.isArray(src.weapons)
+    ? src.weapons.map(w => Object.assign({ name: "Arma", dice: "1d6", dmgType: "Contundente", stat: "FOR", magicBonus: 0, mastery: "", props: "" }, w || {}))
+    : [];
+
+  merged.spells = Array.isArray(src.spells)
+    ? src.spells.map(sp => Object.assign({ level: 1, name: "Incantesimo", time: "1 Azione", range: "18 m", prep: true, note: "" }, sp || {}))
+    : [];
+
+  merged.magicItems = Array.isArray(src.magicItems)
+    ? src.magicItems.map(it => Object.assign({ name: "Oggetto Magico", active: true, charges: 0, maxCharges: 0, note: "" }, it || {}))
+    : [];
+
+  merged.level = Math.max(1, Math.min(20, Number(merged.level || 1)));
+  merged.xp = Math.max(0, Number(merged.xp || 0));
+  merged.hpMax = Math.max(1, Number(merged.hpMax || 12));
+  merged.hpCurrent = Math.max(0, Math.min(merged.hpMax, Number(merged.hpCurrent ?? merged.hpMax)));
+  merged.hpTemp = Math.max(0, Number(merged.hpTemp || 0));
+  merged.hdUsed = Math.max(0, Math.min(merged.level, Number(merged.hdUsed || 0)));
+  merged.exhaustion = Math.max(0, Math.min(6, Number(merged.exhaustion || 0)));
+  merged.gold = Number(merged.gold || 0);
+  merged.schemaVersion = SCHEMA_VERSION;
+
+  return merged;
+}
+
 function loadState() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return defaultState();
-    const parsed = JSON.parse(raw);
-    return Object.assign(defaultState(), parsed);
+    const keysToTry = [STORAGE_KEY, "bk_quest_55e_v2", "bk_quest_55e_v1"];
+    for (const k of keysToTry) {
+      const raw = localStorage.getItem(k);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        return migrateState(parsed);
+      }
+    }
+    return defaultState();
   } catch (e) {
     return defaultState();
   }
@@ -1171,6 +1247,24 @@ function esc(str) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+
+const WEAPON_MASTERY_DESC = {
+  "Sfiancare (Sap)": "Se colpisci una creatura con quest'arma, quella creatura ha Svantaggio al suo prossimo tiro per colpire prima dell'inizio del tuo prossimo turno.",
+  "Graffiare (Graze)": "Se il tuo tiro per colpire con quest'arma manca una creatura, infliggi comunque danni pari al modificatore della caratteristica usata per l'attacco (senza alterare il tipo di danno).",
+  "Vessare (Vex)": "Quando colpisci una creatura con quest'arma e infliggi danni, ottieni Vantaggio al tuo prossimo tiro per colpire contro quella stessa creatura prima della fine del tuo prossimo turno.",
+  "Incalzare (Nick)": "Quando effettui l'attacco extra di una proprietà Leggera, puoi farlo come parte dell'azione di Attacco anziché come Azione Bonus (1 volta per turno; non si somma ad altri attacchi extra da Incalzare).",
+  "Atterrare (Topple)": "Se colpisci una creatura con quest'arma, puoi costringerla a superare un Tiro Salvezza su Costituzione (CD 8 + PB + mod. caratteristica) o cadere a terra Prona.",
+  "Spingere (Push)": "Se colpisci una creatura con quest'arma di taglia fino a Grande, puoi spingerla fino a 3 m (1,5 m per quadretto) lontano da te in linea retta.",
+  "Rallentare (Slow)": "Se colpisci una creatura con quest'arma e le infliggi danni, riduci la sua Velocità di 3 m fino all'inizio del tuo prossimo turno (se colpisci più volte, la riduzione non si somma)."
+};
+
+function getMasteryExplanation(masteryStr) {
+  if (!masteryStr) return "Nessuna proprietà di Padronanza delle Armi specificata.";
+  if (WEAPON_MASTERY_DESC[masteryStr]) return WEAPON_MASTERY_DESC[masteryStr];
+  const matchedKey = Object.keys(WEAPON_MASTERY_DESC).find(k => masteryStr.toLowerCase().includes(k.split(" ")[0].toLowerCase()));
+  return matchedKey ? WEAPON_MASTERY_DESC[matchedKey] : "Proprietà di Padronanza 5.5e: applica l'effetto speciale indicato sull'arma quando colpisci o manchi secondo le regole del manuale.";
 }
 
 function getPB() {
@@ -1357,10 +1451,50 @@ function adjustHP(delta) {
   renderApp();
 }
 
+function spendHitDie() {
+  const cls = CLASSES_DATA[state.className] || CLASSES_DATA["Guerriero"];
+  const maxHD = Number(state.level || 1);
+  const usedHD = Number(state.hdUsed || 0);
+  if (usedHD >= maxHD) {
+    showDiceToast("Dadi Vita Esauriti", `Hai già speso tutti i ${maxHD}d${cls.hd} disponibili!`, "0 DV");
+    return;
+  }
+  const conMod = getMod(state.stats.COS);
+  const roll = Math.floor(Math.random() * cls.hd) + 1;
+  const healed = Math.max(1, roll + conMod);
+  state.hdUsed = usedHD + 1;
+  const prevHP = state.hpCurrent;
+  state.hpCurrent = Math.min(state.hpMax, state.hpCurrent + healed);
+  const actualHealed = state.hpCurrent - prevHP;
+  scheduleSave();
+  renderApp();
+  showDiceToast(
+    `Dado Vita Speso (1d${cls.hd})`,
+    `Tiro (${roll}) ${fmtMod(conMod)} COS = +${healed} PF (recuperati ${actualHealed} PF) • Rimasti: ${maxHD - state.hdUsed}/${maxHD}`,
+    `+${healed} PF`
+  );
+}
+
+function shortRest() {
+  const cls = CLASSES_DATA[state.className] || CLASSES_DATA["Guerriero"];
+  const maxHD = Number(state.level || 1);
+  const availHD = Math.max(0, maxHD - Number(state.hdUsed || 0));
+  let notes = [];
+  if (cls.pactMagic) {
+    Object.keys(state.spellSlots).forEach(lvl => { state.spellSlots[lvl].used = 0; });
+    notes.push("Slot Magia del Patto ripristinati");
+  }
+  notes.push(`Dadi Vita disponibili: ${availHD}/${maxHD} d${cls.hd}`);
+  scheduleSave();
+  renderApp();
+  showDiceToast("Riposo Breve (1 ora)", notes.join(" • ") + " — Usa 'Spendi DV' per curarti!", "☕");
+}
+
 function longRest() {
+  const cls = CLASSES_DATA[state.className] || CLASSES_DATA["Guerriero"];
   state.hpCurrent = state.hpMax;
   state.hpTemp = 0;
-  state.hdUsed = Math.max(0, state.hdUsed - Math.max(1, Math.floor(state.level / 2)));
+  state.hdUsed = 0;
   state.deathSaves = { succ: [false, false, false], fail: [false, false, false] };
   state.exhaustion = Math.max(0, Number(state.exhaustion || 0) - 1);
   if (state.species === "Umano") state.inspiration = true;
@@ -1368,7 +1502,7 @@ function longRest() {
   state.magicItems.forEach(it => { if (it.maxCharges) it.charges = it.maxCharges; });
   scheduleSave();
   renderApp();
-  showDiceToast("Riposo Lungo Completato", "PF massimi, slot e cariche ripristinati!", "OK");
+  showDiceToast("Riposo Lungo Completato", `PF massimi, tutti i ${state.level}d${cls.hd} Dadi Vita, slot e cariche ripristinati!`, "🏕️");
 }
 
 function eatBurger(id) {
@@ -1512,12 +1646,19 @@ function renderHomeTab() {
           <button class="hp-btn hp-dmg" onclick="adjustHP(-5)">-5</button>
           <button class="hp-btn hp-heal" onclick="adjustHP(1)">+1</button>
           <button class="hp-btn hp-heal" onclick="adjustHP(5)">+5</button>
-          <button class="hp-btn hp-rest" onclick="longRest()">🏕️ Riposo</button>
+          <button class="hp-btn" style="background:#7A3B26;color:#fff;" onclick="shortRest()">☕ Riposo Breve</button>
+          <button class="hp-btn hp-rest" onclick="longRest()">🏕️ Riposo Lungo</button>
         </div>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px;padding-top:6px;border-top:1px dashed #E8B4A6;">
           <label style="font-size:11px;font-weight:800;color:var(--bk-brown);">Attuali: <input type="number" min="0" style="width:56px;display:inline-block;padding:3px 5px;" value="${state.hpCurrent}" onchange="state.hpCurrent=Math.max(0,Math.min(state.hpMax,Number(this.value)));scheduleSave();renderApp();"></label>
           <label style="font-size:11px;font-weight:800;color:var(--bk-brown);">PF Max: <input type="number" min="1" style="width:58px;display:inline-block;padding:3px 5px;" value="${state.hpMax}" onchange="const v=Math.max(1,Number(this.value));state.hpMax=v;if(state.hpCurrent>v)state.hpCurrent=v;scheduleSave();renderApp();"></label>
           <label style="font-size:11px;font-weight:800;color:#0d6efd;">PF Temp: <input type="number" min="0" style="width:54px;display:inline-block;padding:3px 5px;" value="${state.hpTemp}" onchange="updateField('hpTemp', Math.max(0, Number(this.value)));renderApp();"></label>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:7px;padding-top:6px;border-top:1px dashed #E8B4A6;">
+          <span style="font-size:11px;font-weight:900;color:var(--bk-brown);">🎲 Dadi Vita (d${cls.hd}): <strong>${Math.max(0, state.level - state.hdUsed)} / ${state.level}</strong></span>
+          <button class="roll-pill" style="padding:3px 8px;font-size:11.5px;background:#FFF8E1;border-color:var(--bk-gold);" onclick="spendHitDie()">+1d${cls.hd}${fmtMod(getMod(state.stats.COS))} Cura</button>
+          <button class="roll-pill" style="padding:2px 6px;font-size:11px;" title="Recupera 1 Dado Vita" onclick="if(state.hdUsed>0){state.hdUsed--;scheduleSave();renderApp();}">+1 DV</button>
+          <button class="roll-pill" style="padding:2px 6px;font-size:11px;" title="Segna 1 Dado Vita come speso senza tirare" onclick="if(state.hdUsed<state.level){state.hdUsed++;scheduleSave();renderApp();}">-1 DV</button>
         </div>
       </div>
       <div style="text-align:right;">
@@ -1566,7 +1707,13 @@ function renderHomeTab() {
     </div>
 
     <div class="card">
-      <div class="card-title"><span>⚔️ Attacchi Rapidi</span><button class="btn btn-util" style="color:var(--bk-brown);border-color:var(--bk-border);" onclick="switchTab('combat')">Gestisci Armi →</button></div>
+      <div class="card-title">
+        <span>⚔️ Attacchi Rapidi</span>
+        <div style="display:flex;gap:5px;align-items:center;">
+          ${state.className === "Ladro" ? `<button class="roll-pill" style="background:#FFF8E1;border-color:var(--bk-gold);" onclick="rollFormula('Attacco Furtivo (${Math.max(1, Math.ceil(Number(state.level||1)/2))}d6)', '${Math.max(1, Math.ceil(Number(state.level||1)/2))}d6')">🗡️ Furtivo ${Math.max(1, Math.ceil(Number(state.level||1)/2))}d6</button>` : ""}
+          <button class="btn btn-util" style="color:var(--bk-brown);border-color:var(--bk-border);" onclick="switchTab('combat')">Gestisci Armi →</button>
+        </div>
+      </div>
       ${quickWeapons || `<div style="font-size:12.5px;color:#7c6558;">Nessuna arma equipaggiata.</div>`}
     </div>
 
@@ -1634,7 +1781,23 @@ function renderStatsTab() {
     </div>
 
     <div class="card">
-      <div class="card-title"><span>🎯 Abilità (18)</span><span style="font-size:11px;">${editMode ? "Tocca il cerchio: Vuoto → Comp. → Perizia (2×)" : "Competenza protetta"}</span></div>
+      <div class="card-title"><span>🎯 Abilità (18)</span><span style="font-size:11px;">${editMode ? "Seleziona livello di competenza su ogni abilità" : "Attiva 🔓 Modifica per cambiare competenze"}</span></div>
+      ${editMode ? `
+        <div style="background:var(--bk-cream);border:1px solid var(--bk-border);border-radius:8px;padding:8px;margin-bottom:8px;font-size:12px;">
+          <strong>Scegli rapidamente una competenza abilità:</strong>
+          <div style="display:flex;gap:6px;margin-top:5px;flex-wrap:wrap;">
+            <select id="quick-skill-sel" style="flex:1;min-width:160px;">
+              ${SKILLS_LIST.map(s => `<option value="${s.id}">${s.name} (${s.stat})</option>`).join("")}
+            </select>
+            <select id="quick-skill-lvl" style="width:145px;">
+              <option value="1">Competente (+PB)</option>
+              <option value="2">Perizia (2×PB)</option>
+              <option value="0">Nessuna</option>
+            </select>
+            <button class="btn btn-print" onclick="const sid=document.getElementById('quick-skill-sel').value;const slvl=Number(document.getElementById('quick-skill-lvl').value);state.skillProfs[sid]=slvl;scheduleSave();renderApp();">Applica</button>
+          </div>
+        </div>
+      ` : ""}
       ${skillsHtml}
     </div>
 
@@ -1660,43 +1823,68 @@ function renderCombatTab() {
     const toHit = getMod(state.stats[statKey]) + pb + Number(w.magicBonus || 0) + bAtk;
     const dmgMod = getMod(state.stats[statKey]) + bDmg;
     const dmgFormula = `${w.dice}${dmgMod !== 0 ? (dmgMod > 0 ? "+" + dmgMod : dmgMod) : ""}`;
+    const masteryDesc = getMasteryExplanation(w.mastery);
 
     return `
-      <div class="acc-item open" style="margin-bottom:8px;">
-        <div class="acc-head">
-          <div>
-            <span class="acc-title">${esc(w.name)}</span>
-            <div style="font-size:11px;color:#7a3b26;">Padronanza 5.5e: <strong>${esc(w.mastery || "—")}</strong> • ${esc(w.props || "")}</div>
+      <div class="acc-item" id="wep-card-${idx}" style="margin-bottom:8px;">
+        <div class="acc-head" onclick="document.getElementById('wep-card-${idx}').classList.toggle('open')">
+          <div style="flex:1;min-width:0;">
+            <span class="acc-title">${esc(w.name)}</span> <span class="acc-tag" style="margin-left:4px;">${esc(w.mastery || "Standard")} ▾</span>
+            <div style="font-size:11px;color:#7a3b26;">${esc(w.dice)} ${esc(w.dmgType)} • ${esc(w.props || "")}</div>
           </div>
-          <div style="display:flex;gap:5px;align-items:center;">
+          <div style="display:flex;gap:5px;align-items:center;" onclick="event.stopPropagation();">
             <button class="roll-pill" onclick="rollD20('${esc(w.name)} (Colpire)', ${toHit})">Colpire ${fmtMod(toHit)}</button>
             <button class="roll-pill" onclick="rollFormula('${esc(w.name)} (Danni)', '${dmgFormula}')">${dmgFormula}</button>
             ${editMode ? `<button class="btn btn-danger" onclick="state.weapons.splice(${idx},1);scheduleSave();renderApp();">✕</button>` : ""}
           </div>
         </div>
-        ${editMode ? `
-          <div class="acc-body" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:6px;">
-            <div><label class="lbl">Nome</label><input type="text" value="${esc(w.name)}" oninput="state.weapons[${idx}].name=this.value;scheduleSave();renderPrintSheet();"></div>
-            <div><label class="lbl">Dado Danno</label><input type="text" value="${esc(w.dice)}" oninput="state.weapons[${idx}].dice=this.value;scheduleSave();"></div>
-            <div><label class="lbl">Tipo Danno</label><input type="text" value="${esc(w.dmgType)}" oninput="state.weapons[${idx}].dmgType=this.value;scheduleSave();"></div>
-            <div><label class="lbl">Caratteristica</label>
-              <select onchange="state.weapons[${idx}].stat=this.value;scheduleSave();renderApp();">
-                <option value="FOR" ${w.stat === "FOR" ? "selected" : ""}>Forza (FOR)</option>
-                <option value="DES" ${w.stat === "DES" ? "selected" : ""}>Destrezza (DES)</option>
-                <option value="FIN" ${w.stat === "FIN" ? "selected" : ""}>Accurata (FOR/DES)</option>
-                <option value="CAR" ${w.stat === "CAR" ? "selected" : ""}>Carisma (CAR)</option>
-              </select>
-            </div>
-            <div><label class="lbl">Bonus Magico</label><input type="number" value="${w.magicBonus || 0}" onchange="state.weapons[${idx}].magicBonus=Number(this.value);scheduleSave();renderApp();"></div>
-            <div><label class="lbl">Padronanza 5.5e</label><input type="text" value="${esc(w.mastery || "")}" oninput="state.weapons[${idx}].mastery=this.value;scheduleSave();"></div>
+        <div class="acc-body">
+          <div style="margin-bottom:${editMode ? "8px" : "0"};">
+            <strong>🎯 Abilità d'Arma (${esc(w.mastery || "Nessuna")}):</strong> ${esc(masteryDesc)}
           </div>
-        ` : ""}
+          ${editMode ? `
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:6px;padding-top:6px;border-top:1px dashed var(--bk-border);">
+              <div><label class="lbl">Nome</label><input type="text" value="${esc(w.name)}" oninput="state.weapons[${idx}].name=this.value;scheduleSave();renderPrintSheet();"></div>
+              <div><label class="lbl">Dado Danno</label><input type="text" value="${esc(w.dice)}" oninput="state.weapons[${idx}].dice=this.value;scheduleSave();"></div>
+              <div><label class="lbl">Tipo Danno</label><input type="text" value="${esc(w.dmgType)}" oninput="state.weapons[${idx}].dmgType=this.value;scheduleSave();"></div>
+              <div><label class="lbl">Caratteristica</label>
+                <select onchange="state.weapons[${idx}].stat=this.value;scheduleSave();renderApp();">
+                  <option value="FOR" ${w.stat === "FOR" ? "selected" : ""}>Forza (FOR)</option>
+                  <option value="DES" ${w.stat === "DES" ? "selected" : ""}>Destrezza (DES)</option>
+                  <option value="FIN" ${w.stat === "FIN" ? "selected" : ""}>Accurata (FOR/DES)</option>
+                  <option value="CAR" ${w.stat === "CAR" ? "selected" : ""}>Carisma (CAR)</option>
+                </select>
+              </div>
+              <div><label class="lbl">Bonus Magico</label><input type="number" value="${w.magicBonus || 0}" onchange="state.weapons[${idx}].magicBonus=Number(this.value);scheduleSave();renderApp();"></div>
+              <div><label class="lbl">Padronanza 5.5e</label>
+                <select onchange="state.weapons[${idx}].mastery=this.value;scheduleSave();renderApp();">
+                  ${Object.keys(WEAPON_MASTERY_DESC).map(mKey => `<option value="${esc(mKey)}" ${w.mastery === mKey ? "selected" : ""}>${esc(mKey)}</option>`).join("")}
+                </select>
+              </div>
+            </div>
+          ` : ""}
+        </div>
       </div>
     `;
   }).join("");
 
+  const sneakDiceCount = Math.max(1, Math.ceil(Number(state.level || 1) / 2));
+  const sneakFormula = `${sneakDiceCount}d6`;
+  const sneakCardHtml = state.className === "Ladro" ? `
+    <div class="card" style="border-color:var(--bk-gold);background:#FFFDF5;">
+      <div class="card-title"><span>🗡️ Attacco Furtivo (Ladro)</span><span class="acc-tag">1/turno • ${sneakFormula}</span></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+        <div style="font-size:12px;color:#5c3d30;">
+          Attacco con arma Accurata o a distanza con Vantaggio (o alleato entro 1,5 m dal bersaglio).
+        </div>
+        <button class="btn btn-print" onclick="rollFormula('Attacco Furtivo (${sneakFormula})', '${sneakFormula}')">🎲 Tira Furtivo (${sneakFormula})</button>
+      </div>
+    </div>
+  ` : "";
+
   return `
     ${renderBiteBanner()}
+    ${sneakCardHtml}
     <div class="card">
       <div class="card-title"><span>🛡️ Armatura & Difesa (CA Totale: ${getCalculatedAC()})</span></div>
       <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin-bottom:8px;">
@@ -1704,8 +1892,8 @@ function renderCombatTab() {
           <label class="lbl">Armatura Indossata</label>
           <select ${dis} onchange="state.armorIndex=Number(this.value);scheduleSave();renderApp();">${armorOptions}</select>
         </div>
-        <label class="chk-item" style="height:36px;">
-          <input type="checkbox" ${state.hasShield ? "checked" : ""} ${dis} onchange="state.hasShield=this.checked;scheduleSave();renderApp();">
+        <label class="chk-item" style="height:36px;cursor:pointer;">
+          <input type="checkbox" ${state.hasShield ? "checked" : ""} onchange="state.hasShield=this.checked;scheduleSave();renderApp();">
           <strong>Scudo (+2 CA)</strong>
         </label>
       </div>
@@ -1725,7 +1913,7 @@ function renderCombatTab() {
     </div>
 
     <div class="card">
-      <div class="card-title"><span>⚔️ Arsenale Armi & Padronanze 5.5e</span></div>
+      <div class="card-title"><span>⚔️ Arsenale Armi & Padronanze 5.5e (Tocca per leggere l'abilità)</span></div>
       <div class="search-box-row">
         <input type="text" id="weapon-search-input" placeholder="🔍 Cerca arma, padronanza o tipo danno..." oninput="filterSelectOptions('weapon-search-input', 'weapon-preset-sel'); filterWeaponCards(this.value);">
       </div>
@@ -1765,14 +1953,18 @@ function renderBKTab() {
   const sp = SPECIES_DATA[state.species] || SPECIES_DATA["Umano"];
   const dis = editMode ? "" : "disabled";
 
-  const subFeatures = cls.features.map((f, i) => `
+  const visibleFeatures = editMode
+    ? cls.features
+    : cls.features.filter(f => Number(f.lvl) <= Number(state.level));
+
+  const subFeatures = visibleFeatures.map((f, i) => `
     <div class="acc-item open" id="bk-sub-${i}">
       <div class="acc-head" onclick="document.getElementById('bk-sub-${i}').classList.toggle('open')">
         <div>
           <span class="acc-title">${esc(f.name)}</span>
           <div style="font-size:11.5px;color:#6e5041;">${esc(f.short)}</div>
         </div>
-        <span class="acc-tag">Liv. ${f.lvl}° ${state.level >= f.lvl ? "✓" : "🔒"}</span>
+        <span class="acc-tag">Liv. ${f.lvl}° ${Number(state.level) >= Number(f.lvl) ? "✓" : "🔒"}</span>
       </div>
       <div class="acc-body">${esc(f.desc)}</div>
     </div>
@@ -1822,6 +2014,55 @@ function renderBKTab() {
       ` : ""}
     </div>
   `;
+}
+
+
+const CRAFTING_RECIPES = [
+  { outType: "burger", outId: "whopper", name: "Whopper", req: { "Pane al Sesamo": 1, "Carne alla Griglia": 1, "Lattuga Iceberg": 1, "Pomodoro": 1, "Cetrioli Sottaceto": 1, "Salsa King / Maionese": 1 } },
+  { outType: "burger", outId: "double_whopper", name: "Double Whopper", req: { "Pane al Sesamo": 1, "Carne alla Griglia": 2, "Lattuga Iceberg": 1, "Pomodoro": 1, "Cetrioli Sottaceto": 1, "Salsa King / Maionese": 1 } },
+  { outType: "burger", outId: "bacon_king", name: "Bacon King", req: { "Pane al Sesamo": 1, "Carne alla Griglia": 2, "Bacon Croccante": 2, "Formaggio Fuso": 2, "Salsa BBQ": 1 } },
+  { outType: "burger", outId: "bacon_king_smokey", name: "Bacon King 3.0 Smokey", req: { "Pane al Sesamo": 1, "Carne alla Griglia": 2, "Bacon Croccante": 3, "Formaggio Fuso": 2, "Salsa BBQ": 1, "Polvere di Brace": 1 } },
+  { outType: "burger", outId: "crazy_cheese", name: "Crazy Cheese BBQ Plant", req: { "Pane al Sesamo": 1, "Formaggio Fuso": 3, "Salsa BBQ": 1, "Cipolla Fresca": 1 } },
+  { outType: "burger", outId: "chicken_royale", name: "Chicken Royale", req: { "Pane al Sesamo": 1, "Filetto Croccante": 1, "Lattuga Iceberg": 1, "Salsa King / Maionese": 1 } },
+  { outType: "burger", outId: "crunchicken", name: "Crunchicken", req: { "Pane al Sesamo": 1, "Filetto Croccante": 2, "Spezie Naniche": 1, "Salsa King / Maionese": 1 } },
+  { outType: "burger", outId: "big_king", name: "Big King", req: { "Pane al Sesamo": 2, "Carne alla Griglia": 2, "Formaggio Fuso": 1, "Lattuga Iceberg": 1, "Cetrioli Sottaceto": 1, "Salsa King / Maionese": 1 } },
+  { outType: "fries", outId: "fries_base", name: "King Fries (Base)", req: { "Patate Mandragola": 1 } },
+  { outType: "fries", outId: "fries_bacon", name: "Bacon King Fries", req: { "Patate Mandragola": 1, "Bacon Croccante": 1, "Formaggio Fuso": 1 } },
+  { outType: "fries", outId: "fries_chili", name: "Chili Cheese Fries", req: { "Patate Mandragola": 1, "Formaggio Fuso": 1, "Scaglie di Peperoncino": 1 } },
+  { outType: "fries", outId: "fries_onion", name: "Onion Cheese Fries", req: { "Patate Mandragola": 1, "Formaggio Fuso": 1, "Cipolla Fresca": 1 } }
+];
+
+let selectedCraftRecipeIdx = 0;
+
+function isRecipeCraftable(recipe) {
+  return Object.keys(recipe.req || {}).every(ing => Number(state.ingredients[ing] || 0) >= Number(recipe.req[ing] || 0));
+}
+
+function craftSelectedFood() {
+  const sel = document.getElementById("craft-recipe-sel");
+  const idx = sel ? Number(sel.value) : selectedCraftRecipeIdx;
+  selectedCraftRecipeIdx = idx;
+  const rec = CRAFTING_RECIPES[idx];
+  if (!rec) return;
+
+  if (!isRecipeCraftable(rec)) {
+    showDiceToast("Ingredienti Insufficienti", `Non hai abbastanza ingredienti nella dispensa per preparare ${rec.name}.`, "⚠️");
+    return;
+  }
+
+  Object.keys(rec.req).forEach(ing => {
+    state.ingredients[ing] = Math.max(0, Number(state.ingredients[ing] || 0) - Number(rec.req[ing] || 0));
+  });
+
+  if (rec.outType === "burger") {
+    state.burgerPantry[rec.outId] = Number(state.burgerPantry[rec.outId] || 0) + 1;
+  } else {
+    state.friesPantry[rec.outId] = Number(state.friesPantry[rec.outId] || 0) + 1;
+  }
+
+  scheduleSave();
+  renderApp();
+  showDiceToast("Preparazione Completata!", `Hai cucinato 1× ${rec.name} ed è stato aggiunto alla tua bisaccia!`, "🍽️");
 }
 
 function renderFoodTab() {
@@ -1881,8 +2122,47 @@ function renderFoodTab() {
     `;
   }).join("");
 
+  const craftableCount = CRAFTING_RECIPES.filter(isRecipeCraftable).length;
+  const craftOptionsHtml = CRAFTING_RECIPES.map((r, idx) => {
+    const ok = isRecipeCraftable(r);
+    return `<option value="${idx}" ${selectedCraftRecipeIdx === idx ? "selected" : ""}>${ok ? "🟢 [DISPONIBILE]" : "⚪"} ${esc(r.name)}</option>`;
+  }).join("");
+  const currentCraftRec = CRAFTING_RECIPES[selectedCraftRecipeIdx] || CRAFTING_RECIPES[0];
+  const currentCraftOk = isRecipeCraftable(currentCraftRec);
+
+  const craftBadgesHtml = CRAFTING_RECIPES.map((r, idx) => {
+    const ok = isRecipeCraftable(r);
+    return `
+      <button type="button" class="roll-pill" style="font-size:11px;padding:4px 8px;${ok ? "background:#e8f5e9;border-color:#2e7d32;color:#1b5e20;font-weight:900;" : "opacity:0.65;"}" onclick="selectedCraftRecipeIdx=${idx};renderApp();">
+        ${ok ? "✓ " : ""}${esc(r.name)}
+      </button>
+    `;
+  }).join("");
+
   return `
     ${renderBiteBanner()}
+
+    <div class="card" style="border-color:var(--bk-gold);background:#FFFDF7;">
+      <div class="card-title">
+        <span>👨‍🍳 Menù di Creazione (Cucina & Preparazione)</span>
+        <span class="acc-tag" style="background:${craftableCount > 0 ? "var(--bk-green)" : "#7a3b26"};">${craftableCount} Preparabili</span>
+      </div>
+      <div style="font-size:11.5px;color:#5c3d30;margin-bottom:8px;">
+        Seleziona una creazione dal selettore qui sotto: le ricette restano nascoste e vengono evidenziate quelle realizzabili con gli ingredienti in dispensa.
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">
+        <select id="craft-recipe-sel" style="flex:1;min-width:190px;" onchange="selectedCraftRecipeIdx=Number(this.value);renderApp();">
+          ${craftOptionsHtml}
+        </select>
+        <button class="btn btn-print" style="background:${currentCraftOk ? "var(--bk-green)" : "#8c7366"};" onclick="craftSelectedFood()">
+          ${currentCraftOk ? "🍳 Prepara Ora" : "🔒 Mancano Ingredienti"}
+        </button>
+      </div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;">
+        ${craftBadgesHtml}
+      </div>
+    </div>
+
     <div class="card" style="padding:9px 12px;">
       <input type="text" id="food-search-input" placeholder="🔍 Cerca panino, King Fries o ingrediente..." oninput="filterFoodList(this.value)">
     </div>
@@ -2359,7 +2639,10 @@ function renderApp() {
 
 
 function exportJSON() {
-  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  const payload = Object.assign({}, migrateState(state), {
+    _meta: { app: "BurgerKingsQuest", schemaVersion: SCHEMA_VERSION, exportedAt: new Date().toISOString() }
+  });
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = `${(state.name || "personaggio").toLowerCase().replace(/[^a-z0-9]+/g, "_")}_bk_quest.json`;
@@ -2373,7 +2656,7 @@ function importJSON(e) {
   reader.onload = function(ev) {
     try {
       const parsed = JSON.parse(ev.target.result);
-      state = Object.assign(defaultState(), parsed);
+      state = migrateState(parsed);
       scheduleSave();
       renderApp();
       showDiceToast("Scheda Caricata", `Benvenuto ${state.name}!`, "OK");
@@ -2388,61 +2671,61 @@ function importJSON(e) {
 let wizStep = 1;
 const CLASS_STARTER_PACKS = {
   "Guerriero": {
-    summary: "Dotazione da Guerriero: Armatura a Scaglie (o Cotta di Maglia), Scudo, Spada Lunga, Arco Lungo (20 frecce), Zaino dell'Avventuriero oppure 155 MO.",
+    summary: "Opzioni iniziali Guerriero: pacchetto armi + armatura + scudo + zaino oppure oro iniziale.",
     options: [
-      { label: "Pacchetto Guerriero (Spada Lunga, Arco Lungo, Scaglie, Scudo, Zaino) + 14 MO", gold: 14, weapons: [0, 7], armorIdx: 6, shield: true, tools: ["Strumenti da Cuoco"], pack: "Zaino dell'Avventuriero (zaino, acciarino e pietra focaia, 10 torce, 10 razioni, borraccia, corda di canapa 15 m)." },
-      { label: "Pacchetto Pesante (Spadone, Ascia da Battaglia, Cotta di Maglia, Zaino) + 9 MO", gold: 9, weapons: [1, 5], armorIdx: 9, shield: false, tools: ["Strumenti da Fabbro"], pack: "Zaino dell'Avventuriero (zaino, acciarino e pietra focaia, 10 torce, 10 razioni, borraccia, corda di canapa 15 m)." },
-      { label: "Solo Oro Iniziale Classe (155 MO)", gold: 155, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
+      { label: "Spada Lunga, Arco Lungo, Corazza a Scaglie, Scudo + 14 MO", gold: 14, weapons: [0, 7], armorIdx: 6, shield: true, tools: ["Strumenti da Cuoco"], pack: "Zaino dell'Avventuriero (zaino, acciarino e pietra focaia, 10 torce, 10 razioni, borraccia, corda di canapa 15 m), 20 frecce." },
+      { label: "Spadone, Ascia da Battaglia, Cotta di Maglia + 9 MO", gold: 9, weapons: [1, 5], armorIdx: 9, shield: false, tools: ["Strumenti da Fabbro"], pack: "Zaino dell'Avventuriero (zaino, acciarino e pietra focaia, 10 torce, 10 razioni, borraccia, corda di canapa 15 m)." },
+      { label: "Solo Oro Iniziale (155 MO)", gold: 155, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
     ]
   },
   "Ladro": {
-    summary: "Dotazione da Ladro: Stocco, Arco Corto (20 frecce), Cuoio Borchiato, Arnesi da Scasso, Zaino da Ladro/Esploratore oppure 140 MO.",
+    summary: "Opzioni iniziali Ladro: pacchetto armi + armatura leggera + arnesi da scasso + zaino oppure oro iniziale.",
     options: [
-      { label: "Pacchetto Furfante (Stocco, Arco Corto, Cuoio Borchiato, Arnesi da Scasso, Zaino) + 16 MO", gold: 16, weapons: [2, 8], armorIdx: 3, shield: false, tools: ["Arnesi da Scasso", "Strumenti da Cuoco"], pack: "Zaino da Esploratore (zaino, sfere d'acciaio, 10 m di filo metallico, campanellino, 2 candele, piede di porco, acciarino e pietra focaia, borraccia)." },
-      { label: "Pacchetto Furtivo (2 Pugnali, Arco Corto, Armatura di Cuoio, Arnesi da Scasso) + 21 MO", gold: 21, weapons: [4, 8], armorIdx: 2, shield: false, tools: ["Arnesi da Scasso", "Kit da Erborista"], pack: "Zaino da Esploratore (zaino, sfere d'acciaio, 10 m di filo metallico, campanellino, 2 candele, piede di porco, acciarino e pietra focaia, borraccia)." },
-      { label: "Solo Oro Iniziale Classe (140 MO)", gold: 140, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
+      { label: "Stocco, Arco Corto, Cuoio Borchiato, Arnesi da Scasso + 16 MO", gold: 16, weapons: [2, 8], armorIdx: 3, shield: false, tools: ["Arnesi da Scasso", "Strumenti da Cuoco"], pack: "Zaino da Esploratore (zaino, sfere d'acciaio, 10 m filo metallico, campanellino, 2 candele, piede di porco, acciarino e pietra focaia, borraccia), 20 frecce." },
+      { label: "Spada Corta, Pugnale, Arco Corto, Armatura di Cuoio, Arnesi da Scasso + 21 MO", gold: 21, weapons: [3, 4, 8], armorIdx: 2, shield: false, tools: ["Arnesi da Scasso", "Kit da Erborista"], pack: "Zaino da Esploratore (zaino, sfere d'acciaio, 10 m filo metallico, campanellino, 2 candele, piede di porco, acciarino e pietra focaia, borraccia), 20 frecce." },
+      { label: "Solo Oro Iniziale (140 MO)", gold: 140, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
     ]
   },
   "Paladino": {
-    summary: "Dotazione da Burger Knight: Spada Lunga, Armi da lancio, Cotta di Maglia, Scudo, Zaino del Sacerdote oppure 150 MO.",
+    summary: "Opzioni iniziali Paladino (Burger Knight): arma marziale, arma secondaria, armatura pesante, scudo e zaino oppure oro iniziale.",
     options: [
-      { label: "Pacchetto Burger Knight (Spada Lunga, Pugnale, Cotta di Maglia, Scudo, Zaino) + 9 MO", gold: 9, weapons: [0, 4], armorIdx: 9, shield: true, tools: ["Strumenti da Cuoco"], pack: "Zaino del Sacerdote (zaino, coperta, 10 candele, acciarino e pietra focaia, scatola per offerte, incensiere, paramenti, 2 razioni, borraccia)." },
-      { label: "Solo Oro Iniziale Classe (150 MO)", gold: 150, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
+      { label: "Spada Lunga, Pugnale, Cotta di Maglia, Scudo + 9 MO", gold: 9, weapons: [0, 4], armorIdx: 9, shield: true, tools: ["Strumenti da Cuoco"], pack: "Zaino del Sacerdote (zaino, coperta, 10 candele, acciarino e pietra focaia, scatola per offerte, incensiere, paramenti, 2 razioni, borraccia)." },
+      { label: "Solo Oro Iniziale (150 MO)", gold: 150, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
     ]
   },
   "Bardo": {
-    summary: "Dotazione da Bardbecue: Stocco, Pugnale, Armatura di Cuoio, Strumenti Musicali / Cuoco, Zaino dell'Intrattenitore oppure 90 MO.",
+    summary: "Opzioni iniziali Bardo (Collegio del Bardbecue): arma accurata, armatura di cuoio, strumenti e zaino oppure oro iniziale.",
     options: [
-      { label: "Pacchetto Bardbecue (Stocco, Pugnale, Armatura di Cuoio, Wok 'n Roll, Zaino) + 19 MO", gold: 19, weapons: [2, 10], armorIdx: 2, shield: false, tools: ["Strumenti da Cuoco", "Strumenti Musicali"], pack: "Zaino dell'Intrattenitore (zaino, sacco a pelo, 2 costumi, 5 candele, 5 razioni, borraccia, kit da trucco)." },
-      { label: "Solo Oro Iniziale Classe (90 MO)", gold: 90, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
+      { label: "Stocco, Pugnale, Armatura di Cuoio, Strumenti da Cuoco + 19 MO", gold: 19, weapons: [2, 4], armorIdx: 2, shield: false, tools: ["Strumenti da Cuoco", "Strumenti Musicali"], pack: "Zaino dell'Intrattenitore (zaino, sacco a pelo, 2 costumi, 5 candele, 5 razioni, borraccia, kit da trucco)." },
+      { label: "Solo Oro Iniziale (90 MO)", gold: 90, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
     ]
   },
   "Mago": {
-    summary: "Dotazione da Mago Molecolare: Pugnale, Balestra Leggera, Grimorio, Zaino dello Studioso oppure 55 MO.",
+    summary: "Opzioni iniziali Mago (Mago Molecolare): arma semplice/a distanza, strumenti/grimorio e zaino oppure oro iniziale.",
     options: [
-      { label: "Pacchetto Mago Molecolare (Pugnale, Balestra Leggera, Grimorio, Zaino) + 10 MO", gold: 10, weapons: [4, 9], armorIdx: 0, shield: false, tools: ["Strumenti da Alchimista"], pack: "Zaino dello Studioso (zaino, libro di storia, acciarino e pietra focaia, 10 fogli di pergamena, boccetta d'inchiostro, penna d'oca, borraccia)." },
-      { label: "Solo Oro Iniziale Classe (55 MO)", gold: 55, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
+      { label: "Pugnale, Balestra Leggera, Strumenti da Alchimista + 10 MO", gold: 10, weapons: [4, 9], armorIdx: 0, shield: false, tools: ["Strumenti da Alchimista"], pack: "Zaino dello Studioso (zaino, libro di storia, acciarino e pietra focaia, 10 fogli di pergamena, boccetta d'inchiostro, penna d'oca, borraccia), 20 quadrelli." },
+      { label: "Solo Oro Iniziale (55 MO)", gold: 55, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
     ]
   },
   "Druido": {
-    summary: "Dotazione da Raccolto Rabbioso: Armatura di Cuoio, Scudo, Kit da Erborista, Zaino dell'Esploratore oppure 50 MO.",
+    summary: "Opzioni iniziali Druido (Circolo del Raccolto Rabbioso): armatura di cuoio, scudo, kit da erborista e zaino oppure oro iniziale.",
     options: [
-      { label: "Pacchetto Raccolto Rabbioso (Pugnale, Cuoio, Scudo, Kit Erborista, Zaino) + 10 MO", gold: 10, weapons: [4], armorIdx: 2, shield: true, tools: ["Kit da Erborista", "Strumenti da Cuoco"], pack: "Zaino dell'Esploratore (zaino, sacco a pelo, acciarino e pietra focaia, 10 torce, 10 razioni, borraccia, corda di canapa 15 m)." },
-      { label: "Solo Oro Iniziale Classe (50 MO)", gold: 50, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
+      { label: "Pugnale, Armatura di Cuoio, Scudo, Kit da Erborista + 10 MO", gold: 10, weapons: [4], armorIdx: 2, shield: true, tools: ["Kit da Erborista", "Strumenti da Cuoco"], pack: "Zaino dell'Esploratore (zaino, sacco a pelo, acciarino e pietra focaia, 10 torce, 10 razioni, borraccia, corda di canapa 15 m)." },
+      { label: "Solo Oro Iniziale (50 MO)", gold: 50, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
     ]
   },
   "Chierico": {
-    summary: "Dotazione da Dominio del Digiuno: Martello da Guerra, Cotta di Maglia, Scudo, Zaino del Sacerdote oppure 110 MO.",
+    summary: "Opzioni iniziali Chierico (Dominio del Digiuno): arma, armatura pesante, scudo e zaino oppure oro iniziale.",
     options: [
-      { label: "Pacchetto Dominio del Digiuno (Martello da Guerra, Cotta di Maglia, Scudo, Zaino) + 15 MO", gold: 15, weapons: [6], armorIdx: 9, shield: true, tools: ["Strumenti da Cuoco"], pack: "Zaino del Sacerdote (zaino, coperta, 10 candele, acciarino e pietra focaia, scatola per offerte, paramenti, 2 razioni, borraccia)." },
-      { label: "Solo Oro Iniziale Classe (110 MO)", gold: 110, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
+      { label: "Martello da Guerra, Cotta di Maglia, Scudo + 15 MO", gold: 15, weapons: [6], armorIdx: 9, shield: true, tools: ["Strumenti da Cuoco"], pack: "Zaino del Sacerdote (zaino, coperta, 10 candele, acciarino e pietra focaia, scatola per offerte, paramenti, 2 razioni, borraccia)." },
+      { label: "Solo Oro Iniziale (110 MO)", gold: 110, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
     ]
   },
   "Warlock": {
-    summary: "Dotazione da Fuoco Primordiale: Armatura di Cuoio, Pugnale, Arco Corto, Zaino da Dungeoneer oppure 100 MO.",
+    summary: "Opzioni iniziali Warlock (Patrono del Fuoco Primordiale): armatura di cuoio, armi e zaino oppure oro iniziale.",
     options: [
-      { label: "Pacchetto Fuoco Primordiale (Pugnale, Arco Corto, Cuoio, Zaino) + 15 MO", gold: 15, weapons: [4, 8], armorIdx: 2, shield: false, tools: ["Strumenti da Cuoco"], pack: "Zaino da Dungeoneer (zaino, piede di porco, martello, 10 pitoni, 10 torce, scatola dell'esca, 10 razioni, borraccia, corda di canapa 15 m)." },
-      { label: "Solo Oro Iniziale Classe (100 MO)", gold: 100, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
+      { label: "Pugnale, Arco Corto, Armatura di Cuoio + 15 MO", gold: 15, weapons: [4, 8], armorIdx: 2, shield: false, tools: ["Strumenti da Cuoco"], pack: "Zaino da Dungeoneer (zaino, piede di porco, martello, 10 pitoni, 10 torce, scatola dell'esca, 10 razioni, borraccia, corda di canapa 15 m), 20 frecce." },
+      { label: "Solo Oro Iniziale (100 MO)", gold: 100, weapons: [], armorIdx: 0, shield: false, tools: [], pack: "" }
     ]
   }
 };

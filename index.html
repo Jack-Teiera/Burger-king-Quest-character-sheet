@@ -1710,10 +1710,17 @@ function renderHomeTab() {
 
     <div class="hp-panel">
       <div>
-        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
           <span class="vital-lbl" style="font-size:11px;">❤️ Punti Ferita</span>
-          <span style="font-size:24px;font-weight:900;color:var(--bk-red);">${state.hpCurrent} <span style="font-size:15px;color:#6e5041;">/ ${state.hpMax}</span></span>
-          ${state.hpTemp > 0 ? `<span style="background:#0d6efd;color:#fff;font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px;">+${state.hpTemp} Temp</span>` : ""}
+          <div style="display:inline-flex;align-items:center;gap:4px;">
+            <input type="number" min="0" title="Punti Ferita Attuali" style="width:62px;padding:3px 6px;font-size:20px;font-weight:900;color:var(--bk-red);text-align:center;" value="${state.hpCurrent}" onchange="state.hpCurrent=Math.max(0,Math.min(state.hpMax,Number(this.value)));scheduleSave();renderApp();">
+            <span style="font-size:16px;font-weight:800;color:#6e5041;">/</span>
+            <input type="number" min="1" title="Punti Ferita Massimi" style="width:60px;padding:3px 6px;font-size:16px;font-weight:800;color:#6e5041;text-align:center;" ${editMode ? "" : "disabled"} value="${state.hpMax}" onchange="const v=Math.max(1,Number(this.value));state.hpMax=v;if(state.hpCurrent>v)state.hpCurrent=v;scheduleSave();renderApp();">
+          </div>
+          <label style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;color:#0d6efd;background:#e7f1ff;padding:3px 7px;border-radius:8px;border:1px solid #b6d4fe;">
+            <span>Temp</span>
+            <input type="number" min="0" title="Punti Ferita Temporanei" style="width:48px;padding:2px 4px;font-size:13px;font-weight:900;color:#0d6efd;text-align:center;" value="${state.hpTemp}" onchange="updateField('hpTemp', Math.max(0, Number(this.value)));renderApp();">
+          </label>
         </div>
         <div class="hp-controls" style="align-items:center;">
           <button class="hp-btn hp-dmg" onclick="adjustHP(-1)">-1</button>
@@ -1724,11 +1731,6 @@ function renderHomeTab() {
             <button class="hp-btn" style="background:#7A3B26;color:#fff;" onclick="shortRest()">☕ Riposo Breve</button>
             <button class="hp-btn hp-rest" onclick="longRest()">🏕️ Riposo Lungo</button>
           </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px;padding-top:6px;border-top:1px dashed #E8B4A6;">
-          <label style="font-size:11px;font-weight:800;color:var(--bk-brown);">Attuali: <input type="number" min="0" style="width:58px;display:inline-block;padding:3px 5px;" value="${state.hpCurrent}" onchange="state.hpCurrent=Math.max(0,Math.min(state.hpMax,Number(this.value)));scheduleSave();renderApp();"></label>
-          <label style="font-size:11px;font-weight:800;color:var(--bk-brown);">PF Max: <input type="number" min="1" style="width:58px;display:inline-block;padding:3px 5px;" ${editMode ? "" : "disabled"} value="${state.hpMax}" onchange="const v=Math.max(1,Number(this.value));state.hpMax=v;if(state.hpCurrent>v)state.hpCurrent=v;scheduleSave();renderApp();"></label>
-          <label style="font-size:11px;font-weight:800;color:#0d6efd;">PF Temp: <input type="number" min="0" style="width:54px;display:inline-block;padding:3px 5px;" value="${state.hpTemp}" onchange="updateField('hpTemp', Math.max(0, Number(this.value)));renderApp();"></label>
         </div>
         <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:7px;padding-top:6px;border-top:1px dashed #E8B4A6;">
           <span style="font-size:11px;font-weight:900;color:var(--bk-brown);">🎲 Dadi Vita (d${cls.hd}): <strong>${Math.max(0, state.level - state.hdUsed)} / ${state.level}</strong></span>

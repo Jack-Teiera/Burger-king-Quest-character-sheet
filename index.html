@@ -1376,7 +1376,29 @@ function migrateState(rawObj) {
   return merged;
 }
 
+function encodeHashState(obj) {
+  try {
+    const copy = Object.assign({}, obj, { portrait: "" }); // keep URL compact
+    const json = JSON.stringify(copy);
+    return btoa(unescape(encodeURIComponent(json)));
+  } catch (e) {
+    return "";
+  }
+}
+
+function decodeHashState(hashStr) {
+  try {
+    const clean = String(hashStr || "").replace(/^#s=/, "");
+    if (!clean) return null;
+    const json = decodeURIComponent(escape(atob(clean)));
+    return JSON.parse(json);
+  } catch (e) {
+    return null;
+  }
+}
+
 function loadState() {
+  // 1. Try localStorage
   try {
     const keysToTry = [STORAGE_KEY, "bk_quest_55e_v2", "bk_quest_55e_v1"];
     for (const k of keysToTry) {
@@ -1386,20 +1408,58 @@ function loadState() {
         return migrateState(parsed);
       }
     }
-    return defaultState();
-  } catch (e) {
-    return defaultState();
-  }
+  } catch (e) {}
+
+  // 2. Fallback: window.name (survives F5 / pull-to-refresh on file:// and sandboxed iframes!)
+  try {
+    if (typeof window.name === "string" && window.name.startsWith("BK_QUEST_STATE:")) {
+      const parsed = JSON.parse(window.name.slice("BK_QUEST_STATE:".length));
+      return migrateState(parsed);
+    }
+  } catch (e) {}
+
+  // 3. Fallback: URL hash (#s=...) for file:// hard reloads
+  try {
+    if (window.location.hash && window.location.hash.startsWith("#s=")) {
+      const parsed = decodeHashState(window.location.hash);
+      if (parsed) return migrateState(parsed);
+    }
+  } catch (e) {}
+
+  return defaultState();
 }
 
 function saveNow() {
   clearTimeout(saveTimer);
   const pill = document.getElementById("save-status");
+  const serialized = JSON.stringify(state);
+  let savedLocal = false;
+  let savedWinName = false;
+
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    if (pill) pill.textContent = "✓ Salvato";
-  } catch (e) {
-    if (pill) pill.textContent = "⚠️ Memoria piena";
+    localStorage.setItem(STORAGE_KEY, serialized);
+    savedLocal = true;
+  } catch (e) {}
+
+  try {
+    window.name = "BK_QUEST_STATE:" + serialized;
+    savedWinName = true;
+  } catch (e) {}
+
+  // On file:// protocol, also mirror compact state into URL hash so even hard refresh preserves everything
+  try {
+    if (window.location.protocol === "file:" || !savedLocal) {
+      const encoded = encodeHashState(state);
+      if (encoded && encoded.length < 32000) {
+        history.replaceState(null, "", "#s=" + encoded);
+      }
+    }
+  } catch (e) {}
+
+  if (pill) {
+    if (savedLocal) pill.textContent = "✓ Salvato";
+    else if (savedWinName) pill.textContent = "✓ Salvato (Sessione)";
+    else pill.textContent = "⚠️ Usa ⬇️ JSON";
   }
 }
 
@@ -3479,6 +3539,7 @@ function resetCharacter() {
   }
 }
 
+saveNow();
 renderApp();
 </script>
 </body>

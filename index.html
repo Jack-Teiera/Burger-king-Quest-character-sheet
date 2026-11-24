@@ -91,6 +91,9 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
+  html, body {
+    overscroll-behavior-y: none;
+  }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background: var(--bk-cream);
@@ -779,7 +782,7 @@
   <div class="topbar-inner">
     <div class="brand-row">
       <div class="brand-title">
-        <span class="brand-badge">BK QUEST 5.5e</span>
+        <span class="brand-badge">BK QUEST 5.5e • v21</span>
         <h1 id="top-char-name">Eroe della Griglia</h1>
         <span id="top-insp-badge" onclick="state.inspiration=!state.inspiration;scheduleSave();renderApp();" style="cursor:pointer;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid #F5A623;background:#F5A623;color:#24130D;" title="Tocca per attivare/disattivare Ispirazione Eroica">★ Ispirazione</span>
         <span class="save-pill" id="save-status">✓ Salvato</span>
@@ -1376,6 +1379,8 @@ function migrateState(rawObj) {
   return merged;
 }
 
+let loadedFromStorage = false;
+
 function encodeHashState(obj) {
   try {
     const copy = Object.assign({}, obj, { portrait: "" }); // keep URL compact
@@ -1397,6 +1402,54 @@ function decodeHashState(hashStr) {
   }
 }
 
+function idbSaveState(serialized) {
+  try {
+    if (!window.indexedDB) return;
+    const req = indexedDB.open("bk_quest_idb", 1);
+    req.onupgradeneeded = function(e) {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains("sheets")) db.createObjectStore("sheets");
+    };
+    req.onsuccess = function(e) {
+      try {
+        const db = e.target.result;
+        const tx = db.transaction("sheets", "readwrite");
+        tx.objectStore("sheets").put(serialized, STORAGE_KEY);
+      } catch (err) {}
+    };
+  } catch (e) {}
+}
+
+function idbRestoreIfNeeded() {
+  if (loadedFromStorage) return;
+  try {
+    if (!window.indexedDB) return;
+    const req = indexedDB.open("bk_quest_idb", 1);
+    req.onupgradeneeded = function(e) {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains("sheets")) db.createObjectStore("sheets");
+    };
+    req.onsuccess = function(e) {
+      try {
+        const db = e.target.result;
+        const tx = db.transaction("sheets", "readonly");
+        const getReq = tx.objectStore("sheets").get(STORAGE_KEY);
+        getReq.onsuccess = function() {
+          if (!loadedFromStorage && getReq.result) {
+            try {
+              const parsed = JSON.parse(getReq.result);
+              state = migrateState(parsed);
+              loadedFromStorage = true;
+              saveNow();
+              renderApp();
+            } catch (err) {}
+          }
+        };
+      } catch (err) {}
+    };
+  } catch (e) {}
+}
+
 function loadState() {
   // 1. Try localStorage
   try {
@@ -1405,24 +1458,29 @@ function loadState() {
       const raw = localStorage.getItem(k);
       if (raw) {
         const parsed = JSON.parse(raw);
+        loadedFromStorage = true;
         return migrateState(parsed);
       }
     }
   } catch (e) {}
 
-  // 2. Fallback: window.name (survives F5 / pull-to-refresh on file:// and sandboxed iframes!)
-  try {
-    if (typeof window.name === "string" && window.name.startsWith("BK_QUEST_STATE:")) {
-      const parsed = JSON.parse(window.name.slice("BK_QUEST_STATE:".length));
-      return migrateState(parsed);
-    }
-  } catch (e) {}
-
-  // 3. Fallback: URL hash (#s=...) for file:// hard reloads
+  // 2. Fallback: URL hash (#s=...) — preserved by Chrome Android PWA on pull-to-refresh!
   try {
     if (window.location.hash && window.location.hash.startsWith("#s=")) {
       const parsed = decodeHashState(window.location.hash);
-      if (parsed) return migrateState(parsed);
+      if (parsed) {
+        loadedFromStorage = true;
+        return migrateState(parsed);
+      }
+    }
+  } catch (e) {}
+
+  // 3. Fallback: window.name
+  try {
+    if (typeof window.name === "string" && window.name.startsWith("BK_QUEST_STATE:")) {
+      const parsed = JSON.parse(window.name.slice("BK_QUEST_STATE:".length));
+      loadedFromStorage = true;
+      return migrateState(parsed);
     }
   } catch (e) {}
 
@@ -1434,7 +1492,7 @@ function saveNow() {
   const pill = document.getElementById("save-status");
   const serialized = JSON.stringify(state);
   let savedLocal = false;
-  let savedWinName = false;
+  let savedHash = false;
 
   try {
     localStorage.setItem(STORAGE_KEY, serialized);
@@ -1443,22 +1501,22 @@ function saveNow() {
 
   try {
     window.name = "BK_QUEST_STATE:" + serialized;
-    savedWinName = true;
   } catch (e) {}
 
-  // On file:// protocol, also mirror compact state into URL hash so even hard refresh preserves everything
+  // Always mirror state into URL hash (#s=...) via replaceState:
+  // In standalone PWA mode the URL bar is hidden, and Chrome reloads the exact URL+hash on pull-to-refresh!
   try {
-    if (window.location.protocol === "file:" || !savedLocal) {
-      const encoded = encodeHashState(state);
-      if (encoded && encoded.length < 32000) {
-        history.replaceState(null, "", "#s=" + encoded);
-      }
+    const encoded = encodeHashState(state);
+    if (encoded && encoded.length < 32000) {
+      history.replaceState(null, "", "#s=" + encoded);
+      savedHash = true;
     }
   } catch (e) {}
 
+  idbSaveState(serialized);
+
   if (pill) {
-    if (savedLocal) pill.textContent = "✓ Salvato";
-    else if (savedWinName) pill.textContent = "✓ Salvato (Sessione)";
+    if (savedLocal || savedHash) pill.textContent = "✓ Salvato";
     else pill.textContent = "⚠️ Usa ⬇️ JSON";
   }
 }
@@ -3541,6 +3599,7 @@ function resetCharacter() {
 
 saveNow();
 renderApp();
+idbRestoreIfNeeded();
 </script>
 </body>
 </html>

@@ -213,7 +213,6 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.25);
   }
 
-  
   /* WIZARD MODAL */
   #wizard-modal {
     display: none;
@@ -782,7 +781,7 @@
   <div class="topbar-inner">
     <div class="brand-row">
       <div class="brand-title">
-        <span class="brand-badge">BK QUEST 5.5e • v21</span>
+        <span class="brand-badge">BK QUEST 5.5e • v23</span>
         <h1 id="top-char-name">Eroe della Griglia</h1>
         <span id="top-insp-badge" onclick="state.inspiration=!state.inspiration;scheduleSave();renderApp();" style="cursor:pointer;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;border:1px solid #F5A623;background:#F5A623;color:#24130D;" title="Tocca per attivare/disattivare Ispirazione Eroica">★ Ispirazione</span>
         <span class="save-pill" id="save-status">✓ Salvato</span>
@@ -807,7 +806,6 @@
     </nav>
   </div>
 </header>
-
 
 <div id="wizard-modal">
   <div class="wizard-box" id="wizard-content"></div>
@@ -1030,7 +1028,6 @@ const ARMOR_PRESETS = [
 ];
 
 const WEAPON_PRESETS = [
-  // Mischia Semplici
   { name: "Bastone Ferrato", dice: "1d6", dmgType: "Contundente", stat: "FOR", mastery: "Atterrare (Topple)", props: "Semplice, Versatile (1d8)" },
   { name: "Falcetto", dice: "1d4", dmgType: "Tagliente", stat: "FOR", mastery: "Incalzare (Nick)", props: "Semplice, Leggera" },
   { name: "Giavellotto", dice: "1d6", dmgType: "Perforante", stat: "FOR", mastery: "Rallentare (Slow)", props: "Semplice, Lancio (9/36 m)" },
@@ -1039,12 +1036,10 @@ const WEAPON_PRESETS = [
   { name: "Pugnale", dice: "1d4", dmgType: "Perforante", stat: "FIN", mastery: "Incalzare (Nick)", props: "Semplice, Accurata, Leggera, Lancio (6/18 m)" },
   { name: "Randello", dice: "1d4", dmgType: "Contundente", stat: "FOR", mastery: "Rallentare (Slow)", props: "Semplice, Leggera" },
   { name: "Randello Pesante", dice: "1d8", dmgType: "Contundente", stat: "FOR", mastery: "Spingere (Push)", props: "Semplice, A due mani" },
-  // Distanza Semplici
   { name: "Arco Corto", dice: "1d6", dmgType: "Perforante", stat: "DES", mastery: "Vessare (Vex)", props: "Semplice, Munizioni (24/96 m), A due mani" },
   { name: "Balestra Leggera", dice: "1d8", dmgType: "Perforante", stat: "DES", mastery: "Rallentare (Slow)", props: "Semplice, Munizioni (24/96 m), Ricarica, A due mani" },
   { name: "Dardo", dice: "1d4", dmgType: "Perforante", stat: "FIN", mastery: "Vessare (Vex)", props: "Semplice, Accurata, Lancio (6/18 m)" },
   { name: "Fionda", dice: "1d4", dmgType: "Contundente", stat: "DES", mastery: "Rallentare (Slow)", props: "Semplice, Munizioni (9/36 m)" },
-  // Mischia Marziali
   { name: "Alabarda", dice: "1d10", dmgType: "Tagliente", stat: "FOR", mastery: "Incalzare (Nick)", props: "Marziale, Pesante, Portata, A due mani" },
   { name: "Ascia Bipenne", dice: "1d12", dmgType: "Tagliente", stat: "FOR", mastery: "Graffiare (Graze)", props: "Marziale, Pesante, A due mani" },
   { name: "Ascia da Battaglia", dice: "1d8", dmgType: "Tagliente", stat: "FOR", mastery: "Atterrare (Topple)", props: "Marziale, Versatile (1d10)" },
@@ -1063,11 +1058,9 @@ const WEAPON_PRESETS = [
   { name: "Spadone", dice: "2d6", dmgType: "Tagliente", stat: "FOR", mastery: "Graffiare (Graze)", props: "Marziale, Pesante, A due mani" },
   { name: "Stocco", dice: "1d8", dmgType: "Perforante", stat: "FIN", mastery: "Vessare (Vex)", props: "Marziale, Accurata" },
   { name: "Tridente", dice: "1d8", dmgType: "Perforante", stat: "FOR", mastery: "Atterrare (Topple)", props: "Marziale, Lancio (6/18 m), Versatile (1d10)" },
-  // Distanza Marziali
   { name: "Arco Lungo", dice: "1d8", dmgType: "Perforante", stat: "DES", mastery: "Rallentare (Slow)", props: "Marziale, Munizioni (45/180 m), Pesante, A due mani" },
   { name: "Balestra a Mano", dice: "1d6", dmgType: "Perforante", stat: "DES", mastery: "Vessare (Vex)", props: "Marziale, Munizioni (9/36 m), Leggera, Ricarica" },
   { name: "Balestra Pesante", dice: "1d10", dmgType: "Perforante", stat: "DES", mastery: "Spingere (Push)", props: "Marziale, Munizioni (30/120 m), Pesante, Ricarica, A due mani" },
-  // Armi Speciali Burger King's Quest
   { name: "Wok 'n Roll (BK)", dice: "1d6", dmgType: "Contundente", stat: "FOR", mastery: "Atterrare (Topple)", props: "Magica BK (+1/+2 txc), Versatile (1d8), Strumento Cuoco/Musicista" },
   { name: "S-Wing (BK)", dice: "1d4", dmgType: "Perforante", stat: "FIN", mastery: "Incalzare (Nick)", props: "Magica BK (+1/+2 txc, +1d6 fuoco Rara), Accurata, Leggera, Lancio" },
   { name: "Lacrimascia (BK)", dice: "1d8", dmgType: "Tagliente", stat: "FOR", mastery: "Atterrare (Topple)", props: "Magica BK (+1/+2 txc e CA), Versatile (1d10)" }
@@ -1091,75 +1084,32 @@ const FRIES_DATA = [
   { id: "fries_onion", name: "Onion Cheese Fries", label: "+1 PF e Vant. Perc./Indag. (10m)", desc: "Ripristina 1 PF e conferisce Vantaggio a Percezione e Indagare per 10 minuti." }
 ];
 
-const INGREDIENTS_LIST = [
-  "Pane al Sesamo", "Carne alla Griglia", "Bacon Croccante", "Formaggio Fuso",
-  "Cipolla Fresca", "Lattuga Iceberg", "Pomodoro", "Cetrioli Sottaceto",
-  "Salsa King / Maionese", "Salsa BBQ", "Filetto Croccante", "Patate Mandragola",
-  "Scaglie di Peperoncino", "Essenza di Battlecattle", "Spezie Naniche", "Polvere di Brace"
-];
-
 const INGREDIENT_CATEGORIES = [
-  {
-    id: "Pane",
-    icon: "🍞",
-    label: "Pane",
-    items: [
-      { name: "Pane al Sesamo", sym: "🍔", code: "[PAN]" }
-    ]
-  },
-  {
-    id: "Proteina",
-    icon: "🥩",
-    label: "Proteina",
-    items: [
-      { name: "Carne alla Griglia", sym: "🥩", code: "[PRO]" },
-      { name: "Bacon Croccante", sym: "🥓", code: "[PRO]" },
-      { name: "Filetto Croccante", sym: "🍗", code: "[PRO]" },
-      { name: "Formaggio Fuso", sym: "🧀", code: "[PRO]" }
-    ]
-  },
-  {
-    id: "Fresco",
-    icon: "🥬",
-    label: "Fresco",
-    items: [
-      { name: "Lattuga Iceberg", sym: "🥬", code: "[FRE]" },
-      { name: "Pomodoro", sym: "🍅", code: "[FRE]" },
-      { name: "Cipolla Fresca", sym: "🧅", code: "[FRE]" },
-      { name: "Cetrioli Sottaceto", sym: "🥒", code: "[FRE]" },
-      { name: "Patate Mandragola", sym: "🥔", code: "[FRE]" }
-    ]
-  },
-  {
-    id: "Salsa",
-    icon: "🧴",
-    label: "Salsa",
-    items: [
-      { name: "Salsa King / Maionese", sym: "🥚", code: "[SAL]" },
-      { name: "Salsa BBQ", sym: "🔥", code: "[SAL]" }
-    ]
-  },
-  {
-    id: "Speciale",
-    icon: "🌶️",
-    label: "Speciale",
-    items: [
-      { name: "Scaglie di Peperoncino", sym: "🌶️", code: "[SPE]" },
-      { name: "Essenza di Battlecattle", sym: "🧪", code: "[SPE]" },
-      { name: "Spezie Naniche", sym: "✨", code: "[SPE]" },
-      { name: "Polvere di Brace", sym: "🌋", code: "[SPE]" }
-    ]
-  }
+  { id: "Pane", icon: "🍞", label: "Pane", items: [{ name: "Pane al Sesamo", sym: "🍔", code: "[PAN]" }] },
+  { id: "Proteina", icon: "🥩", label: "Proteina", items: [
+    { name: "Carne alla Griglia", sym: "🥩", code: "[PRO]" },
+    { name: "Bacon Croccante", sym: "🥓", code: "[PRO]" },
+    { name: "Filetto Croccante", sym: "🍗", code: "[PRO]" },
+    { name: "Formaggio Fuso", sym: "🧀", code: "[PRO]" }
+  ]},
+  { id: "Fresco", icon: "🥬", label: "Fresco", items: [
+    { name: "Lattuga Iceberg", sym: "🥬", code: "[FRE]" },
+    { name: "Pomodoro", sym: "🍅", code: "[FRE]" },
+    { name: "Cipolla Fresca", sym: "🧅", code: "[FRE]" },
+    { name: "Cetrioli Sottaceto", sym: "🥒", code: "[FRE]" },
+    { name: "Patate Mandragola", sym: "🥔", code: "[FRE]" }
+  ]},
+  { id: "Salsa", icon: "🧴", label: "Salsa", items: [
+    { name: "Salsa King / Maionese", sym: "🥚", code: "[SAL]" },
+    { name: "Salsa BBQ", sym: "🔥", code: "[SAL]" }
+  ]},
+  { id: "Speciale", icon: "🌶️", label: "Speciale", items: [
+    { name: "Scaglie di Peperoncino", sym: "🌶️", code: "[SPE]" },
+    { name: "Essenza di Battlecattle", sym: "🧪", code: "[SPE]" },
+    { name: "Spezie Naniche", sym: "✨", code: "[SPE]" },
+    { name: "Polvere di Brace", sym: "🌋", code: "[SPE]" }
+  ]}
 ];
-
-function getIngredientMeta(ingName) {
-  for (const cat of INGREDIENT_CATEGORIES) {
-    const found = cat.items.find(it => it.name === ingName);
-    if (found) return { ...found, catId: cat.id, catIcon: cat.icon };
-  }
-  return { name: ingName, sym: "🧂", code: "[SPE]", catId: "Speciale", catIcon: "🌶️" };
-}
-
 
 const TOOLS_LIST = [
   "Strumenti da Cuoco", "Kit da Erborista", "Strumenti da Alchimista", "Strumenti da Fabbro",
@@ -1168,9 +1118,7 @@ const TOOLS_LIST = [
   "Veicoli (Terra)", "Veicoli (Acqua)"
 ];
 
-
 const SPELL_CATALOG = [
-  // Trucchetti (0°)
   { level: 0, name: "Controllare Fiamme", time: "1 Azione", range: "18 m", note: "Manipola fiamme non magiche entro 1,5 m (Bardbecue / Mago Mol. / Fuoco Prim.)" },
   { level: 0, name: "Produrre Fiamma", time: "1 Azione", range: "Incantatore", note: "Luce 3 m + attacco fuoco a distanza 18 m (1d8+ fuoco) (Bardbecue)" },
   { level: 0, name: "Creare Falò", time: "1 Azione", range: "18 m", note: "Cubo 1,5 m di fuoco (Conc., TS Des 1d8+ fuoco) (Fuoco Primordiale)" },
@@ -1184,8 +1132,6 @@ const SPELL_CATALOG = [
   { level: 0, name: "Taumaturgia", time: "1 Azione", range: "9 m", note: "Effetti sovrannaturali minori, voce tonante, fiamme tremolanti" },
   { level: 0, name: "Illusione Minore", time: "1 Azione", range: "9 m", note: "Crea un suono o un'immagine statica entro cubo 1,5 m" },
   { level: 0, name: "Prestidigitazione", time: "1 Azione", range: "3 m", note: "Trucchi magici sensoriali, pulisce/sporca o insaporisce cibo" },
-
-  // 1° Livello
   { level: 1, name: "Assorbire Elementi", time: "1 Reazione", range: "Incantatore", note: "Resistenza a acido/freddo/fuoco/fulmine/tuono +1d6 danno al prossimo colpo" },
   { level: 1, name: "Bacca Benefica", time: "1 Azione", range: "Contatto", note: "Crea 10 bacche (1 PF ciascuna, nutrono per 1 giorno) (Raccolto Rabbioso)" },
   { level: 1, name: "Benedizione", time: "1 Azione", range: "9 m", note: "Conc. 1 min: fino a 3 creature aggiungono +1d4 a tiri colpire e TS" },
@@ -1200,8 +1146,6 @@ const SPELL_CATALOG = [
   { level: 1, name: "Punizione Ustionante", time: "1 Az. Bonus", range: "Incantatore", note: "Conc. 1 min: +1d6 fuoco al colpo e incendia il bersaglio (King's Blade)" },
   { level: 1, name: "Scudo", time: "1 Reazione", range: "Incantatore", note: "+5 CA fino al prossimo turno e immunità a Dardo Incantato" },
   { level: 1, name: "Scudo della Fede", time: "1 Az. Bonus", range: "18 m", note: "Conc. 10 min: +2 CA a una creatura (Shake-a-Lot)" },
-
-  // 2° Livello
   { level: 2, name: "Calmare Emozioni", time: "1 Azione", range: "18 m", note: "Conc. 1 min: sopprime Ammaliato/Spaventato o ostilità in raggio 6 m (Digiuno)" },
   { level: 2, name: "Crescita di Spine", time: "1 Azione", range: "45 m", note: "Conc. 10 min: raggio 6 m terreno difficile, 2d4 perf. ogni 1,5 m percorsi (Raccolto)" },
   { level: 2, name: "Passo Velato", time: "1 Az. Bonus", range: "Incantatore", note: "Teletrasporto fino a 9 m in uno spazio visibile" },
@@ -1211,8 +1155,6 @@ const SPELL_CATALOG = [
   { level: 2, name: "Sfera Infuocata", time: "1 Azione", range: "18 m", note: "Conc. 1 min: sfera 1,5 m, TS Des 2d6 fuoco entro 1,5 m, muovibile Az. Bonus" },
   { level: 2, name: "Vedere Invisibilità", time: "1 Azione", range: "Incantatore", note: "1 ora: vedi creature/oggetti invisibili ed eterei (Dominio del Digiuno)" },
   { level: 2, name: "Vincolo Protettivo", time: "1 Azione", range: "Contatto", note: "1 ora: +1 CA e TS all'alleato, dividi i danni subiti (Shake-a-Lot)" },
-
-  // 3° Livello
   { level: 3, name: "Arma Elementale (Fuoco)", time: "1 Azione", range: "Contatto", note: "Conc. 1 ora: arma +1 colpire e +1d4 danni da fuoco (King's Blade)" },
   { level: 3, name: "Chiaroveggenza", time: "10 Minuti", range: "1,5 km", note: "Conc. 10 min: crea sensore invisibile visivo o uditivo (Dominio del Digiuno)" },
   { level: 3, name: "Crescita Vegetale", time: "1 Azione", range: "45 m", note: "Raggio 30 m: movimento costa 4× oppure arricchisce raccolti (Raccolto Rabbioso)" },
@@ -1221,8 +1163,6 @@ const SPELL_CATALOG = [
   { level: 3, name: "Protezione dall'Energia", time: "1 Azione", range: "Contatto", note: "Conc. 1 ora: resistenza a un tipo di danno elementale (Shake-a-Lot / Fuoco Prim.)" },
   { level: 3, name: "Schema Ipnotico", time: "1 Azione", range: "36 m", note: "Conc. 1 min: cubo 9 m, TS Sag o Ammaliato e Incapacitato (Dominio del Digiuno)" },
   { level: 3, name: "Tempesta di Nevischio", time: "1 Azione", range: "45 m", note: "Conc. 1 min: cilindro 6 m, oscurato, terreno difficile, TS Des o prono (Shake-a-Lot)" },
-
-  // 4° Livello
   { level: 4, name: "Evoca Elementale (Fuoco)", time: "1 Azione", range: "27 m", note: "Conc. 1 ora: evoca uno spirito elementale del fuoco (Fuoco Primordiale)" },
   { level: 4, name: "Invisibilità Superiore", time: "1 Azione", range: "Contatto", note: "Conc. 1 min: invisibile anche mentre attacca o lancia magie (Dominio del Digiuno)" },
   { level: 4, name: "Libertà di Movimento", time: "1 Azione", range: "Contatto", note: "1 ora: immune a terreno difficile, paralisi e trattenuto (Shake-a-Lot)" },
@@ -1232,8 +1172,6 @@ const SPELL_CATALOG = [
   { level: 4, name: "Scudo di Fuoco (Caldo)", time: "1 Azione", range: "Incantatore", note: "10 min: resistenza al freddo e 2d8 danni da fuoco a chi colpisce in mischia (King's Blade)" },
   { level: 4, name: "Tempesta di Ghiaccio", time: "1 Azione", range: "90 m", note: "Cilindro 6 m: TS Des, 2d8 contundenti + 4d6 freddo + terreno difficile (Shake-a-Lot)" },
   { level: 4, name: "Tralcio Afferrante", time: "1 Az. Bonus", range: "9 m", note: "Conc. 1 min: attira creatura di 6 m (TS For) e infligge danni (Raccolto Rabbioso)" },
-
-  // 5° Livello
   { level: 5, name: "Colonna di Fiamma", time: "1 Azione", range: "18 m", note: "Cilindro 3 m: TS Des, 4d6 fuoco + 4d6 radianti (King's Blade / Fuoco Prim.)" },
   { level: 5, name: "Cono di Freddo", time: "1 Azione", range: "Incantatore", note: "Cono 18 m: TS Cos, 8d8 danni da freddo (Shake-a-Lot)" },
   { level: 5, name: "Immolazione", time: "1 Azione", range: "27 m", note: "Conc. 1 min: TS Des, 8d6 fuoco + 4d6 fuoco/turno (King's Blade / Fuoco Prim.)" },
@@ -1308,10 +1246,33 @@ function defaultState() {
   };
 }
 
-let state = loadState();
+const SCHEMA_VERSION = 5;
+let loadedFromStorage = false;
 
-
-const SCHEMA_VERSION = 4;
+function normalizeGearItemsList(rawList) {
+  const map = new Map();
+  (rawList || []).forEach(g => {
+    if (!g) return;
+    const rawName = String(g.name || "Oggetto").trim();
+    if (!rawName) return;
+    const qty = Math.max(1, Number(g.qty || 1));
+    const category = String(g.category || "Attrezzatura").trim() || "Attrezzatura";
+    const note = String(g.note || "").trim();
+    const maxCharges = Math.max(0, Number(g.maxCharges || 0));
+    const charges = maxCharges > 0
+      ? Math.max(0, Math.min(maxCharges, Number(g.charges !== undefined ? g.charges : maxCharges)))
+      : 0;
+    const key = `${category.toLowerCase()}::${rawName.toLowerCase()}::${note.toLowerCase()}::${maxCharges}`;
+    if (map.has(key)) {
+      const ex = map.get(key);
+      ex.qty += qty;
+      if (maxCharges > 0) ex.charges = Math.min(ex.maxCharges, ex.charges + charges);
+    } else {
+      map.set(key, { name: rawName, qty, category, note, charges, maxCharges });
+    }
+  });
+  return Array.from(map.values());
+}
 
 function migrateState(rawObj) {
   const base = defaultState();
@@ -1355,14 +1316,25 @@ function migrateState(rawObj) {
     : [];
 
   merged.magicItems = Array.isArray(src.magicItems)
-    ? src.magicItems.map(it => Object.assign({ name: "Oggetto Magico", active: true, charges: 0, maxCharges: 0, note: "" }, it || {}))
+    ? src.magicItems.map(it => {
+        const obj = Object.assign({ name: "Oggetto Magico", active: true, charges: 0, maxCharges: 0, note: "" }, it || {});
+        obj.maxCharges = Math.max(0, Number(obj.maxCharges || 0));
+        if (obj.maxCharges > 0 && (it.charges === undefined || it.charges === null)) {
+          obj.charges = obj.maxCharges;
+        } else {
+          obj.charges = Math.max(0, Math.min(obj.maxCharges || 99, Number(obj.charges || 0)));
+        }
+        return obj;
+      })
     : [];
 
-  merged.gearItems = Array.isArray(src.gearItems)
-    ? src.gearItems.map(g => Object.assign({ name: "Oggetto", qty: 1, category: "Attrezzatura", note: "" }, g || {}))
+  const rawGear = Array.isArray(src.gearItems)
+    ? src.gearItems
     : (src.inventory && String(src.inventory).trim()
-        ? [{ name: String(src.inventory).trim(), qty: 1, category: "Attrezzatura", note: "" }]
+        ? [{ name: String(src.inventory).trim(), qty: 1, category: "Attrezzatura", note: "", charges: 0, maxCharges: 0 }]
         : []);
+  merged.gearItems = normalizeGearItemsList(rawGear);
+
   merged.silver = Math.max(0, Number(merged.silver || 0));
   merged.copper = Math.max(0, Number(merged.copper || 0));
 
@@ -1379,11 +1351,9 @@ function migrateState(rawObj) {
   return merged;
 }
 
-let loadedFromStorage = false;
-
 function encodeHashState(obj) {
   try {
-    const copy = Object.assign({}, obj, { portrait: "" }); // keep URL compact
+    const copy = Object.assign({}, obj, { portrait: "" });
     const json = JSON.stringify(copy);
     return btoa(unescape(encodeURIComponent(json)));
   } catch (e) {
@@ -1464,7 +1434,7 @@ function loadState() {
     }
   } catch (e) {}
 
-  // 2. Fallback: URL hash (#s=...) — preserved by Chrome Android PWA on pull-to-refresh!
+  // 2. Fallback: URL hash (#s=...)
   try {
     if (window.location.hash && window.location.hash.startsWith("#s=")) {
       const parsed = decodeHashState(window.location.hash);
@@ -1487,6 +1457,8 @@ function loadState() {
   return defaultState();
 }
 
+let state = loadState();
+
 function saveNow() {
   clearTimeout(saveTimer);
   const pill = document.getElementById("save-status");
@@ -1497,14 +1469,13 @@ function saveNow() {
   try {
     localStorage.setItem(STORAGE_KEY, serialized);
     savedLocal = true;
+    loadedFromStorage = true;
   } catch (e) {}
 
   try {
     window.name = "BK_QUEST_STATE:" + serialized;
   } catch (e) {}
 
-  // Always mirror state into URL hash (#s=...) via replaceState:
-  // In standalone PWA mode the URL bar is hidden, and Chrome reloads the exact URL+hash on pull-to-refresh!
   try {
     const encoded = encodeHashState(state);
     if (encoded && encoded.length < 32000) {
@@ -1529,9 +1500,17 @@ window.addEventListener("beforeprint", saveNow);
 window.addEventListener("pagehide", saveNow);
 window.addEventListener("beforeunload", saveNow);
 window.addEventListener("pageshow", function(ev) {
-  if (ev.persisted) {
+  if (ev.persisted || !loadedFromStorage) {
     state = loadState();
     renderApp();
+    idbRestoreIfNeeded();
+  }
+});
+document.addEventListener("visibilitychange", function() {
+  if (document.visibilityState === "visible" && !loadedFromStorage) {
+    state = loadState();
+    renderApp();
+    idbRestoreIfNeeded();
   }
 });
 
@@ -1543,7 +1522,6 @@ function esc(str) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 }
-
 
 const WEAPON_MASTERY_DESC = {
   "Sfiancare (Sap)": "Se colpisci una creatura con quest'arma, quella creatura ha Svantaggio al suo prossimo tiro per colpire prima dell'inizio del tuo prossimo turno.",
@@ -1562,26 +1540,11 @@ function getMasteryExplanation(masteryStr) {
   return matchedKey ? WEAPON_MASTERY_DESC[matchedKey] : "Proprietà di Padronanza 5.5e: applica l'effetto speciale indicato sull'arma quando colpisci o manchi secondo le regole del manuale.";
 }
 
-function getPB() {
-  return Math.floor((Number(state.level || 1) - 1) / 4) + 2;
-}
-
-function getMod(score) {
-  return Math.floor((Number(score || 10) - 10) / 2);
-}
-
-function fmtMod(m) {
-  return m >= 0 ? `+${m}` : `${m}`;
-}
-
-function getActiveBurgerObj() {
-  return BURGERS_DATA.find(b => b.id === state.activeBurger) || null;
-}
-
-function getActiveFriesObj() {
-  return FRIES_DATA.find(f => f.id === state.activeFries) || null;
-}
-
+function getPB() { return Math.floor((Number(state.level || 1) - 1) / 4) + 2; }
+function getMod(score) { return Math.floor((Number(score || 10) - 10) / 2); }
+function fmtMod(m) { return m >= 0 ? `+${m}` : `${m}`; }
+function getActiveBurgerObj() { return BURGERS_DATA.find(b => b.id === state.activeBurger) || null; }
+function getActiveFriesObj() { return FRIES_DATA.find(f => f.id === state.activeFries) || null; }
 
 function hasShieldInInventory() {
   if (state.hasShield) return true;
@@ -1607,9 +1570,7 @@ function getCalculatedAC() {
 
 function getInitiative() {
   let init = getMod(state.stats.DES);
-  if (state.species === "Umano" && state.originFeat.startsWith("Allerta")) {
-    init += getPB();
-  }
+  if (state.species === "Umano" && state.originFeat.startsWith("Allerta")) init += getPB();
   return init;
 }
 
@@ -1697,9 +1658,7 @@ function toggleEditMode() {
 
 function switchTab(tab) {
   currentTab = tab;
-  document.querySelectorAll(".nav-tab").forEach(b => {
-    b.classList.toggle("active", b.dataset.tab === tab);
-  });
+  document.querySelectorAll(".nav-tab").forEach(b => b.classList.toggle("active", b.dataset.tab === tab));
   renderApp();
 }
 
@@ -1708,9 +1667,7 @@ function updateField(path, val) {
   let obj = state;
   for (let i = 0; i < keys.length - 1; i++) obj = obj[keys[i]];
   obj[keys[keys.length - 1]] = val;
-  if (path === "name") {
-    document.getElementById("top-char-name").textContent = val || "Eroe della Griglia";
-  }
+  if (path === "name") document.getElementById("top-char-name").textContent = val || "Eroe della Griglia";
   scheduleSave();
   renderPrintSheet();
 }
@@ -1772,11 +1729,7 @@ function spendHitDie() {
   const actualHealed = state.hpCurrent - prevHP;
   scheduleSave();
   renderApp();
-  showDiceToast(
-    `Dado Vita Speso (1d${cls.hd})`,
-    `Tiro (${roll}) ${fmtMod(conMod)} COS = +${healed} PF (recuperati ${actualHealed} PF) • Rimasti: ${maxHD - state.hdUsed}/${maxHD}`,
-    `+${healed} PF`
-  );
+  showDiceToast(`Dado Vita Speso (1d${cls.hd})`, `Tiro (${roll}) ${fmtMod(conMod)} COS = +${healed} PF (recuperati ${actualHealed} PF) • Rimasti: ${maxHD - state.hdUsed}/${maxHD}`, `+${healed} PF`);
 }
 
 function shortRest() {
@@ -1804,6 +1757,7 @@ function longRest() {
   if (state.species === "Umano") state.inspiration = true;
   Object.keys(state.spellSlots).forEach(lvl => { state.spellSlots[lvl].used = 0; });
   state.magicItems.forEach(it => { if (it.maxCharges) it.charges = it.maxCharges; });
+  (state.gearItems || []).forEach(g => { if (g.maxCharges) g.charges = g.maxCharges; });
   scheduleSave();
   renderApp();
   showDiceToast("Riposo Lungo Completato", `PF massimi, tutti i ${state.level}d${cls.hd} Dadi Vita, slot e cariche ripristinati!`, "🏕️");
@@ -1812,9 +1766,7 @@ function longRest() {
 function eatBurger(id) {
   const b = BURGERS_DATA.find(x => x.id === id);
   if (!b) return;
-  if ((state.burgerPantry[id] || 0) > 0) {
-    state.burgerPantry[id]--;
-  }
+  if ((state.burgerPantry[id] || 0) > 0) state.burgerPantry[id]--;
   const healed = rollFormula(`Morso: ${b.name}`, b.heal);
   state.hpCurrent = Math.min(state.hpMax, state.hpCurrent + healed);
   state.activeBurger = id;
@@ -1825,9 +1777,7 @@ function eatBurger(id) {
 function eatFries(id) {
   const f = FRIES_DATA.find(x => x.id === id);
   if (!f) return;
-  if ((state.friesPantry[id] || 0) > 0) {
-    state.friesPantry[id]--;
-  }
+  if ((state.friesPantry[id] || 0) > 0) state.friesPantry[id]--;
   state.hpCurrent = Math.min(state.hpMax, state.hpCurrent + 1);
   state.activeFries = id;
   showDiceToast(`King Fries: ${f.name}`, f.desc, "+1 PF");
@@ -1865,7 +1815,7 @@ function renderHomeTab() {
   const pp = getPassivePerception();
   const dis = editMode ? "" : "disabled";
 
-  const quickWeapons = state.weapons.map((w, idx) => {
+  const quickWeapons = state.weapons.map((w) => {
     const statKey = w.stat === "FIN" ? (getMod(state.stats.DES) > getMod(state.stats.FOR) ? "DES" : "FOR") : w.stat;
     const bAtk = (getActiveBurgerObj()?.bonusType === "atk") ? getActiveBurgerObj().bonusVal : 0;
     const bDmg = (getActiveBurgerObj()?.bonusType === "dmg") ? getActiveBurgerObj().bonusVal : 0;
@@ -2104,35 +2054,79 @@ function renderStatsTab() {
   `;
 }
 
-
 const GEAR_PRESETS = [
-  { name: "Pozione di Guarigione (2d4+2 PF)", qty: 1, category: "Pozioni & Consumabili", note: "Azione Bonus: ripristina 2d4+2 Punti Ferita." },
-  { name: "Pozione di Guarigione Superiore (4d4+4 PF)", qty: 1, category: "Pozioni & Consumabili", note: "Azione Bonus: ripristina 4d4+4 Punti Ferita." },
-  { name: "Antitossina (ampolla)", qty: 1, category: "Pozioni & Consumabili", note: "Vantaggio ai TS contro veleno per 1 ora." },
-  { name: "Borsa da Guaritore (10 usi)", qty: 1, category: "Attrezzatura", note: "Stabilizza una creatura a 0 PF senza prova di Medicina." },
-  { name: "Frecce (faretra da 20)", qty: 20, category: "Munizioni", note: "Munizioni per Arco Corto e Arco Lungo." },
-  { name: "Quadrelli (custodia da 20)", qty: 20, category: "Munizioni", note: "Munizioni per Balestra Leggera, Pesante e a Mano." },
-  { name: "Razioni da Viaggio (1 giorno)", qty: 1, category: "Viveri & Campo", note: "Cibo secco conservato per 1 giornata." },
-  { name: "Torcia", qty: 1, category: "Attrezzatura", note: "Luce intensa 6 m, fioca +6 m per 1 ora (1 danno fuoco)." },
-  { name: "Corda di Canapa (15 m)", qty: 1, category: "Attrezzatura", note: "2 PF, CD 17 Forza per spezzarla." },
-  { name: "Acciarino e Pietra Focaia", qty: 1, category: "Attrezzatura", note: "Accende torce e fuochi da campo." },
-  { name: "Piede di Porco", qty: 1, category: "Attrezzatura", note: "Conferisce Vantaggio alle prove di Forza dove si applica leva." },
-  { name: "Rampino", qty: 1, category: "Attrezzatura", note: "Si aggancia a sporgenze e mura." },
-  { name: "Lanterna Schermabile", qty: 1, category: "Attrezzatura", note: "Luce intensa 9 m, fioca +9 m per 6 ore con 1 ampolla d'olio." },
-  { name: "Olio (ampolla)", qty: 1, category: "Pozioni & Consumabili", note: "Combustibile per lanterna o +5 danni da fuoco se incendiato." },
-  { name: "Zaino dell'Avventuriero (Contenuto completo)", qty: 1, category: "Zaino & Dotazione", note: "Zaino, acciarino e pietra focaia, 10 torce, 10 razioni, borraccia, corda di canapa 15 m." },
-  { name: "Zaino da Esploratore (Contenuto completo)", qty: 1, category: "Zaino & Dotazione", note: "Zaino, sacco a pelo, acciarino e pietra focaia, 10 torce, 10 razioni, borraccia, corda di canapa 15 m." },
-  { name: "Zaino da Dungeoneer (Contenuto completo)", qty: 1, category: "Zaino & Dotazione", note: "Zaino, piede di porco, martello, 10 pitoni, 10 torce, scatola dell'esca, 10 razioni, borraccia, corda di canapa 15 m." },
-  { name: "Zaino del Sacerdote (Contenuto completo)", qty: 1, category: "Zaino & Dotazione", note: "Zaino, coperta, 10 candele, acciarino e pietra focaia, scatola per offerte, incensiere, paramenti, 2 razioni, borraccia." },
-  { name: "Zaino dello Studioso (Contenuto completo)", qty: 1, category: "Zaino & Dotazione", note: "Zaino, libro di storia, acciarino e pietra focaia, 10 fogli di pergamena, boccetta d'inchiostro, penna d'oca, borraccia." },
-  { name: "Zaino dell'Intrattenitore (Contenuto completo)", qty: 1, category: "Zaino & Dotazione", note: "Zaino, sacco a pelo, 2 costumi, 5 candele, 5 razioni, borraccia, kit da trucco." }
+  { name: "Pozione di Guarigione (2d4+2 PF)", qty: 1, category: "Pozioni & Consumabili", note: "Azione Bonus: ripristina 2d4+2 Punti Ferita.", charges: 0, maxCharges: 0 },
+  { name: "Pozione di Guarigione Superiore (4d4+4 PF)", qty: 1, category: "Pozioni & Consumabili", note: "Azione Bonus: ripristina 4d4+4 Punti Ferita.", charges: 0, maxCharges: 0 },
+  { name: "Antitossina (ampolla)", qty: 1, category: "Pozioni & Consumabili", note: "Vantaggio ai TS contro veleno per 1 ora.", charges: 0, maxCharges: 0 },
+  { name: "Borsa da Guaritore", qty: 1, category: "Attrezzatura", note: "Stabilizza una creatura a 0 PF senza prova di Medicina (10 usi per borsa).", charges: 10, maxCharges: 10 },
+  { name: "Frecce (faretra)", qty: 20, category: "Munizioni", note: "Munizioni per Arco Corto e Arco Lungo.", charges: 0, maxCharges: 0 },
+  { name: "Quadrelli (custodia)", qty: 20, category: "Munizioni", note: "Munizioni per Balestra Leggera, Pesante e a Mano.", charges: 0, maxCharges: 0 },
+  { name: "Razioni da Viaggio (1 giorno)", qty: 1, category: "Viveri & Campo", note: "Cibo secco conservato per 1 giornata.", charges: 0, maxCharges: 0 },
+  { name: "Torcia", qty: 1, category: "Attrezzatura", note: "Luce intensa 6 m, fioca +6 m per 1 ora (1 danno fuoco).", charges: 0, maxCharges: 0 },
+  { name: "Corda di Canapa (15 m)", qty: 1, category: "Attrezzatura", note: "2 PF, CD 17 Forza per spezzarla.", charges: 0, maxCharges: 0 },
+  { name: "Acciarino e Pietra Focaia", qty: 1, category: "Attrezzatura", note: "Accende torce e fuochi da campo.", charges: 0, maxCharges: 0 },
+  { name: "Piede di Porco", qty: 1, category: "Attrezzatura", note: "Conferisce Vantaggio alle prove di Forza dove si applica leva.", charges: 0, maxCharges: 0 },
+  { name: "Rampino", qty: 1, category: "Attrezzatura", note: "Si aggancia a sporgenze e mura.", charges: 0, maxCharges: 0 },
+  { name: "Lanterna Schermabile", qty: 1, category: "Attrezzatura", note: "Luce intensa 9 m, fioca +9 m per 6 ore con 1 ampolla d'olio.", charges: 0, maxCharges: 0 },
+  { name: "Olio (ampolla)", qty: 1, category: "Pozioni & Consumabili", note: "Combustibile per lanterna o +5 danni da fuoco se incendiato.", charges: 0, maxCharges: 0 },
+  { name: "Zaino dell'Avventuriero (Contenuto completo)", qty: 1, category: "Zaino & Dotazione", note: "Zaino, acciarino e pietra focaia, 10 torce, 10 razioni, borraccia, corda di canapa 15 m.", charges: 0, maxCharges: 0 },
+  { name: "Zaino da Esploratore (Contenuto completo)", qty: 1, category: "Zaino & Dotazione", note: "Zaino, sacco a pelo, acciarino e pietra focaia, 10 torce, 10 razioni, borraccia, corda di canapa 15 m.", charges: 0, maxCharges: 0 },
+  { name: "Zaino da Dungeoneer (Contenuto completo)", qty: 1, category: "Zaino & Dotazione", note: "Zaino, piede di porco, martello, 10 pitoni, 10 torce, scatola dell'esca, 10 razioni, borraccia, corda di canapa 15 m.", charges: 0, maxCharges: 0 },
+  { name: "Zaino del Sacerdote (Contenuto completo)", qty: 1, category: "Zaino & Dotazione", note: "Zaino, coperta, 10 candele, acciarino e pietra focaia, scatola per offerte, incensiere, paramenti, 2 razioni, borraccia.", charges: 0, maxCharges: 0 },
+  { name: "Zaino dello Studioso (Contenuto completo)", qty: 1, category: "Zaino & Dotazione", note: "Zaino, libro di storia, acciarino e pietra focaia, 10 fogli di pergamena, boccetta d'inchiostro, penna d'oca, borraccia.", charges: 0, maxCharges: 0 },
+  { name: "Zaino dell'Intrattenitore (Contenuto completo)", qty: 1, category: "Zaino & Dotazione", note: "Zaino, sacco a pelo, 2 costumi, 5 candele, 5 razioni, borraccia, kit da trucco.", charges: 0, maxCharges: 0 }
+];
+
+const GEAR_CATEGORY_ORDER = [
+  "Pozioni & Consumabili",
+  "Munizioni",
+  "Attrezzatura",
+  "Viveri & Campo",
+  "Zaino & Dotazione",
+  "Dotazione Iniziale",
+  "Tesoro & Chiavi"
 ];
 
 function syncInventoryTextFromGear() {
   state.inventory = (state.gearItems || [])
     .filter(g => Number(g.qty || 0) > 0)
-    .map(g => `${g.qty > 1 ? g.qty + "× " : ""}${g.name}${g.note ? " (" + g.note + ")" : ""}`)
+    .map(g => {
+      const chTxt = g.maxCharges > 0 ? ` [${g.charges}/${g.maxCharges * g.qty} cariche]` : "";
+      return `${g.qty > 1 ? g.qty + "× " : ""}${g.name}${chTxt}${g.note ? " (" + g.note + ")" : ""}`;
+    })
     .join("\n");
+}
+
+function changeGearQty(idx, delta) {
+  const item = state.gearItems[idx];
+  if (!item) return;
+  const oldQty = Math.max(1, Number(item.qty || 1));
+  const newQty = oldQty + delta;
+  if (newQty <= 0) {
+    state.gearItems.splice(idx, 1);
+  } else {
+    item.qty = newQty;
+    if (item.maxCharges > 0) {
+      if (delta > 0) {
+        item.charges = Math.min(item.maxCharges * newQty, Number(item.charges || 0) + item.maxCharges * delta);
+      } else {
+        item.charges = Math.min(item.maxCharges * newQty, Number(item.charges || 0));
+      }
+    }
+  }
+  syncInventoryTextFromGear();
+  scheduleSave();
+  renderApp();
+}
+
+function changeGearCharge(idx, delta) {
+  const item = state.gearItems[idx];
+  if (!item || !(item.maxCharges > 0)) return;
+  const totalMax = item.maxCharges * Math.max(1, Number(item.qty || 1));
+  item.charges = Math.max(0, Math.min(totalMax, Number(item.charges || 0) + delta));
+  syncInventoryTextFromGear();
+  scheduleSave();
+  renderApp();
 }
 
 function addGearPreset() {
@@ -2140,11 +2134,17 @@ function addGearPreset() {
   if (!sel) return;
   const gp = GEAR_PRESETS[Number(sel.value)];
   if (!gp) return;
-  const existing = state.gearItems.find(x => x.name === gp.name);
+  const existing = state.gearItems.find(x => x.name.toLowerCase() === gp.name.toLowerCase() && (x.category || "Attrezzatura") === gp.category);
   if (existing) {
-    existing.qty = Number(existing.qty || 0) + Number(gp.qty || 1);
+    const addQty = Math.max(1, Number(gp.qty || 1));
+    existing.qty = Number(existing.qty || 1) + addQty;
+    if (existing.maxCharges > 0) {
+      existing.charges = Math.min(existing.maxCharges * existing.qty, Number(existing.charges || 0) + existing.maxCharges * addQty);
+    }
   } else {
-    state.gearItems.push({ ...gp });
+    const initQty = Math.max(1, Number(gp.qty || 1));
+    const maxCh = Math.max(0, Number(gp.maxCharges || 0));
+    state.gearItems.push({ ...gp, qty: initQty, maxCharges: maxCh, charges: maxCh * initQty });
   }
   syncInventoryTextFromGear();
   scheduleSave();
@@ -2156,13 +2156,25 @@ function addCustomGearItem() {
   const nameEl = document.getElementById("custom-gear-name");
   const qtyEl = document.getElementById("custom-gear-qty");
   const catEl = document.getElementById("custom-gear-cat");
+  const chEl = document.getElementById("custom-gear-charges");
   const noteEl = document.getElementById("custom-gear-note");
   const name = (nameEl?.value || "").trim();
   if (!name) return;
   const qty = Math.max(1, Number(qtyEl?.value || 1));
   const category = catEl?.value || "Attrezzatura";
+  const maxCharges = Math.max(0, Number(chEl?.value || 0));
   const note = (noteEl?.value || "").trim();
-  state.gearItems.push({ name, qty, category, note });
+
+  const existing = state.gearItems.find(x => x.name.toLowerCase() === name.toLowerCase() && (x.category || "Attrezzatura") === category && Number(x.maxCharges || 0) === maxCharges);
+  if (existing) {
+    existing.qty = Number(existing.qty || 1) + qty;
+    if (maxCharges > 0) {
+      existing.charges = Math.min(maxCharges * existing.qty, Number(existing.charges || 0) + maxCharges * qty);
+    }
+    if (note && !existing.note) existing.note = note;
+  } else {
+    state.gearItems.push({ name, qty, category, note, maxCharges, charges: maxCharges * qty });
+  }
   syncInventoryTextFromGear();
   scheduleSave();
   renderApp();
@@ -2171,8 +2183,14 @@ function addCustomGearItem() {
 
 function filterGearList(q) {
   const term = (q || "").toLowerCase().trim();
-  document.querySelectorAll("#app-content .gear-row").forEach(el => {
-    el.style.display = !term || el.textContent.toLowerCase().includes(term) ? "" : "none";
+  document.querySelectorAll("#app-content .gear-cat-block").forEach(block => {
+    let anyVisible = false;
+    block.querySelectorAll(".gear-row").forEach(row => {
+      const match = !term || row.textContent.toLowerCase().includes(term);
+      row.style.display = match ? "" : "none";
+      if (match) anyVisible = true;
+    });
+    block.style.display = anyVisible ? "" : "none";
   });
 }
 
@@ -2315,7 +2333,7 @@ function renderCombatTab() {
     <div class="card">
       <div class="card-title">
         <span>🎒 Inventario Equipaggiamento & Borsello</span>
-        <span class="acc-tag">${(state.gearItems || []).reduce((s, x) => s + Number(x.qty || 0), 0)} Oggetti</span>
+        <span class="acc-tag">${(state.gearItems || []).reduce((s, x) => s + Number(x.qty || 0), 0)} Pezzi • ${(state.gearItems || []).length} Voci</span>
       </div>
 
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;background:#FFF8E1;padding:8px;border-radius:8px;border:1px solid var(--bk-gold);">
@@ -2339,15 +2357,15 @@ function renderCombatTab() {
 
       <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">
         <select id="gear-preset-sel" style="flex:1;min-width:190px;">
-          ${GEAR_PRESETS.map((gp, i) => `<option value="${i}">[${gp.category}] ${gp.name}</option>`).join("")}
+          ${GEAR_PRESETS.map((gp, i) => `<option value="${i}">[${gp.category}] ${gp.name}${gp.maxCharges > 0 ? ` (${gp.maxCharges} cariche)` : ""}</option>`).join("")}
         </select>
         <button class="btn btn-print" onclick="addGearPreset()">+ Aggiungi</button>
       </div>
 
       <details style="margin-bottom:10px;background:var(--bk-cream);padding:7px 9px;border-radius:8px;border:1px solid var(--bk-border);">
         <summary style="font-size:11.5px;font-weight:800;color:var(--bk-brown);cursor:pointer;">+ Inserisci oggetto personalizzato nello zaino</summary>
-        <div style="display:grid;grid-template-columns:58px 1.4fr 1fr;gap:5px;margin-top:6px;">
-          <input type="number" id="custom-gear-qty" min="1" value="1" placeholder="Qtà">
+        <div style="display:grid;grid-template-columns:56px 1.4fr 1fr 78px;gap:5px;margin-top:6px;">
+          <input type="number" id="custom-gear-qty" min="1" value="1" title="Quantità" placeholder="Qtà">
           <input type="text" id="custom-gear-name" placeholder="Nome oggetto">
           <select id="custom-gear-cat">
             <option value="Attrezzatura">Attrezzatura</option>
@@ -2356,6 +2374,7 @@ function renderCombatTab() {
             <option value="Zaino & Dotazione">Zaino & Dotazione</option>
             <option value="Tesoro & Chiavi">Tesoro & Chiavi</option>
           </select>
+          <input type="number" id="custom-gear-charges" min="0" max="50" value="0" title="Cariche per unità (0 = nessuna)" placeholder="Cariche">
         </div>
         <div style="display:flex;gap:5px;margin-top:5px;">
           <input type="text" id="custom-gear-note" placeholder="Descrizione / Effetto / Contenuto...">
@@ -2363,21 +2382,69 @@ function renderCombatTab() {
         </div>
       </details>
 
-      ${(state.gearItems && state.gearItems.length) ? state.gearItems.map((g, idx) => `
-        <div class="skill-row gear-row" style="gap:8px;align-items:center;">
-          <div style="flex:1;min-width:0;">
-            <span class="acc-tag" style="margin-right:4px;">${esc(g.category || "Oggetto")}</span>
-            <strong>${esc(g.name)}</strong>
-            ${g.note ? `<div style="font-size:11px;color:#6e5041;margin-top:2px;">${esc(g.note)}</div>` : ""}
-          </div>
-          <div style="display:flex;align-items:center;gap:4px;">
-            <button class="roll-pill" style="padding:2px 7px;" onclick="if(state.gearItems[${idx}].qty>1){state.gearItems[${idx}].qty--;}else{state.gearItems.splice(${idx},1);}syncInventoryTextFromGear();scheduleSave();renderApp();">-</button>
-            <strong style="min-width:20px;text-align:center;">${Number(g.qty || 1)}</strong>
-            <button class="roll-pill" style="padding:2px 7px;" onclick="state.gearItems[${idx}].qty=Number(state.gearItems[${idx}].qty||1)+1;syncInventoryTextFromGear();scheduleSave();renderApp();">+</button>
-            <button class="btn btn-danger" style="padding:3px 6px;" title="Rimuovi" onclick="state.gearItems.splice(${idx},1);syncInventoryTextFromGear();scheduleSave();renderApp();">✕</button>
-          </div>
-        </div>
-      `).join("") : `<div style="font-size:12.5px;color:#7c6558;">Lo zaino è vuoto. Aggiungi dotazioni dal menu sopra o crea un oggetto personalizzato.</div>`}
+      ${(() => {
+        const items = state.gearItems || [];
+        if (!items.length) {
+          return `<div style="font-size:12.5px;color:#7c6558;">Lo zaino è vuoto. Aggiungi dotazioni dal menu sopra o crea un oggetto personalizzato.</div>`;
+        }
+        const grouped = {};
+        items.forEach((g, idx) => {
+          const cat = g.category || "Attrezzatura";
+          if (!grouped[cat]) grouped[cat] = [];
+          grouped[cat].push({ item: g, idx });
+        });
+        const allCats = [
+          ...GEAR_CATEGORY_ORDER.filter(c => grouped[c]),
+          ...Object.keys(grouped).filter(c => !GEAR_CATEGORY_ORDER.includes(c)).sort()
+        ];
+        return allCats.map(cat => {
+          const list = grouped[cat];
+          const totalPieces = list.reduce((acc, x) => acc + Number(x.item.qty || 1), 0);
+          return `
+            <div class="gear-cat-block" style="margin-bottom:10px;border:1.5px solid var(--bk-border);border-radius:9px;overflow:hidden;background:#fff;">
+              <div style="display:flex;justify-content:space-between;align-items:center;background:var(--bk-brown);color:#fff;padding:5px 10px;font-size:11.5px;font-weight:800;letter-spacing:0.3px;">
+                <span>📦 ${esc(cat)}</span>
+                <span style="background:rgba(255,255,255,0.18);padding:1px 7px;border-radius:999px;font-size:10.5px;">${list.length} voci • ${totalPieces} pz</span>
+              </div>
+              <div>
+                ${list.map(({ item: g, idx }) => {
+                  const q = Math.max(1, Number(g.qty || 1));
+                  const hasCh = Number(g.maxCharges || 0) > 0;
+                  const totalMaxCh = hasCh ? Number(g.maxCharges) * q : 0;
+                  const curCh = hasCh ? Math.max(0, Math.min(totalMaxCh, Number(g.charges !== undefined ? g.charges : totalMaxCh))) : 0;
+                  return `
+                    <div class="skill-row gear-row" style="gap:8px;align-items:center;flex-wrap:wrap;">
+                      <div style="flex:1;min-width:170px;">
+                        <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;">
+                          <strong style="font-size:13px;">${esc(g.name)}</strong>
+                          ${q > 1 ? `<span class="acc-tag" style="background:var(--bk-red);">×${q}</span>` : ""}
+                        </div>
+                        ${g.note ? `<div style="font-size:11px;color:#6e5041;margin-top:2px;">${esc(g.note)}</div>` : ""}
+                        ${hasCh ? `
+                          <div style="display:flex;align-items:center;gap:5px;margin-top:4px;flex-wrap:wrap;">
+                            <span style="font-size:11px;font-weight:800;color:#7a3b26;background:#FFF8E1;border:1px solid var(--bk-gold);padding:2px 7px;border-radius:6px;">
+                              ⚡ Cariche: <strong>${curCh} / ${totalMaxCh}</strong>${q > 1 ? ` (${g.maxCharges}/cad.)` : ""}
+                            </span>
+                            <button class="roll-pill" style="padding:1px 7px;font-size:11px;" title="Usa 1 carica" onclick="changeGearCharge(${idx}, -1)">-1 Carica</button>
+                            <button class="roll-pill" style="padding:1px 7px;font-size:11px;background:#e8f5e9;border-color:#2e7d32;color:#1b5e20;" title="Ripristina 1 carica" onclick="changeGearCharge(${idx}, 1)">+1</button>
+                          </div>
+                        ` : ""}
+                      </div>
+                      <div style="display:flex;align-items:center;gap:4px;">
+                        <span style="font-size:10px;font-weight:800;color:#7c6558;margin-right:2px;">Qtà:</span>
+                        <button class="roll-pill" style="padding:2px 7px;" onclick="changeGearQty(${idx}, -1)">-</button>
+                        <strong style="min-width:20px;text-align:center;">${q}</strong>
+                        <button class="roll-pill" style="padding:2px 7px;" onclick="changeGearQty(${idx}, 1)">+</button>
+                        <button class="btn btn-danger" style="padding:3px 6px;" title="Rimuovi voce" onclick="state.gearItems.splice(${idx},1);syncInventoryTextFromGear();scheduleSave();renderApp();">✕</button>
+                      </div>
+                    </div>
+                  `;
+                }).join("")}
+              </div>
+            </div>
+          `;
+        }).join("");
+      })()}
     </div>
 
     <div class="card">
@@ -2512,7 +2579,6 @@ function renderBKTab() {
     </div>
   `;
 }
-
 
 const CRAFTING_RECIPES = [
   { outType: "burger", outId: "whopper", name: "Whopper", req: { "Pane al Sesamo": 1, "Carne alla Griglia": 1, "Lattuga Iceberg": 1, "Pomodoro": 1, "Cetrioli Sottaceto": 1, "Salsa King / Maionese": 1 } },
@@ -2844,7 +2910,6 @@ function renderMagicTab() {
   `;
 }
 
-
 function previewSpellCatalog(idx) {
   const sp = SPELL_CATALOG[Number(idx)];
   const el = document.getElementById("spell-catalog-preview");
@@ -2962,7 +3027,6 @@ function renderPrintSheet() {
   const friesOwned = FRIES_DATA.filter(f => (state.friesPantry[f.id] || 0) > 0).map(f => `${f.name} (×${state.friesPantry[f.id]})`).join(", ");
 
   document.getElementById("print-sheet").innerHTML = `
-    <!-- PAGINA 1 -->
     <div class="bk-page bk-page-break">
       <div style="text-align:center;"><span class="bk-crown-top">BURGER KING — SCHEDA DEL PERSONAGGIO</span></div>
       <div class="p1-header">
@@ -3058,7 +3122,6 @@ function renderPrintSheet() {
       <div class="bk-footer-logo">BURGER KING'S QUEST — PAGINA 1/2</div>
     </div>
 
-    <!-- PAGINA 2 -->
     <div class="bk-page">
       <div style="text-align:center;"><span class="bk-crown-top">BURGER KING — INCANTESIMI, INVENTARIO & INGREDIENTI</span></div>
       <div class="p2-head">
@@ -3111,7 +3174,6 @@ function renderPrintSheet() {
   `;
 }
 
-
 function hasMagicAccess() {
   const cls = CLASSES_DATA[state.className];
   if (cls && cls.caster) return true;
@@ -3151,7 +3213,6 @@ function renderApp() {
   renderPrintSheet();
 }
 
-
 function exportJSON() {
   const payload = Object.assign({}, migrateState(state), {
     _meta: { app: "BurgerKingsQuest", schemaVersion: SCHEMA_VERSION, exportedAt: new Date().toISOString() }
@@ -3171,6 +3232,7 @@ function importJSON(e) {
     try {
       const parsed = JSON.parse(ev.target.result);
       state = migrateState(parsed);
+      loadedFromStorage = true;
       scheduleSave();
       renderApp();
       showDiceToast("Scheda Caricata", `Benvenuto ${state.name}!`, "OK");
@@ -3180,7 +3242,6 @@ function importJSON(e) {
   };
   reader.readAsText(file);
 }
-
 
 let wizStep = 1;
 
@@ -3206,398 +3267,325 @@ let wizClassSkills = [];
 function syncWizardSkillProfs() {
   const spRule = SPECIES_SKILL_RULES[state.species];
   const clsRule = CLASS_SKILL_RULES[state.className];
-  if (spRule) {
-    wizSpeciesSkills = wizSpeciesSkills.filter(id => spRule.pool.includes(id)).slice(0, spRule.count);
-  } else {
-    wizSpeciesSkills = [];
-  }
-  if (clsRule) {
-    wizClassSkills = wizClassSkills.filter(id => clsRule.pool.includes(id) && !wizSpeciesSkills.includes(id)).slice(0, clsRule.count);
-  } else {
-    wizClassSkills = [];
-  }
+  if (spRule) wizSpeciesSkills = wizSpeciesSkills.filter(id => spRule.pool.includes(id)).slice(0, spRule.count);
+  else wizSpeciesSkills = [];
+  if (clsRule) wizClassSkills = wizClassSkills.filter(id => clsRule.pool.includes(id) && !wizSpeciesSkills.includes(id)).slice(0, clsRule.count);
+  else wizClassSkills = [];
+
   state.skillProfs = {};
-  [...wizSpeciesSkills, ...wizClassSkills].forEach(id => { state.skillProfs[id] = 1; });
+  [...wizSpeciesSkills, ...wizClassSkills].forEach(id => {
+    state.skillProfs[id] = 1;
+  });
 }
 
-function toggleWizSpeciesSkill(skillId) {
-  const rule = SPECIES_SKILL_RULES[state.species];
-  if (!rule) return;
-  const idx = wizSpeciesSkills.indexOf(skillId);
-  if (idx >= 0) {
-    wizSpeciesSkills.splice(idx, 1);
-  } else {
-    if (wizSpeciesSkills.length >= rule.count) {
-      if (rule.count === 1) wizSpeciesSkills = [skillId];
-      else {
-        showDiceToast("Limite Raggiunto", `Puoi selezionare al massimo ${rule.count} abilità per la specie ${state.species}.`, "!");
-        return;
-      }
-    } else {
+function toggleWizardSkill(source, skillId) {
+  if (source === "species") {
+    const rule = SPECIES_SKILL_RULES[state.species];
+    if (!rule) return;
+    if (wizSpeciesSkills.includes(skillId)) {
+      wizSpeciesSkills = wizSpeciesSkills.filter(x => x !== skillId);
+    } else if (wizSpeciesSkills.length < rule.count) {
       wizSpeciesSkills.push(skillId);
+      wizClassSkills = wizClassSkills.filter(x => x !== skillId);
     }
-  }
-  syncWizardSkillProfs();
-  renderWizard();
-}
-
-function toggleWizClassSkill(skillId) {
-  const rule = CLASS_SKILL_RULES[state.className];
-  if (!rule) return;
-  if (wizSpeciesSkills.includes(skillId)) {
-    showDiceToast("Già Selezionata", "Questa abilità è già stata scelta come competenza di specie.", "✓");
-    return;
-  }
-  const idx = wizClassSkills.indexOf(skillId);
-  if (idx >= 0) {
-    wizClassSkills.splice(idx, 1);
   } else {
-    if (wizClassSkills.length >= rule.count) {
-      showDiceToast("Limite Raggiunto", `Puoi selezionare al massimo ${rule.count} abilità per la classe ${state.className}.`, "!");
-      return;
+    const rule = CLASS_SKILL_RULES[state.className];
+    if (!rule) return;
+    if (wizClassSkills.includes(skillId)) {
+      wizClassSkills = wizClassSkills.filter(x => x !== skillId);
+    } else if (wizClassSkills.length < rule.count && !wizSpeciesSkills.includes(skillId)) {
+      wizClassSkills.push(skillId);
     }
-    wizClassSkills.push(skillId);
   }
   syncWizardSkillProfs();
+  scheduleSave();
   renderWizard();
-}
-
-const CLASS_STARTER_PACKS = {
-  "Guerriero": {
-    summary: "Opzioni iniziali Guerriero: pacchetto armi + armatura + scudo + zaino oppure oro iniziale.",
-    options: [
-      { label: "Spada Lunga, Arco Lungo, Corazza a Scaglie, Scudo + 14 MO", gold: 14, weaponNames: ["Spada Lunga", "Arco Lungo"], armorIdx: 6, shield: true, tools: ["Strumenti da Cuoco"], pack: "Zaino dell'Avventuriero (zaino, acciarino e pietra focaia, 10 torce, 10 razioni, borraccia, corda di canapa 15 m), 20 frecce." },
-      { label: "Spadone, Ascia da Battaglia, Cotta di Maglia + 9 MO", gold: 9, weaponNames: ["Spadone", "Ascia da Battaglia"], armorIdx: 9, shield: false, tools: ["Strumenti da Fabbro"], pack: "Zaino dell'Avventuriero (zaino, acciarino e pietra focaia, 10 torce, 10 razioni, borraccia, corda di canapa 15 m)." },
-      { label: "Solo Oro Iniziale (155 MO)", gold: 155, weaponNames: [], armorIdx: 0, shield: false, tools: [], pack: "" }
-    ]
-  },
-  "Ladro": {
-    summary: "Opzioni iniziali Ladro: pacchetto armi + armatura leggera + arnesi da scasso + zaino oppure oro iniziale.",
-    options: [
-      { label: "Stocco, Arco Corto, Cuoio Borchiato, Arnesi da Scasso + 16 MO", gold: 16, weaponNames: ["Stocco", "Arco Corto"], armorIdx: 3, shield: false, tools: ["Arnesi da Scasso", "Strumenti da Cuoco"], pack: "Zaino da Esploratore (zaino, sfere d'acciaio, 10 m filo metallico, campanellino, 2 candele, piede di porco, acciarino e pietra focaia, borraccia), 20 frecce." },
-      { label: "Spada Corta, Pugnale, Arco Corto, Armatura di Cuoio, Arnesi da Scasso + 21 MO", gold: 21, weaponNames: ["Spada Corta", "Pugnale", "Arco Corto"], armorIdx: 2, shield: false, tools: ["Arnesi da Scasso", "Kit da Erborista"], pack: "Zaino da Esploratore (zaino, sfere d'acciaio, 10 m filo metallico, campanellino, 2 candele, piede di porco, acciarino e pietra focaia, borraccia), 20 frecce." },
-      { label: "Solo Oro Iniziale (140 MO)", gold: 140, weaponNames: [], armorIdx: 0, shield: false, tools: [], pack: "" }
-    ]
-  },
-  "Paladino": {
-    summary: "Opzioni iniziali Paladino (Burger Knight): arma marziale, arma secondaria, armatura pesante, scudo e zaino oppure oro iniziale.",
-    options: [
-      { label: "Spada Lunga, Giavellotto, Cotta di Maglia, Scudo + 9 MO", gold: 9, weaponNames: ["Spada Lunga", "Giavellotto"], armorIdx: 9, shield: true, tools: ["Strumenti da Cuoco"], pack: "Zaino del Sacerdote (zaino, coperta, 10 candele, acciarino e pietra focaia, scatola per offerte, incensiere, paramenti, 2 razioni, borraccia)." },
-      { label: "Solo Oro Iniziale (150 MO)", gold: 150, weaponNames: [], armorIdx: 0, shield: false, tools: [], pack: "" }
-    ]
-  },
-  "Bardo": {
-    summary: "Opzioni iniziali Bardo (Collegio del Bardbecue): arma accurata, armatura di cuoio, strumenti e zaino oppure oro iniziale.",
-    options: [
-      { label: "Stocco, Pugnale, Armatura di Cuoio, Strumenti da Cuoco + 19 MO", gold: 19, weaponNames: ["Stocco", "Pugnale"], armorIdx: 2, shield: false, tools: ["Strumenti da Cuoco", "Strumenti Musicali"], pack: "Zaino dell'Intrattenitore (zaino, sacco a pelo, 2 costumi, 5 candele, 5 razioni, borraccia, kit da trucco)." },
-      { label: "Solo Oro Iniziale (90 MO)", gold: 90, weaponNames: [], armorIdx: 0, shield: false, tools: [], pack: "" }
-    ]
-  },
-  "Mago": {
-    summary: "Opzioni iniziali Mago (Mago Molecolare): arma semplice/a distanza, strumenti/grimorio e zaino oppure oro iniziale.",
-    options: [
-      { label: "Pugnale, Balestra Leggera, Strumenti da Alchimista + 10 MO", gold: 10, weaponNames: ["Pugnale", "Balestra Leggera"], armorIdx: 0, shield: false, tools: ["Strumenti da Alchimista"], pack: "Zaino dello Studioso (zaino, libro di storia, acciarino e pietra focaia, 10 fogli di pergamena, boccetta d'inchiostro, penna d'oca, borraccia), 20 quadrelli." },
-      { label: "Solo Oro Iniziale (55 MO)", gold: 55, weaponNames: [], armorIdx: 0, shield: false, tools: [], pack: "" }
-    ]
-  },
-  "Druido": {
-    summary: "Opzioni iniziali Druido (Circolo del Raccolto Rabbioso): armatura di cuoio, scudo, kit da erborista e zaino oppure oro iniziale.",
-    options: [
-      { label: "Bastone Ferrato, Armatura di Cuoio, Scudo, Kit da Erborista + 10 MO", gold: 10, weaponNames: ["Bastone Ferrato"], armorIdx: 2, shield: true, tools: ["Kit da Erborista", "Strumenti da Cuoco"], pack: "Zaino dell'Esploratore (zaino, sacco a pelo, acciarino e pietra focaia, 10 torce, 10 razioni, borraccia, corda di canapa 15 m)." },
-      { label: "Solo Oro Iniziale (50 MO)", gold: 50, weaponNames: [], armorIdx: 0, shield: false, tools: [], pack: "" }
-    ]
-  },
-  "Chierico": {
-    summary: "Opzioni iniziali Chierico (Dominio del Digiuno): arma, armatura pesante, scudo e zaino oppure oro iniziale.",
-    options: [
-      { label: "Martello da Guerra, Cotta di Maglia, Scudo + 15 MO", gold: 15, weaponNames: ["Martello da Guerra"], armorIdx: 9, shield: true, tools: ["Strumenti da Cuoco"], pack: "Zaino del Sacerdote (zaino, coperta, 10 candele, acciarino e pietra focaia, scatola per offerte, paramenti, 2 razioni, borraccia)." },
-      { label: "Solo Oro Iniziale (110 MO)", gold: 110, weaponNames: [], armorIdx: 0, shield: false, tools: [], pack: "" }
-    ]
-  },
-  "Warlock": {
-    summary: "Opzioni iniziali Warlock (Patrono del Fuoco Primordiale): armatura di cuoio, armi e zaino oppure oro iniziale.",
-    options: [
-      { label: "Pugnale, Arco Corto, Armatura di Cuoio + 15 MO", gold: 15, weaponNames: ["Pugnale", "Arco Corto"], armorIdx: 2, shield: false, tools: ["Strumenti da Cuoco"], pack: "Zaino da Dungeoneer (zaino, piede di porco, martello, 10 pitoni, 10 torce, scatola dell'esca, 10 razioni, borraccia, corda di canapa 15 m), 20 frecce." },
-      { label: "Solo Oro Iniziale (100 MO)", gold: 100, weaponNames: [], armorIdx: 0, shield: false, tools: [], pack: "" }
-    ]
-  }
-};
-
-function filterSelectOptions(inputId, selectId) {
-  const q = (document.getElementById(inputId)?.value || "").toLowerCase().trim();
-  const sel = document.getElementById(selectId);
-  if (!sel) return;
-  let firstVisible = -1;
-  Array.from(sel.options).forEach((opt, i) => {
-    const match = !q || opt.textContent.toLowerCase().includes(q);
-    opt.style.display = match ? "" : "none";
-    if (match && firstVisible === -1) firstVisible = i;
-  });
-  if (firstVisible !== -1 && sel.options[sel.selectedIndex]?.style.display === "none") {
-    sel.selectedIndex = firstVisible;
-  }
-}
-
-function filterWeaponCards(q) {
-  const term = (q || "").toLowerCase().trim();
-  document.querySelectorAll("#app-content .acc-item").forEach(el => {
-    if (el.id && el.id.startsWith("food-")) return;
-    el.style.display = !term || el.textContent.toLowerCase().includes(term) ? "" : "none";
-  });
-}
-
-function filterFoodList(q) {
-  const term = (q || "").toLowerCase().trim();
-  document.querySelectorAll("#app-content [id^='food-']").forEach(el => {
-    el.style.display = !term || el.textContent.toLowerCase().includes(term) ? "" : "none";
-  });
-  document.querySelectorAll("#app-content .chk-item").forEach(el => {
-    el.style.display = !term || el.textContent.toLowerCase().includes(term) ? "" : "none";
-  });
-  document.querySelectorAll("#app-content .ing-cat-group").forEach(grp => {
-    const visibleItems = Array.from(grp.querySelectorAll(".chk-item")).some(it => it.style.display !== "none");
-    grp.style.display = !term || visibleItems ? "" : "none";
-  });
 }
 
 function openWizard() {
-  if (!confirm("Vuoi avviare la procedura guidata per creare un nuovo personaggio da manuale? I dati attuali non esportati verranno azzerati.")) return;
-  state = defaultState();
   wizStep = 1;
-  wizSpeciesSkills = [];
-  wizClassSkills = [];
+  const currentIds = Object.keys(state.skillProfs || {}).filter(k => state.skillProfs[k] > 0);
+  const spRule = SPECIES_SKILL_RULES[state.species];
+  const clsRule = CLASS_SKILL_RULES[state.className];
+  wizSpeciesSkills = spRule ? currentIds.filter(id => spRule.pool.includes(id)).slice(0, spRule.count) : [];
+  wizClassSkills = clsRule ? currentIds.filter(id => clsRule.pool.includes(id) && !wizSpeciesSkills.includes(id)).slice(0, clsRule.count) : [];
   document.getElementById("wizard-modal").classList.add("open");
   renderWizard();
 }
 
 function closeWizard() {
   document.getElementById("wizard-modal").classList.remove("open");
-  scheduleSave();
   renderApp();
 }
 
-function applyStandardArray(order) {
-  const arr = [15, 14, 13, 12, 10, 8];
-  const keys = ["FOR", "DES", "COS", "INT", "SAG", "CAR"];
-  keys.forEach((k, idx) => { state.stats[k] = arr[idx]; });
-  recalcMaxHP();
-  renderWizard();
-}
+function applyClassDefaults(clsName) {
+  const cls = CLASSES_DATA[clsName];
+  if (!cls) return;
+  state.className = clsName;
+  state.saveProfs = { FOR: false, DES: false, COS: false, INT: false, SAG: false, CAR: false };
+  cls.saves.forEach(s => { state.saveProfs[s] = true; });
 
-function roll4d6DropLowestAll() {
-  const keys = ["FOR", "DES", "COS", "INT", "SAG", "CAR"];
-  keys.forEach(k => {
-    const rolls = [1,2,3,4].map(() => Math.floor(Math.random() * 6) + 1).sort((a,b) => a - b);
-    state.stats[k] = rolls[1] + rolls[2] + rolls[3];
-  });
-  recalcMaxHP();
-  renderWizard();
-  showDiceToast("4d6 Scarta il Più Basso", "Nuovi punteggi generati per tutte le 6 caratteristiche!", "🎲");
-}
-
-function recalcMaxHP() {
-  const cls = CLASSES_DATA[state.className] || CLASSES_DATA["Guerriero"];
+  const presets = {
+    "Guerriero": { stats: { FOR: 15, DES: 13, COS: 14, INT: 10, SAG: 12, CAR: 8 }, armorIndex: 9, hasShield: true, wepIdx: [26, 2], gear: [{ name: "Zaino dell'Esploratore", qty: 1, category: "Dotazione Iniziale", note: "Sacco a pelo, acciarino, 10 torce, 10 razioni, borraccia, corda 15 m", charges: 0, maxCharges: 0 }], gold: 150 },
+    "Ladro": { stats: { FOR: 8, DES: 15, COS: 14, INT: 13, SAG: 12, CAR: 10 }, armorIndex: 2, hasShield: false, wepIdx: [25, 5, 8], gear: [{ name: "Arnesi da Scasso", qty: 1, category: "Attrezzatura", note: "Strumenti per scassinare serrature e disinnescare trappole", charges: 0, maxCharges: 0 }, { name: "Frecce", qty: 20, category: "Munizioni", note: "Faretra per Arco Corto", charges: 0, maxCharges: 0 }, { name: "Zaino da Dungeoneer", qty: 1, category: "Dotazione Iniziale", note: "Piede di porco, martello, 10 pitoni, 10 torce, 10 razioni, corda 15 m", charges: 0, maxCharges: 0 }], gold: 150 },
+    "Paladino": { stats: { FOR: 15, DES: 10, COS: 14, INT: 8, SAG: 12, CAR: 13 }, armorIndex: 9, hasShield: true, wepIdx: [26, 2], gear: [{ name: "Simbolo Sacro della Corona", qty: 1, category: "Attrezzatura", note: "Focus incantatore da Paladino", charges: 0, maxCharges: 0 }, { name: "Zaino del Sacerdote", qty: 1, category: "Dotazione Iniziale", note: "Coperta, 10 candele, acciarino, paramenti, 2 razioni, borraccia", charges: 0, maxCharges: 0 }], gold: 150 },
+    "Bardo": { stats: { FOR: 8, DES: 14, COS: 13, INT: 12, SAG: 10, CAR: 15 }, armorIndex: 2, hasShield: false, wepIdx: [28, 5], gear: [{ name: "Strumenti da Cuoco", qty: 1, category: "Attrezzatura", note: "Padelle, mestoli e spezie da campo", charges: 0, maxCharges: 0 }, { name: "Zaino dell'Intrattenitore", qty: 1, category: "Dotazione Iniziale", note: "Sacco a pelo, 2 costumi, 5 candele, 5 razioni, borraccia, kit da trucco", charges: 0, maxCharges: 0 }], gold: 150 },
+    "Mago": { stats: { FOR: 8, DES: 14, COS: 13, INT: 15, SAG: 12, CAR: 10 }, armorIndex: 0, hasShield: false, wepIdx: [0, 5], gear: [{ name: "Grimorio Molecolare", qty: 1, category: "Attrezzatura", note: "Libro degli incantesimi arcani e formule culinarie", charges: 0, maxCharges: 0 }, { name: "Zaino dello Studioso", qty: 1, category: "Dotazione Iniziale", note: "Libro di storia, 10 pergamene, inchiostro, penna d'oca, borraccia", charges: 0, maxCharges: 0 }], gold: 150 },
+    "Druido": { stats: { FOR: 10, DES: 13, COS: 14, INT: 12, SAG: 15, CAR: 8 }, armorIndex: 2, hasShield: true, wepIdx: [24, 0], gear: [{ name: "Focus Druidico", qty: 1, category: "Attrezzatura", note: "Verga di legno sacro o rametto di vischio", charges: 0, maxCharges: 0 }, { name: "Zaino dell'Esploratore", qty: 1, category: "Dotazione Iniziale", note: "Sacco a pelo, acciarino, 10 torce, 10 razioni, borraccia, corda 15 m", charges: 0, maxCharges: 0 }], gold: 150 },
+    "Chierico": { stats: { FOR: 14, DES: 10, COS: 13, INT: 12, SAG: 15, CAR: 8 }, armorIndex: 6, hasShield: true, wepIdx: [4, 2], gear: [{ name: "Simbolo Sacro", qty: 1, category: "Attrezzatura", note: "Focus divino del Dominio del Digiuno", charges: 0, maxCharges: 0 }, { name: "Zaino del Sacerdote", qty: 1, category: "Dotazione Iniziale", note: "Coperta, 10 candele, acciarino, paramenti, 2 razioni, borraccia", charges: 0, maxCharges: 0 }], gold: 150 },
+    "Warlock": { stats: { FOR: 8, DES: 14, COS: 13, INT: 12, SAG: 10, CAR: 15 }, armorIndex: 2, hasShield: false, wepIdx: [0, 5], gear: [{ name: "Focus Arcano della Fiamma", qty: 1, category: "Attrezzatura", note: "Cristallo o verga incandescente del Patrono", charges: 0, maxCharges: 0 }, { name: "Zaino dello Studioso", qty: 1, category: "Dotazione Iniziale", note: "Libro di storia, 10 pergamene, inchiostro, penna d'oca, borraccia", charges: 0, maxCharges: 0 }], gold: 150 }
+  };
+  const p = presets[clsName];
+  if (p) {
+    state.stats = { ...p.stats };
+    state.armorIndex = p.armorIndex;
+    state.hasShield = p.hasShield;
+    state.weapons = p.wepIdx.map(i => ({ ...WEAPON_PRESETS[i], magicBonus: 0 }));
+    state.gearItems = normalizeGearItemsList(p.gear);
+    syncInventoryTextFromGear();
+    state.gold = p.gold;
+  }
+  const lvl = Number(state.level || 1);
   const conMod = getMod(state.stats.COS);
-  const toughBonus = (state.species === "Umano" && state.originFeat.startsWith("Robusto")) ? 2 * state.level : 0;
-  const dwarfBonus = (state.species === "Nano") ? state.level : 0;
-  const perLevel = Math.max(1, Math.floor(cls.hd / 2) + 1 + conMod);
-  const maxHp = Math.max(1, cls.hd + conMod + ((state.level - 1) * perLevel) + toughBonus + dwarfBonus);
-  state.hpMax = maxHp;
-  state.hpCurrent = maxHp;
-}
+  const avgGain = Math.floor(cls.hd / 2) + 1 + conMod;
+  const maxHP = Math.max(1, cls.hd + conMod + Math.max(0, lvl - 1) * avgGain);
+  state.hpMax = maxHP;
+  state.hpCurrent = maxHP;
 
-function applyStarterPack(optIdx) {
-  const packData = CLASS_STARTER_PACKS[state.className] || CLASS_STARTER_PACKS["Guerriero"];
-  const opt = packData.options[optIdx];
-  if (!opt) return;
-  state.gold = opt.gold;
-  state.weapons = (opt.weaponNames || []).map(wName => {
-    const wp = WEAPON_PRESETS.find(x => x.name === wName) || WEAPON_PRESETS[0];
-    return { ...wp, magicBonus: 0 };
-  });
-  state.armorIndex = opt.armorIdx || 0;
-  state.hasShield = !!opt.shield;
-  state.tools = {};
-  (opt.tools || []).forEach(t => { state.tools[t] = true; });
-  state.inventory = opt.pack || "";
-  state.gearItems = opt.pack
-    ? [{ name: opt.pack, qty: 1, category: "Zaino & Dotazione", note: "Dotazione iniziale di classe" }]
-    : [];
-  renderWizard();
-  showDiceToast("Equipaggiamento Impostato", `Dotazione per ${state.className} applicata!`, "🎒");
+  if (cls.caster) {
+    if (cls.pactMagic) {
+      const slotCount = lvl === 1 ? 1 : 2;
+      const slotLvl = Math.min(5, Math.ceil(lvl / 2));
+      state.spellSlots = { 1:{max:0,used:0}, 2:{max:0,used:0}, 3:{max:0,used:0}, 4:{max:0,used:0}, 5:{max:0,used:0} };
+      state.spellSlots[slotLvl].max = slotCount;
+    } else if (cls.halfCaster) {
+      state.spellSlots = {
+        1: { max: lvl >= 2 ? (lvl >= 3 ? 3 : 2) : 0, used: 0 },
+        2: { max: lvl >= 5 ? (lvl >= 7 ? 3 : 2) : 0, used: 0 },
+        3: { max: lvl >= 9 ? 2 : 0, used: 0 },
+        4: { max: lvl >= 13 ? 1 : 0, used: 0 },
+        5: { max: lvl >= 17 ? 1 : 0, used: 0 }
+      };
+    } else {
+      state.spellSlots = {
+        1: { max: lvl === 1 ? 2 : (lvl === 2 ? 3 : 4), used: 0 },
+        2: { max: lvl >= 3 ? (lvl === 3 ? 2 : 3) : 0, used: 0 },
+        3: { max: lvl >= 5 ? (lvl === 5 ? 2 : 3) : 0, used: 0 },
+        4: { max: lvl >= 7 ? (lvl === 7 ? 1 : (lvl === 8 ? 2 : 3)) : 0, used: 0 },
+        5: { max: lvl >= 9 ? (lvl === 9 ? 1 : 2) : 0, used: 0 }
+      };
+    }
+  } else {
+    state.spellSlots = { 1:{max:0,used:0}, 2:{max:0,used:0}, 3:{max:0,used:0}, 4:{max:0,used:0}, 5:{max:0,used:0} };
+  }
 }
 
 function renderWizard() {
-  const steps = ["1. Identità", "2. Specie", "3. Classe BK", "4. Caratter.", "5. Oro & Equip."];
-  const pillsHtml = steps.map((s, idx) => {
-    const num = idx + 1;
-    const cls = num === wizStep ? "active" : (num < wizStep ? "done" : "");
-    return `<div class="wiz-step-pill ${cls}">${s}</div>`;
-  }).join("");
+  const box = document.getElementById("wizard-content");
+  const steps = ["1. Classe", "2. Specie", "3. Caratt.", "4. Abilità", "5. Equip"];
+  const stepsBar = `<div class="wizard-steps">${steps.map((s, i) => `<div class="wiz-step-pill ${wizStep === i + 1 ? "active" : (wizStep > i + 1 ? "done" : "")}">${s}</div>`).join("")}</div>`;
 
-  let bodyHtml = "";
+  let body = "";
   if (wizStep === 1) {
-    bodyHtml = `
-      <div style="margin-bottom:8px;"><label class="lbl">Nome del Personaggio</label><input type="text" value="${esc(state.name)}" oninput="state.name=this.value;"></div>
-      <div style="display:grid;grid-template-columns:1fr 90px;gap:8px;margin-bottom:8px;">
-        <div><label class="lbl">Livello Iniziale (Cap. 1-2 = Liv. 3, o Liv. 1)</label><input type="number" min="1" max="20" value="${state.level}" onchange="state.level=Math.max(1,Math.min(20,Number(this.value)));recalcMaxHP();renderWizard();"></div>
-        <div><label class="lbl">Pool Oro (MO)</label><input type="number" min="0" value="${state.gold}" onchange="state.gold=Math.max(0,Number(this.value));"></div>
+    const cls = CLASSES_DATA[state.className];
+    body = `
+      <div class="card-title"><span>Step 1 — Classe, Sottoclasse BK & Livello</span></div>
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:8px;margin-bottom:10px;">
+        <div>
+          <label class="lbl">Classe & Sottoclasse Esclusiva</label>
+          <select onchange="applyClassDefaults(this.value);syncWizardSkillProfs();scheduleSave();renderWizard();">
+            ${Object.keys(CLASSES_DATA).map(c => `<option value="${c}" ${state.className === c ? "selected" : ""}>${c} — ${CLASSES_DATA[c].subName}</option>`).join("")}
+          </select>
+        </div>
+        <div>
+          <label class="lbl">Livello Iniziale</label>
+          <input type="number" min="1" max="20" value="${state.level}" onchange="state.level=Math.max(1,Math.min(20,Number(this.value)));applyClassDefaults(state.className);scheduleSave();renderWizard();">
+        </div>
       </div>
-      <div><label class="lbl">Descrivi il tuo Personaggio (chi sei, cosa vuoi, come combatti)</label><textarea rows="3" oninput="state.description=this.value;">${esc(state.description)}</textarea></div>
+      ${state.className === "Paladino" ? `
+        <div style="margin-bottom:10px;">
+          <label class="lbl">Scuola Paladino Burger Knight</label>
+          <select onchange="state.paladinSchool=this.value;scheduleSave();renderWizard();">
+            <option value="Shake-a-Lot" ${state.paladinSchool === "Shake-a-Lot" ? "selected" : ""}>Scuola Shake-a-Lot (Gelo & Difesa)</option>
+            <option value="King's Blade" ${state.paladinSchool === "King's Blade" ? "selected" : ""}>Scuola King's Blade (Fiamme & Assalto)</option>
+          </select>
+        </div>
+      ` : ""}
+      <div class="acc-item open">
+        <div class="acc-head"><span class="acc-title">Anteprima: ${esc(cls.subName)} (Dado Vita d${cls.hd})</span></div>
+        <div class="acc-body">${cls.features.map(f => `<div>• <strong>${esc(f.name)} (${f.lvl}°):</strong> ${esc(f.short)}</div>`).join("")}</div>
+      </div>
     `;
   } else if (wizStep === 2) {
     const sp = SPECIES_DATA[state.species];
-    const spSkillRule = SPECIES_SKILL_RULES[state.species];
-    bodyHtml = `
-      <div style="margin-bottom:8px;"><label class="lbl">Scegli la Specie</label>
-        <select onchange="state.species=this.value;syncWizardSkillProfs();recalcMaxHP();renderWizard();">
-          ${Object.keys(SPECIES_DATA).map(s => `<option value="${s}" ${state.species === s ? "selected" : ""}>${s} (Velocità ${SPECIES_DATA[s].speed} m, Taglia ${SPECIES_DATA[s].size})</option>`).join("")}
+    body = `
+      <div class="card-title"><span>Step 2 — Specie & Origine 5.5e</span></div>
+      <div style="margin-bottom:10px;">
+        <label class="lbl">Scegli la Specie</label>
+        <select onchange="state.species=this.value;syncWizardSkillProfs();scheduleSave();renderWizard();">
+          ${Object.keys(SPECIES_DATA).map(s => `<option value="${s}" ${state.species === s ? "selected" : ""}>${s} (Taglia ${SPECIES_DATA[s].size}, Vel. ${SPECIES_DATA[s].speed} m)</option>`).join("")}
         </select>
       </div>
-      <div style="background:var(--bk-cream);padding:8px;border-radius:8px;border:1px solid var(--bk-border);margin-bottom:8px;">
-        ${sp.traits.map(t => `<div style="margin-bottom:4px;font-size:12px;"><strong>• ${esc(t.name)}:</strong> ${esc(t.desc)}</div>`).join("")}
-      </div>
-      ${spSkillRule ? `
-        <div style="background:#FFFDF5;padding:8px;border-radius:8px;border:1.5px solid var(--bk-gold);margin-bottom:8px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-            <label class="lbl" style="margin:0;">🎯 ${esc(spSkillRule.label)}</label>
-            <span class="acc-tag">${wizSpeciesSkills.length}/${spSkillRule.count}</span>
-          </div>
-          <div class="chk-grid">
-            ${spSkillRule.pool.map(sid => {
-              const skObj = SKILLS_LIST.find(x => x.id === sid);
-              const checked = wizSpeciesSkills.includes(sid);
-              return `
-                <label class="chk-item" style="cursor:pointer;${checked ? "background:#e8f5e9;border:1px solid #2e7d32;font-weight:800;" : ""}">
-                  <input type="checkbox" ${checked ? "checked" : ""} onchange="toggleWizSpeciesSkill('${sid}')">
-                  <span>${esc(skObj ? skObj.name : sid)} (${skObj ? skObj.stat : ""})</span>
-                </label>
-              `;
-            }).join("")}
-          </div>
-        </div>
-      ` : ""}
       ${state.species === "Umano" ? `
-        <div><label class="lbl">Talento d'Origine (Umano Versatile)</label>
-          <select onchange="state.originFeat=this.value;recalcMaxHP();renderWizard();">
+        <div style="margin-bottom:10px;">
+          <label class="lbl">Talento d'Origine 5.5e (Tratto Versatile)</label>
+          <select onchange="state.originFeat=this.value;scheduleSave();renderWizard();">
             ${ORIGIN_FEATS.map(of => `<option value="${esc(of)}" ${state.originFeat === of ? "selected" : ""}>${esc(of)}</option>`).join("")}
           </select>
         </div>
       ` : ""}
+      <div class="acc-item open">
+        <div class="acc-head"><span class="acc-title">Tratti di ${esc(state.species)}</span></div>
+        <div class="acc-body">${sp.traits.map(t => `<div>• <strong>${esc(t.name)}:</strong> ${esc(t.desc)}</div>`).join("")}</div>
+      </div>
     `;
   } else if (wizStep === 3) {
     const cls = CLASSES_DATA[state.className];
-    const clsSkillRule = CLASS_SKILL_RULES[state.className];
-    bodyHtml = `
-      <div style="margin-bottom:8px;"><label class="lbl">Scegli la Classe e Sottoclasse Burger King-Dom</label>
-        <select onchange="state.className=this.value;const nc=CLASSES_DATA[this.value];state.saveProfs={};nc.saves.forEach(sv=>state.saveProfs[sv]=true);syncWizardSkillProfs();recalcMaxHP();renderWizard();">
-          ${Object.keys(CLASSES_DATA).map(c => `<option value="${c}" ${state.className === c ? "selected" : ""}>${c} — ${CLASSES_DATA[c].subName} (DV d${CLASSES_DATA[c].hd})</option>`).join("")}
-        </select>
-      </div>
-      ${state.className === "Paladino" ? `
-        <div style="margin-bottom:8px;"><label class="lbl">Scuola del Burger Knight</label>
-          <select onchange="state.paladinSchool=this.value;">
-            <option value="Shake-a-Lot" ${state.paladinSchool === "Shake-a-Lot" ? "selected" : ""}>Shake-a-Lot (Gelo & Difesa)</option>
-            <option value="King's Blade" ${state.paladinSchool === "King's Blade" ? "selected" : ""}>King's Blade (Fiamme & Assalto)</option>
-          </select>
-        </div>
-      ` : ""}
-      ${clsSkillRule ? `
-        <div style="background:#FFFDF5;padding:8px;border-radius:8px;border:1.5px solid var(--bk-gold);margin-bottom:8px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-            <label class="lbl" style="margin:0;">🎯 ${esc(clsSkillRule.label)}</label>
-            <span class="acc-tag">${wizClassSkills.length}/${clsSkillRule.count}</span>
-          </div>
-          <div class="chk-grid">
-            ${clsSkillRule.pool.map(sid => {
-              const skObj = SKILLS_LIST.find(x => x.id === sid);
-              const fromSpecies = wizSpeciesSkills.includes(sid);
-              const isSelected = wizClassSkills.includes(sid);
-              const checked = fromSpecies || isSelected;
-              const limitReached = !checked && wizClassSkills.length >= clsSkillRule.count;
-              const isDisabled = fromSpecies || limitReached;
-              return `
-                <label class="chk-item" style="cursor:${isDisabled ? "not-allowed" : "pointer"};opacity:${limitReached ? "0.55" : "1"};${checked ? "background:#e8f5e9;border:1px solid #2e7d32;font-weight:800;" : ""}">
-                  <input type="checkbox" ${checked ? "checked" : ""} ${isDisabled ? "disabled" : ""} onchange="toggleWizClassSkill('${sid}')">
-                  <span>${esc(skObj ? skObj.name : sid)} ${fromSpecies ? "(Specie)" : "(" + (skObj ? skObj.stat : "") + ")"}</span>
-                </label>
-              `;
-            }).join("")}
-          </div>
-        </div>
-      ` : ""}
-      <div style="background:var(--bk-cream);padding:8px;border-radius:8px;border:1px solid var(--bk-border);">
-        <div style="font-size:12px;font-weight:800;margin-bottom:4px;">Privilegi di ${esc(cls.subName)}:</div>
-        ${cls.features.map(f => `<div style="font-size:12px;margin-bottom:4px;"><strong>• (${f.lvl}°) ${esc(f.name)}:</strong> ${esc(f.short)}</div>`).join("")}
-      </div>
-    `;
-  } else if (wizStep === 4) {
-    bodyHtml = `
-      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
-        <button class="btn btn-util" style="color:var(--bk-brown);border-color:var(--bk-border);background:var(--bk-cream);" onclick="applyStandardArray()">📊 Array Standard (15,14,13,12,10,8)</button>
-        <button class="btn btn-util" style="color:var(--bk-brown);border-color:var(--bk-border);background:var(--bk-cream);" onclick="roll4d6DropLowestAll()">🎲 Tira 4d6 (Scarta Minore)</button>
-      </div>
-      <div class="stats-grid">
+    const conMod = getMod(state.stats.COS);
+    const autoHP = Math.max(1, cls.hd + conMod + Math.max(0, state.level - 1) * (Math.floor(cls.hd / 2) + 1 + conMod));
+    body = `
+      <div class="card-title"><span>Step 3 — Caratteristiche & Punti Ferita</span></div>
+      <div style="font-size:11.5px;color:#6e5041;margin-bottom:8px;">Standard Array 5.5e suggerito: <strong>15, 14, 13, 12, 10, 8</strong> (ricorda il +2/+1 del Background!).</div>
+      <div class="stats-grid" style="margin-bottom:10px;">
         ${Object.keys(state.stats).map(k => `
           <div class="stat-card">
             <div class="vital-lbl">${k}</div>
-            <div class="stat-mod" style="cursor:default;">${fmtMod(getMod(state.stats[k]))}</div>
-            <input type="number" min="1" max="30" style="text-align:center;font-weight:800;" value="${state.stats[k]}" onchange="state.stats['${k}']=Number(this.value);recalcMaxHP();renderWizard();">
+            <div class="stat-mod">${fmtMod(getMod(state.stats[k]))}</div>
+            <input type="number" min="3" max="20" style="text-align:center;font-weight:800;" value="${state.stats[k]}" onchange="state.stats['${k}']=Number(this.value);scheduleSave();renderWizard();">
           </div>
         `).join("")}
       </div>
-      <div style="margin-top:8px;font-size:12px;color:#5c3d30;"><strong>PF Massimi Calcolati:</strong> ${state.hpMax} PF</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;background:var(--bk-cream);padding:8px 10px;border-radius:8px;border:1px solid var(--bk-border);">
+        <span style="font-size:12.5px;"><strong>PF Massimi Calcolati (Liv.${state.level}):</strong> ${autoHP} PF</span>
+        <button class="btn btn-print" onclick="state.hpMax=${autoHP};state.hpCurrent=${autoHP};scheduleSave();renderWizard();">Applica ${autoHP} PF</button>
+      </div>
     `;
-  } else {
-    const packData = CLASS_STARTER_PACKS[state.className] || CLASS_STARTER_PACKS["Guerriero"];
-    bodyHtml = `
-      <div style="background:var(--bk-cream);padding:8px;border-radius:8px;border:1px solid var(--bk-border);margin-bottom:8px;font-size:12px;">
-        <strong>📜 Scelte Iniziali (${esc(state.className)}):</strong> ${esc(packData.summary)}
-      </div>
-      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px;">
-        ${packData.options.map((op, idx) => `
-          <button class="btn btn-util" style="justify-content:space-between;text-align:left;color:var(--bk-ink);background:#fff;border:1.5px solid var(--bk-border);padding:8px 10px;" onclick="applyStarterPack(${idx})">
-            <span>${esc(op.label)}</span>
-            <span class="acc-tag">Scegli</span>
-          </button>
-        `).join("")}
-      </div>
-      <div style="display:grid;grid-template-columns:120px 1fr;gap:8px;align-items:start;">
-        <div>
-          <label class="lbl">🪙 Oro (MO)</label>
-          <input type="number" min="0" value="${state.gold}" onchange="state.gold=Math.max(0,Number(this.value));renderWizard();">
+  } else if (wizStep === 4) {
+    const spRule = SPECIES_SKILL_RULES[state.species];
+    const clsRule = CLASS_SKILL_RULES[state.className];
+    const spHtml = spRule ? `
+      <div style="margin-bottom:10px;background:#FFF8E1;border:1.5px solid #F5A623;border-radius:8px;padding:8px;">
+        <div style="font-size:11.5px;font-weight:900;color:#502314;margin-bottom:5px;">
+          🧬 ${esc(spRule.label)} (${wizSpeciesSkills.length}/${spRule.count} selezionate)
         </div>
-        <div>
-          <label class="lbl">🎒 Zaino & Contenuto</label>
-          <textarea rows="3" oninput="state.inventory=this.value;">${esc(state.inventory)}</textarea>
+        <div class="chk-grid">
+          ${SKILLS_LIST.filter(sk => spRule.pool.includes(sk.id)).map(sk => {
+            const checked = wizSpeciesSkills.includes(sk.id);
+            const disabled = !checked && wizSpeciesSkills.length >= spRule.count;
+            return `
+              <label class="chk-item" style="opacity:${disabled ? "0.45" : "1"};">
+                <input type="checkbox" ${checked ? "checked" : ""} ${disabled ? "disabled" : ""} onchange="toggleWizardSkill('species', '${sk.id}')">
+                <span>${sk.name} (${sk.stat})</span>
+              </label>
+            `;
+          }).join("")}
         </div>
+      </div>
+    ` : "";
+
+    const clsHtml = clsRule ? `
+      <div style="background:var(--bk-cream);border:1.5px solid var(--bk-border);border-radius:8px;padding:8px;">
+        <div style="font-size:11.5px;font-weight:900;color:#502314;margin-bottom:5px;">
+          ⚔️ ${esc(clsRule.label)} (${wizClassSkills.length}/${clsRule.count} selezionate)
+        </div>
+        <div class="chk-grid">
+          ${SKILLS_LIST.filter(sk => clsRule.pool.includes(sk.id)).map(sk => {
+            const fromSpecies = wizSpeciesSkills.includes(sk.id);
+            const checked = wizClassSkills.includes(sk.id) || fromSpecies;
+            const disabled = fromSpecies || (!checked && wizClassSkills.length >= clsRule.count);
+            return `
+              <label class="chk-item" style="opacity:${disabled ? "0.45" : "1"};">
+                <input type="checkbox" ${checked ? "checked" : ""} ${disabled ? "disabled" : ""} onchange="toggleWizardSkill('class', '${sk.id}')">
+                <span>${sk.name} (${sk.stat})${fromSpecies ? " [Specie]" : ""}</span>
+              </label>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    ` : "";
+
+    body = `
+      <div class="card-title"><span>Step 4 — Abilità con Competenza (Regole 5.5e)</span></div>
+      ${spHtml}
+      ${clsHtml}
+    `;
+  } else if (wizStep === 5) {
+    body = `
+      <div class="card-title"><span>Step 5 — Nome Eroe, Armi & Borsello</span></div>
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:8px;margin-bottom:8px;">
+        <div><label class="lbl">Nome Personaggio</label><input type="text" value="${esc(state.name)}" oninput="state.name=this.value;scheduleSave();"></div>
+        <div><label class="lbl">Oro Iniziale (MO)</label><input type="number" value="${state.gold}" oninput="state.gold=Number(this.value);scheduleSave();"></div>
+      </div>
+      <div style="margin-bottom:8px;">
+        <label class="lbl">Armatura Iniziale</label>
+        <select onchange="state.armorIndex=Number(this.value);scheduleSave();">
+          ${ARMOR_PRESETS.map((a, i) => `<option value="${i}" ${state.armorIndex === i ? "selected" : ""}>${a.name} (CA ${a.base})</option>`).join("")}
+        </select>
+      </div>
+      <div>
+        <label class="lbl">Descrizione & Aspetto</label>
+        <textarea rows="2" oninput="state.description=this.value;scheduleSave();">${esc(state.description)}</textarea>
       </div>
     `;
   }
 
-  document.getElementById("wizard-content").innerHTML = `
-    <div class="card-title"><span>🧙‍♂️ Creazione Guidata Personaggio BK 5.5e</span><button class="btn btn-danger" onclick="closeWizard()">✕ Chiudi</button></div>
-    <div class="wizard-steps">${pillsHtml}</div>
-    ${bodyHtml}
-    <div style="display:flex;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1.5px solid var(--bk-border);">
-      <button class="btn btn-util" style="color:var(--bk-brown);border-color:var(--bk-border);background:var(--bk-cream);" ${wizStep === 1 ? "disabled" : ""} onclick="wizStep--;renderWizard();">← Indietro</button>
+  box.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <strong style="font-size:15px;color:var(--bk-brown);">🧙‍♂️ Procedura Guidata Personaggio 5.5e</strong>
+      <button class="btn btn-util" style="color:var(--bk-brown);border-color:var(--bk-border);" onclick="closeWizard()">✕ Chiudi</button>
+    </div>
+    ${stepsBar}
+    ${body}
+    <div style="display:flex;justify-content:space-between;margin-top:12px;">
+      <button class="btn btn-util" style="color:var(--bk-brown);border-color:var(--bk-border);" ${wizStep === 1 ? "disabled" : ""} onclick="wizStep--;renderWizard();">← Indietro</button>
       ${wizStep < 5
         ? `<button class="btn btn-print" onclick="wizStep++;renderWizard();">Avanti →</button>`
-        : `<button class="btn btn-print" style="background:var(--bk-green);" onclick="autoLoadSubclassSpells();closeWizard();">✓ Completa Scheda</button>`
+        : `<button class="btn btn-print" style="background:var(--bk-green);" onclick="syncWizardSkillProfs();scheduleSave();closeWizard();showDiceToast('Eroe Pronto!', state.name + ' creato con successo!', '👑');">✓ Completa & Vai alla Scheda</button>`
       }
     </div>
   `;
 }
 
-function resetCharacter() {
-  if (confirm("Vuoi creare un nuovo personaggio? I dati attuali non esportati verranno azzerati.")) {
-    state = defaultState();
-    scheduleSave();
-    renderApp();
+function filterSelectOptions(inputId, selectId) {
+  const inp = document.getElementById(inputId);
+  const sel = document.getElementById(selectId);
+  if (!inp || !sel) return;
+  const q = inp.value.toLowerCase().trim();
+  let firstVisible = -1;
+  Array.from(sel.options).forEach((opt, idx) => {
+    const match = !q || opt.text.toLowerCase().includes(q);
+    opt.style.display = match ? "" : "none";
+    opt.disabled = !match;
+    if (match && firstVisible === -1) firstVisible = idx;
+  });
+  if (firstVisible !== -1 && sel.options[sel.selectedIndex]?.disabled) {
+    sel.selectedIndex = firstVisible;
   }
 }
 
-saveNow();
+function filterWeaponCards(q) {
+  const term = (q || "").toLowerCase().trim();
+  document.querySelectorAll("#app-content .acc-item[id^='wep-card-']").forEach(el => {
+    el.style.display = (!term || el.textContent.toLowerCase().includes(term)) ? "" : "none";
+  });
+}
+
+function filterFoodList(q) {
+  const term = (q || "").toLowerCase().trim();
+  document.querySelectorAll("#app-content .acc-item[id^='food-']").forEach(el => {
+    el.style.display = (!term || el.textContent.toLowerCase().includes(term)) ? "" : "none";
+  });
+  document.querySelectorAll("#app-content .ing-cat-group").forEach(grp => {
+    let anyVisible = false;
+    grp.querySelectorAll(".chk-item").forEach(el => {
+      const match = !term || el.textContent.toLowerCase().includes(term);
+      el.style.display = match ? "" : "none";
+      if (match) anyVisible = true;
+    });
+    grp.style.display = anyVisible ? "" : "none";
+  });
+}
+
 renderApp();
 idbRestoreIfNeeded();
 </script>
